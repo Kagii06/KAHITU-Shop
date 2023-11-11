@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package QuanLyShopAoQuan.ui;
+
+import com.fsm.utils.XImage;
+import java.awt.Color;
 
 /**
  *
@@ -16,6 +15,14 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
     public ChamSocKhachHangDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
+    }
+    void init()
+    {
+        setIconImage(XImage.getAppIcon());
+        setTitle("FSM - CHĂM SÓC KHÁCH HÀNG ");
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.white);
     }
 
     /**
@@ -49,9 +56,9 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("CHĂM SÓC KHÁCH HÀNG");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -74,7 +81,7 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
         jLabel4.setText("DESCRIPTION:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel5.setForeground(new java.awt.Color(51, 0, 51));
         jLabel5.setText("SEND MAIL");
 
         jLabel6.setText("ADD FILE:");
@@ -83,8 +90,10 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        jButton1.setBackground(new java.awt.Color(255, 204, 255));
         jButton1.setText("...");
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 255));
         jButton2.setText("SEND");
 
         jLabel8.setText("TÌM KIẾM:");
@@ -95,6 +104,7 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Theo Tên KH");
 
+        jButton3.setBackground(new java.awt.Color(255, 204, 255));
         jButton3.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,7 +138,7 @@ public class ChamSocKhachHangDialog extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField1)
                                     .addComponent(jTextField2)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2)
                                     .addComponent(jButton1))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
