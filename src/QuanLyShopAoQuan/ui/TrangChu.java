@@ -15,7 +15,7 @@ import javax.swing.Timer;
  * @author MMSI
  */
 public class TrangChu extends javax.swing.JFrame {
-    int width = 200,height = 600;
+    int width = 200,height = 570;
     
     public TrangChu() {
         initComponents();
@@ -99,7 +99,6 @@ public class TrangChu extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblClose = new javax.swing.JLabel();
-        pnlContainer = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         pnlThanhDuoi = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -107,9 +106,24 @@ public class TrangChu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        mniDangNhap = new javax.swing.JMenuItem();
+        mniDangXuat = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        mniDoiMK = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        mniKetThuc = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,7 +131,7 @@ public class TrangChu extends javax.swing.JFrame {
         pnlMain.setPreferredSize(new java.awt.Dimension(1006, 600));
 
         pnlMenu.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMenu.setPreferredSize(new java.awt.Dimension(200, 600));
+        pnlMenu.setPreferredSize(new java.awt.Dimension(200, 590));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/ShopAoQuan3.png"))); // NOI18N
@@ -134,24 +148,24 @@ public class TrangChu extends javax.swing.JFrame {
         pnlMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 161, 90, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Unknown person.png"))); // NOI18N
-        jLabel4.setText("Tài khoản");
-        pnlMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 197, 90, -1));
+        jLabel4.setText("Quản lý tài khoản");
+        pnlMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 197, 130, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Clien list.png"))); // NOI18N
-        jLabel5.setText("Nhân viên");
-        pnlMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 233, 90, -1));
+        jLabel5.setText("Quản lý nhân viên");
+        pnlMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 233, 130, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/T-Shirt-icon.png"))); // NOI18N
-        jLabel6.setText("Sản phẩm");
+        jLabel6.setText("Quản lý sản phẩm");
         jLabel6.setToolTipText("");
         pnlMenu.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 269, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/User group.png"))); // NOI18N
-        jLabel7.setText("Khách hàng");
+        jLabel7.setText("Quản lý khách hàng");
         pnlMenu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 305, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Unordered list.png"))); // NOI18N
-        jLabel8.setText("Đơn hàng");
+        jLabel8.setText("Quản lý đơn hàng");
         pnlMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 383, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Bar chart.png"))); // NOI18N
@@ -179,8 +193,6 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
         pnlMenu.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 6, 17, -1));
-
-        pnlContainer.setLayout(new java.awt.CardLayout());
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/logo1_preview_rev_1.png"))); // NOI18N
 
@@ -218,11 +230,9 @@ public class TrangChu extends javax.swing.JFrame {
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(206, 206, 206)
-                .addComponent(pnlContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205)
+                .addGap(402, 402, 402)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 399, Short.MAX_VALUE))
+                .addGap(0, 408, Short.MAX_VALUE))
             .addComponent(pnlThanhDuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlMainLayout.setVerticalGroup(
@@ -230,9 +240,7 @@ public class TrangChu extends javax.swing.JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(106, 106, 106))
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(168, 168, 168)
@@ -250,15 +258,106 @@ public class TrangChu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Hệ thống");
+
+        mniDangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangNhap.setBackground(new java.awt.Color(255, 204, 255));
+        mniDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Key.png"))); // NOI18N
+        mniDangNhap.setText("Đăng nhập");
+        mniDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangNhapActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mniDangNhap);
+
+        mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Log out.png"))); // NOI18N
+        mniDangXuat.setText("Đăng xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mniDangXuat);
+        jMenu2.add(jSeparator3);
+
+        mniDoiMK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Refresh.png"))); // NOI18N
+        mniDoiMK.setText("Đổi mật khẩu");
+        mniDoiMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDoiMKActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mniDoiMK);
+        jMenu2.add(jSeparator4);
+
+        mniKetThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        mniKetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Stop.png"))); // NOI18N
+        mniKetThuc.setText("Kết thúc");
+        mniKetThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniKetThucActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mniKetThuc);
+
         jMenuBar1.add(jMenu2);
 
         jMenu6.setText("Quản lý");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Yusuke-Kamiyamane-Fugue-T-shirt-print-gray.16.png"))); // NOI18N
+        jMenuItem1.setText("Quản lý sản phẩm");
+        jMenu6.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Gear.png"))); // NOI18N
+        jMenuItem2.setText("Quản lý tài khoản");
+        jMenu6.add(jMenuItem2);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Clien list.png"))); // NOI18N
+        jMenuItem3.setText("Quản lý nhân viên");
+        jMenu6.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/User group.png"))); // NOI18N
+        jMenuItem4.setText("Quản lý khách hàng");
+        jMenu6.add(jMenuItem4);
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Unordered list.png"))); // NOI18N
+        jMenuItem5.setText("Quản lý đơn hàng");
+        jMenu6.add(jMenuItem5);
+
         jMenuBar1.add(jMenu6);
 
         jMenu3.setText("Thống kê");
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Statistics.png"))); // NOI18N
+        jMenuItem6.setText("TK Doanh thu");
+        jMenu3.add(jMenuItem6);
+
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Full basket.png"))); // NOI18N
+        jMenuItem7.setText("TK Hàng tồn kho");
+        jMenu3.add(jMenuItem7);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Trợ giúp");
+
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Globe.png"))); // NOI18N
+        jMenuItem8.setText("Hướng dẫn sử dụng");
+        jMenu4.add(jMenuItem8);
+
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Brick house.png"))); // NOI18N
+        jMenuItem9.setText("Giới thiệu sản phẩm");
+        jMenu4.add(jMenuItem9);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -286,6 +385,25 @@ public class TrangChu extends javax.swing.JFrame {
         // TODO add your handling code here:
         closeMenuBar();
     }//GEN-LAST:event_lblCloseMouseClicked
+
+    private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniDangNhapActionPerformed
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+//        dangXuat();
+    }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void mniDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMKActionPerformed
+        // TODO add your handling code here:
+//        openDoiMatKhau();
+    }//GEN-LAST:event_mniDoiMKActionPerformed
+
+    private void mniKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKetThucActionPerformed
+        // TODO add your handling code here:
+//        ketThuc();
+    }//GEN-LAST:event_mniKetThucActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,11 +461,25 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblDongHo;
-    private javax.swing.JPanel pnlContainer;
+    private javax.swing.JMenuItem mniDangNhap;
+    private javax.swing.JMenuItem mniDangXuat;
+    private javax.swing.JMenuItem mniDoiMK;
+    private javax.swing.JMenuItem mniKetThuc;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlThanhDuoi;
