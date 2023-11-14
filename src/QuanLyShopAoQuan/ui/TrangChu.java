@@ -52,6 +52,9 @@ public class TrangChu extends javax.swing.JFrame {
 //    }).start();
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
+        
+        this.OpenWelcome();
+        OpenLogin();
     }
     void openMenuBar()
     {
@@ -100,6 +103,17 @@ public class TrangChu extends javax.swing.JFrame {
         dh.dispose();
         cskh.dispose();
     }
+    
+    void OpenWelcome(){
+         new ChaoDialog(this, true).setVisible(true);
+     }
+     void OpenLogin(){
+//         new DangNhapJDialog(this, true).setVisible(true);
+            DangNhapDialog dangNhap = new DangNhapDialog(this, true);
+            dangNhap.setVisible(true);
+            dangNhap.DangNhap();
+         
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
