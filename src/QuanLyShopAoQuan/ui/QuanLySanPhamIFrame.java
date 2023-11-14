@@ -89,6 +89,8 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
 
+        setMaximizable(true);
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
