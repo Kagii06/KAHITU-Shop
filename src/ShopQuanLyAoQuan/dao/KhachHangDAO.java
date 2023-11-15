@@ -49,6 +49,7 @@ public class KhachHangDAO extends ShopAoQuanDAO<KhachHang,String> {
         }
         return list.get(0);
     }
+    
 
     @Override
     public List<KhachHang> selectBySql(String sql, Object... args) {
@@ -69,5 +70,47 @@ public class KhachHangDAO extends ShopAoQuanDAO<KhachHang,String> {
         }
         return list;
     }
+    
+    public List<KhachHang> timKiem(String tuKhoa, boolean searchByMaKH) {
+    List<KhachHang> list = new ArrayList<>();
+    String sql;
+    
+    if (searchByMaKH) {
+        sql = "SELECT * FROM KhachHang WHERE MaKH LIKE ?";
+    } else {
+        sql = "SELECT * FROM KhachHang WHERE HoTen LIKE ?";
+    }
+
+    try {
+        ResultSet rs = jdbcHelper.query(sql, "%" + tuKhoa + "%");
+        while (rs.next()) {
+            KhachHang entity = new KhachHang();
+            entity.setMaKH(rs.getString("MaKH"));
+            entity.setHoTen(rs.getString("HoTen"));
+            entity.setDiaChi(rs.getString("DiaChi"));
+            entity.setSDT(rs.getString("SDT"));
+            entity.setEmail(rs.getString("Email"));
+            list.add(entity);
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return list;
+}
+    // KhachHangDAO.java
+
+public KhachHang selectBySDT(String sdt) {
+  String sql = "SELECT * FROM KhachHang WHERE SDT = ?";
+
+  List<KhachHang> list = selectBySql(sql, sdt);
+
+  if(list.isEmpty()) {
+    return null;
+  }
+
+  return list.get(0);
+}
+
+
     
 }

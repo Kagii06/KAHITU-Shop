@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/Home.java</file>
-            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/QuanLyNhanVienIFrame.java</file>
-            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/TrangChu.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/TaiKhoanDAO.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/QuanLyKhachHang.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/ShopQuanLyAoQuan/entity/KhachHang.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/TrangChu.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/KhachHangDAO.java</file>
+            <file>file:/C:/Users/Huy%20Nguyen/Documents/NetBeansProjects/KAHITU/DuAn1_Nhom5/src/com/fsm/utils/jdbcHelper.java</file>
         </group>
     </open-files>
 </project-private>
