@@ -9,6 +9,7 @@ import com.fsm.utils.jdbcHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.util.Date;
 
 /**
  *
@@ -70,5 +71,18 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
         }
         return list;
     }
-    
+    public List<Date> selectDay(){
+        String sql = "select distinct NgayLap from DonHang order by NgayLap desc";
+        List<Date> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcHelper.query(sql);
+            while(rs.next()){
+                list.add(rs.getDate(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
