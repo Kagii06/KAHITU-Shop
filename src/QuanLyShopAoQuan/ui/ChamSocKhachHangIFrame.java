@@ -4,10 +4,34 @@
  */
 package QuanLyShopAoQuan.ui;
 
+import ShopQuanLyAoQuan.dao.KhachHangDAO;
+import ShopQuanLyAoQuan.entity.KhachHang;
+import com.fsm.utils.MsgBox;
 import com.sun.jdi.connect.Transport;
+import java.io.File;
+import java.io.IOException;
 import java.net.Authenticator;
-import java.net.PasswordAuthentication;
+import java.util.List;
+//import java.net.PasswordAuthentication;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+import javax.mail.PasswordAuthentication;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -15,45 +39,141 @@ import java.util.Properties;
  * @author MMSI
  */
 public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
-
+    KhachHangDAO khDAO = new KhachHangDAO();
+    int row = 0;
+    private String duongDan="";
+    
     /**
      * Creates new form ChamSocKhachHangIFrame
      */
     public ChamSocKhachHangIFrame() {
         initComponents();
-        sendEmail();
+        fillTable(); 
+        
     }
     
-     private void sendEmail() {
-         final String username = "your_email@gmail.com"; // Thay bằng địa chỉ email của bạn
-        final String password = "your_email_password"; // Thay bằng mật khẩu email của bạn
+     void fillTable(){
+        DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
+        tblModel.setRowCount(0);
+        try {
+            List<KhachHang> listKH = khDAO.selectALl();
+            for (KhachHang kh : listKH) {
+                Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
+                tblModel.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+     
+        void setForm(KhachHang kh){
+        txtTo.setText(kh.getEmail());
+    }
+     
+     void edit(){
+        try {
+            String MaKH = (String) tblKhachHang.getValueAt(row, 0);
+            KhachHang kh = khDAO.selectById(MaKH);
+            if(kh!=null)
+            {
+                setForm(kh);
+//                updateStatus();
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+     
+     public void attachFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            duongDan = selectedFile.getAbsolutePath();
+            JOptionPane.showMessageDialog(this, "File attached: " + selectedFile.getName());
+        System.out.println("Selected File Path: " + selectedFile.getAbsolutePath());
+            // Thực hiện các thao tác liên quan đến việc đính kèm file
+            // ở đây, bạn có thể lưu trữ đường dẫn của file hoặc thực hiện các thao tác khác.
+        }
+    }
+    
+    public void sendEmail() throws IOException{
+        
+        String to = txtTo.getText();
+        String subject = txtSubject.getText();
+        String message = txtDescription.getText();
 
+        // Thông tin tài khoản email của bạn
+        String username = "leetub4@gmail.com";
+        String password = "mdeb ymtc aunb ieii";
+
+        // Cài đặt cấu hình cho JavaMail API
         Properties props = new Properties();
+
+        props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-//        Session session = Session.getInstance(props, new PasswordAuthentication(username, password) {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return PasswordAuthentication(username, password);
-//            }
-//        });
+        
 
-//        try {
-//            Message message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(username));
-//            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("recipient_email@gmail.com"));
-//            message.setSubject("Subject Here");
-//            message.setText("Your Message Here");
+        // Tạo đối tượng Session
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
-//            Transport.send(message);
+        try {
+    // Tạo đối tượng MimeMessage
+    Message mimeMessage = new MimeMessage(session);
 
-            System.out.println("Email sent successfully.");
+    // Đặt thông tin người gửi và người nhận
+    mimeMessage.setFrom(new InternetAddress(username));
+    mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+    mimeMessage.setSubject(subject);
+    mimeMessage.setText(message);
+    
+     // Tạo đối tượng MimeBodyPart cho nội dung văn bản
+            MimeBodyPart textBodyPart = new MimeBodyPart();
+            textBodyPart.setText(message);
 
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
+            // Đính kèm file (nếu có)
+            File selectedFile = new File(duongDan);
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(textBodyPart);
+                //add file
+                if(selectedFile != null){
+                MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+                DataSource source = new FileDataSource(selectedFile);
+                attachmentBodyPart.setDataHandler(new DataHandler(source));
+                attachmentBodyPart.setFileName(selectedFile.getName());
+                multipart.addBodyPart(attachmentBodyPart);
+                }
+
+            // Đặt nội dung của thư
+            mimeMessage.setContent(multipart);
+
+    // Lấy đối tượng Transport
+            javax.mail.Transport transport = session.getTransport("smtp");
+
+
+    // Kết nối và gửi email
+    transport.connect(username, password);
+    transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+
+    // Đóng kết nối
+    transport.close();
+     System.out.println("file: "+selectedFile);
+    JOptionPane.showMessageDialog(this, "Email sent successfully!");
+} catch (MessagingException ex) {
+    JOptionPane.showMessageDialog(this, "Error sending email: " + ex.getMessage());
+    ex.printStackTrace();
+}
+
     }
 
     /**
@@ -65,9 +185,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblKhachHang = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtTo = new javax.swing.JTextField();
@@ -82,27 +203,32 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        txtTimkiem = new javax.swing.JTextField();
+        rdoMaKH = new javax.swing.JRadioButton();
+        rdoTenKH = new javax.swing.JRadioButton();
+        btnTimKiem = new javax.swing.JButton();
 
         setMaximizable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "MÃ KH", "TÊN KH", "ĐỊA CHỈ", "EMAIL", "SDT"
+                "MÃ KH", "TÊN KH", "ĐỊA CHỈ", "EMAIL", "SDT"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblKhachHangMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblKhachHang);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Send mail"));
@@ -196,14 +322,21 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Thông tin KH");
 
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Theo mã KH");
+        buttonGroup1.add(rdoMaKH);
+        rdoMaKH.setSelected(true);
+        rdoMaKH.setText("Theo mã KH");
 
-        jRadioButton2.setText("Theo Tên KH");
+        buttonGroup1.add(rdoTenKH);
+        rdoTenKH.setText("Theo Tên KH");
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Search.png"))); // NOI18N
-        jButton2.setText("Tìm");
+        btnTimKiem.setBackground(new java.awt.Color(255, 204, 255));
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Search.png"))); // NOI18N
+        btnTimKiem.setText("Tìm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -215,12 +348,12 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(rdoMaKH)
                         .addGap(41, 41, 41)
-                        .addComponent(jRadioButton2)
+                        .addComponent(rdoTenKH)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jTextField3))
+                        .addComponent(btnTimKiem))
+                    .addComponent(txtTimkiem))
                 .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
@@ -229,12 +362,12 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jButton2))
+                    .addComponent(rdoMaKH)
+                    .addComponent(rdoTenKH)
+                    .addComponent(btnTimKiem))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -284,17 +417,70 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnAddFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFileActionPerformed
         // TODO add your handling code here:
+        attachFile();
+        btnAddFile.setText(duongDan);
     }//GEN-LAST:event_btnAddFileActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            sendEmail();
+        } catch (IOException ex) {
+            Logger.getLogger(ChamSocKhachHangIFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtDescription.setText("");
+        txtSubject.setText("");
+        txtTo.setText("");
     }//GEN-LAST:event_btnSendActionPerformed
+
+    private void tblKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMousePressed
+        // TODO add your handling code here:
+        if(evt.getClickCount()==1)
+        {
+            row = tblKhachHang.getSelectedRow();
+            this.row = tblKhachHang.rowAtPoint(evt.getPoint());
+           edit();
+        }
+    }//GEN-LAST:event_tblKhachHangMousePressed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        try {
+        String searchText = txtTimkiem.getText();
+        boolean searchByMaKH = rdoMaKH.isSelected();
+        boolean searchByTenKH = rdoTenKH.isSelected();
+
+        if (!searchByMaKH && !searchByTenKH) {
+            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+            return;
+        }
+
+        List<KhachHang> listKH;
+
+        if (searchByMaKH) {
+            listKH = khDAO.timKiem(searchText, true);
+        } else {
+            listKH = khDAO.timKiem(searchText, false);
+        }
+
+        DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
+        tblModel.setRowCount(0);
+
+        for (KhachHang kh : listKH) {
+            Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
+            tblModel.addRow(row);
+        }
+    } catch (Exception e) {
+        MsgBox.alert(this, "Lỗi khi tìm kiếm khách hàng");
+    }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFile;
     private javax.swing.JButton btnSend;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,14 +490,14 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JRadioButton rdoMaKH;
+    private javax.swing.JRadioButton rdoTenKH;
+    private javax.swing.JTable tblKhachHang;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtSubject;
+    private javax.swing.JTextField txtTimkiem;
     private javax.swing.JTextField txtTo;
     // End of variables declaration//GEN-END:variables
 }
