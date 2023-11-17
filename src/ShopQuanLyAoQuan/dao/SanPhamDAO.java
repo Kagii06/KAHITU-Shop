@@ -15,8 +15,8 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
-    final String INSERT_SQL ="insert into SanPham(MaSP,MaLoai,TenSP,GiaNhap,Size,SoLuongTon,GhiChu,HinhAnh) VALUES(?,?,?,?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE SanPham MaLoai= ?, TenSP = ?, GiaNhap= ?, Size= ?, SoLuongTon= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
+    final String INSERT_SQL ="insert into SanPham(MaSP,MaLoai,TenSP,GiaNhap,SoLuongTon,GhiChu,HinhAnh) VALUES(?,?,?,?,?,?,?)";
+    final String UPDATE_SQL ="UPDATE SanPham MaLoai= ?, TenSP = ?, GiaNhap= ?, SoLuongTon= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
     final String DELETE_SQL ="DELETE from SanPham WHERE MaSP = ?";
     final String SELECT_ALL_SQL ="SELECT * FROM SanPham";
     final String SELECT_BY_ID_SQL ="SELECT * FROM SanPham WHERE MaSP= ?";

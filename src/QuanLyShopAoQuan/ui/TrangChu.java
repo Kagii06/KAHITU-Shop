@@ -1,5 +1,6 @@
 package QuanLyShopAoQuan.ui;
 
+import com.fsm.utils.MsgBox;
 import com.fsm.utils.XImage;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -114,6 +115,27 @@ public class TrangChu extends javax.swing.JFrame {
             dangNhap.DangNhap();
          
      }
+     void dangXuat()
+     {
+        pnlDangXuat.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        dispose();
+        dangnhap.setVisible(true);
+     }
+    void ketThuc()
+    {
+        if(MsgBox.confirm(this, "Bạn muốn kết thúc làm việc?"));
+        System.exit(0);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -226,9 +248,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnlTrangChuLayout.setHorizontalGroup(
             pnlTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTrangChuLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(28, 28, 28)
                 .addComponent(lblTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         pnlTrangChuLayout.setVerticalGroup(
             pnlTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,9 +277,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnlTaikhoanLayout.setHorizontalGroup(
             pnlTaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTaikhoanLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(23, 23, 23)
                 .addComponent(lblTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         pnlTaikhoanLayout.setVerticalGroup(
             pnlTaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,9 +393,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnldonHangLayout.setHorizontalGroup(
             pnldonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnldonHangLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(24, 24, 24)
                 .addComponent(lblDonHang)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         pnldonHangLayout.setVerticalGroup(
             pnldonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,9 +422,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnlThongKeLayout.setHorizontalGroup(
             pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlThongKeLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(26, 26, 26)
                 .addComponent(lblThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         pnlThongKeLayout.setVerticalGroup(
             pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,9 +451,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnlTroGiupLayout.setHorizontalGroup(
             pnlTroGiupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTroGiupLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(25, 25, 25)
                 .addComponent(lblTroGiup, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         pnlTroGiupLayout.setVerticalGroup(
             pnlTroGiupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,9 +480,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnlDangXuatLayout.setHorizontalGroup(
             pnlDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDangXuatLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(22, 22, 22)
                 .addComponent(lblDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         pnlDangXuatLayout.setVerticalGroup(
             pnlDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,10 +514,10 @@ public class TrangChu extends javax.swing.JFrame {
         pnlSanPham.setLayout(pnlSanPhamLayout);
         pnlSanPhamLayout.setHorizontalGroup(
             pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSanPhamLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSanPhamLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(lblSanPham)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         pnlSanPhamLayout.setVerticalGroup(
             pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,11 +735,12 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
         // TODO add your handling code here:
+        OpenLogin();
     }//GEN-LAST:event_mniDangNhapActionPerformed
 
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
-//        dangXuat();
+        dangXuat();
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMKActionPerformed
@@ -727,7 +750,7 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void mniKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKetThucActionPerformed
         // TODO add your handling code here:
-//        ketThuc();
+        ketThuc();
     }//GEN-LAST:event_mniKetThucActionPerformed
 
     private void pnlTrangChuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTrangChuMousePressed

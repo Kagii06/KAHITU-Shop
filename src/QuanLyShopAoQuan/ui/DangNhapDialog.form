@@ -101,6 +101,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NV01"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -108,6 +111,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtPass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="123"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnDangNhap">
       <Properties>

@@ -69,7 +69,11 @@ public class DangNhapDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Username:");
 
+        txtName.setText("NV01");
+
         jLabel3.setText("Password:");
+
+        txtPass.setText("123");
 
         btnDangNhap.setBackground(new java.awt.Color(255, 204, 255));
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Key.png"))); // NOI18N

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ShopQuanLyAoQuan.dao;
 
 import ShopQuanLyAoQuan.entity.TaiKhoan;
@@ -69,4 +65,27 @@ public class TaiKhoanDAO extends ShopAoQuanDAO<TaiKhoan,String> {
         return list;
     }
     
+    public List<TaiKhoan> timkiemByMaNVOrTenNV(String keyword, boolean isSearchByMaNV) {
+    String sql;
+    List<TaiKhoan> list = new ArrayList<>();
+    try {
+        if (isSearchByMaNV) {
+            sql = "SELECT * FROM TaiKhoan WHERE MaNV LIKE ?";
+        } else {
+            sql = "SELECT * FROM TaiKhoan WHERE HoTen LIKE ?";
+        }
+        ResultSet rs = jdbcHelper.query(sql, "%" + keyword + "%");
+        while (rs.next()) {
+            TaiKhoan entity = new TaiKhoan();
+            entity.setMaNV(rs.getString("MaNV"));
+            entity.setMatKhau(rs.getString("MatKhau"));
+            entity.setHoTen(rs.getString("HoTen"));
+            entity.setVaiTro(rs.getBoolean("VaiTro"));
+            list.add(entity);
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return list;
+    }
 }

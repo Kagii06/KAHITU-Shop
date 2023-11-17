@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ShopQuanLyAoQuan.dao;
 
 import ShopQuanLyAoQuan.entity.NhanVien;
@@ -29,7 +25,7 @@ public class NhanVienDAO extends ShopAoQuanDAO<NhanVien,String> {
 
     @Override
     public void update(NhanVien entity) {
-        jdbcHelper.Update(INSERT_SQL,entity.getHoTen(),entity.getDiaChi(),entity.getSDT(), entity.getEmail(), entity.getNgaySinh(),entity.getLuong(), entity.getGhiChu(), entity.getMaNV());
+        jdbcHelper.Update(UPDATE_SQL,entity.getHoTen(),entity.getDiaChi(),entity.getSDT(), entity.getEmail(), entity.getNgaySinh(),entity.getLuong(), entity.getGhiChu(), entity.getMaNV());
     }
 
     @Override
@@ -72,6 +68,33 @@ public class NhanVienDAO extends ShopAoQuanDAO<NhanVien,String> {
             throw new RuntimeException(e);
         }
         return list;
+    }
+    public List<NhanVien> timkiemByMaNVOrTenNV(String keyword, boolean isSearchByMaNV) {
+    String sql;
+    List<NhanVien> list = new ArrayList<>();
+    try {
+        if (isSearchByMaNV) {
+            sql = "SELECT * FROM NhanVien WHERE MaNV LIKE ?";
+        } else {
+            sql = "SELECT * FROM NhanVien WHERE HoTen LIKE ?";
+        }
+        ResultSet rs = jdbcHelper.query(sql, "%" + keyword + "%");
+        while (rs.next()) {
+            NhanVien entity = new NhanVien();
+            entity.setMaNV(rs.getString("MaNV"));
+            entity.setHoTen(rs.getString("HoTen"));
+            entity.setDiaChi(rs.getString("DiaChi"));
+            entity.setSDT(rs.getString("SDT"));
+            entity.setEmail(rs.getString("Email"));
+            entity.setNgaySinh(rs.getDate("NgaySinh"));
+            entity.setLuong(rs.getFloat("Luong"));
+            entity.setGhiChu(rs.getString("GhiChu"));
+            list.add(entity);
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return list;
     }
     
 }
