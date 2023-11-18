@@ -15,20 +15,20 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
-    final String INSERT_SQL ="insert into SanPham(MaSP,MaLoai,TenSP,GiaNhap,SoLuongTon,GhiChu,HinhAnh) VALUES(?,?,?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE SanPham MaLoai= ?, TenSP = ?, GiaNhap= ?, SoLuongTon= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
+    final String INSERT_SQL ="insert into SanPham(MaSP,MaLoai,TenSP,GiaNhap,SoLuongNhap,GhiChu,HinhAnh) VALUES(?,?,?,?,?,?,?)";
+    final String UPDATE_SQL ="UPDATE SanPham MaLoai= ?, TenSP = ?, GiaNhap= ?, SoLuongNhap= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
     final String DELETE_SQL ="DELETE from SanPham WHERE MaSP = ?";
     final String SELECT_ALL_SQL ="SELECT * FROM SanPham";
     final String SELECT_BY_ID_SQL ="SELECT * FROM SanPham WHERE MaSP= ?";
 
     @Override
     public void insert(SanPham entity) {
-        jdbcHelper.Update(INSERT_SQL, entity.getMaSP(),entity.getMaLoai(),entity.getTenSP(),entity.getGiaNhap(),entity.getSize(), entity.getTonKho(),entity.getGhiChu(),entity.getHinhAnh());
+        jdbcHelper.Update(INSERT_SQL, entity.getMaSP(),entity.getMaLoai(),entity.getTenSP(),entity.getGiaNhap(), entity.getSoLuongNhap(),entity.getGhiChu(),entity.getHinhAnh());
     }
 
     @Override
     public void update(SanPham entity) {
-        jdbcHelper.Update(UPDATE_SQL,entity.getMaLoai(),entity.getTenSP(),entity.getGiaNhap(),entity.getSize(), entity.getTonKho(),entity.getGhiChu(),entity.getHinhAnh(), entity.getMaSP());
+        jdbcHelper.Update(UPDATE_SQL,entity.getMaLoai(),entity.getTenSP(),entity.getGiaNhap(), entity.getSoLuongNhap(),entity.getGhiChu(),entity.getHinhAnh(), entity.getMaSP());
     }
 
     @Override
@@ -61,8 +61,7 @@ public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
                 entity.setMaLoai(rs.getString("MaLoai"));
                 entity.setTenSP(rs.getString("TenSP"));
                 entity.setGiaNhap(rs.getFloat("GiaNhap"));
-                entity.setSize(rs.getString("Size"));
-                entity.setTonKho(rs.getInt("SoLuongTon"));
+                entity.setSoLuongNhap(rs.getInt("SoLuongNhap"));
                 entity.setGhiChu(rs.getString("GhiChu"));
                 entity.setHinhAnh(rs.getString("HinhAnh"));
                 list.add(entity);
@@ -72,5 +71,34 @@ public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
         }
         return list;
     }
+    public List<SanPham> timKiem(String tuKhoa, boolean searchByMaSP) {
+    List<SanPham> list = new ArrayList<>();
+    String sql;
+
+    if (searchByMaSP) {
+        sql = "SELECT * FROM SanPham WHERE MaSP LIKE ?";
+    } else {
+        sql = "SELECT * FROM SanPham WHERE TenSP LIKE ?";
+    }
+
+    try {
+        ResultSet rs = jdbcHelper.query(sql, "%" + tuKhoa + "%");
+        while (rs.next()) {
+            SanPham entity = new SanPham();
+            entity.setMaSP(rs.getString("MaSP"));
+            entity.setMaLoai(rs.getString("MaLoai"));
+            entity.setTenSP(rs.getString("TenSP"));
+            entity.setGiaNhap(rs.getFloat("GiaNhap"));
+            entity.setSoLuongNhap(rs.getInt("SoLuongNhap"));
+            entity.setGhiChu(rs.getString("GhiChu"));
+            entity.setHinhAnh(rs.getString("HinhAnh"));
+            list.add(entity);
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return list;
+}
+
     
 }

@@ -37,11 +37,12 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         try {
             List<KhachHang> listKH = khDAO.selectALl();
             for (KhachHang kh : listKH) {
-                Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
+                Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT(), kh.getGhiChu()};
                 tblModel.addRow(row);
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            System.out.println(e);
         }
     }
     void setForm(KhachHang kh){
@@ -50,6 +51,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         txtDiaChi.setText(kh.getDiaChi());
         txtEmail.setText(kh.getEmail());
         txtSDT.setText(kh.getSDT());
+        txtGhiChu.setText(kh.getGhiChu());
     }
     void edit(){
         try {
@@ -63,6 +65,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            System.out.println(e);
         }
     }
     KhachHang getForm(){
@@ -72,6 +75,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         kh.setDiaChi((txtDiaChi.getText()));
         kh.setEmail(txtEmail.getText());
         kh.setSDT(txtSDT.getText());
+        kh.setGhiChu(txtGhiChu.getText());
         return kh;
     }
      void updateStatus(){
@@ -94,50 +98,122 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         updateStatus();
     }
      
-    void insert(){
+    void insert() {
+    KhachHang kh = getForm();
+    String sdt = kh.getSDT();
+    String email = kh.getEmail();
+    String tenKH = kh.getHoTen();
 
-  KhachHang kh = getForm();
-
-  String sdt = kh.getSDT();
-
-  // Kiểm tra trùng SĐT
-  if(khDAO.selectBySDT(sdt) != null){
-    MsgBox.alert(this, "SĐT "+sdt+" đã tồn tại! Vui lòng nhập số khác."); 
-    return;
-  }
-
-  try{
-
-    khDAO.insert(kh);
-    
-    fillTable();
-    
-    clearForm();
-    
-    MsgBox.alert(this, "Thêm mới thành công");
-    
-  } catch(Exception e){
-  
-    MsgBox.alert(this,"Thêm mới thất bại");
-  
-  }
-
-}
-     void update() {
-        KhachHang kh = getForm();
-        String sdt = kh.getSDT();
-        if(khDAO.selectBySDT(sdt) != null){
-    MsgBox.alert(this, "SĐT "+sdt+" đã tồn tại! Vui lòng nhập số khác."); 
-    return;
-  }
-        try {
-            khDAO.update(kh);
-            this.fillTable();
-            MsgBox.alert(this, "Cập nhật thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bại!");
-        }
+    // Kiểm tra tên khách hàng không được để trống
+    if (tenKH.isEmpty()) {
+        MsgBox.alert(this, "Tên khách hàng không được để trống!");
+        return;
     }
+
+    // Kiểm tra định dạng và trùng SĐT
+    if (!isValidPhoneNumber(sdt)) {
+        MsgBox.alert(this, "SĐT không hợp lệ!");
+        return;
+    }
+
+    // Kiểm tra định dạng và trùng Email
+    if (!isValidEmail(email)) {
+        MsgBox.alert(this, "Email không hợp lệ!");
+        return;
+    }
+    if (khDAO.selectById(kh.getMaKH()) != null) {
+        MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
+        return;
+    }
+
+    if (khDAO.selectBySDT(sdt) != null) {
+        MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+        return;
+    }
+
+    if (khDAO.selectByEmail(email) != null) {
+        MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
+        return;
+    }
+    
+
+    try {
+        khDAO.insert(kh);
+        fillTable();
+        clearForm();
+        MsgBox.alert(this, "Thêm mới thành công");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Thêm mới thất bại");
+    }
+}
+
+// Hàm kiểm tra định dạng SĐT
+boolean isValidPhoneNumber(String phoneNumber) {
+    // Thực hiện kiểm tra định dạng số điện thoại ở đây
+    // Ví dụ đơn giản: kiểm tra độ dài số điện thoại
+    return phoneNumber.matches("\\d{10}"); // Kiểm tra xem có 10 chữ số hay không
+}
+
+// Hàm kiểm tra định dạng Email
+boolean isValidEmail(String email) {
+    // Thực hiện kiểm tra định dạng Email ở đây
+    // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
+    return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
+}
+
+
+    void update() {
+    KhachHang kh = getForm();
+    
+
+    // Kiểm tra tên khách hàng không được để trống
+    if (kh.getHoTen().isEmpty()) {
+        MsgBox.alert(this, "Tên khách hàng không được để trống!");
+        return;
+    }
+
+    // Kiểm tra định dạng Email
+    String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    if (!kh.getEmail().matches(emailPattern)) {
+        MsgBox.alert(this, "Định dạng Email không hợp lệ!");
+        return;
+    }
+
+    // Kiểm tra định dạng SĐT
+    String phonePattern = "\\d{10,11}";
+    if (!kh.getSDT().matches(phonePattern)) {
+        MsgBox.alert(this, "Định dạng SĐT không hợp lệ!");
+        return;
+    }
+    KhachHang existing = khDAO.selectById(kh.getMaKH());
+    if (existing != null && !existing.getMaKH().equals(kh.getMaKH())) {
+        MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
+        return;
+    }
+     // Kiểm tra trùng SĐT
+    KhachHang existingBySDT = khDAO.selectBySDT(kh.getSDT());
+    if (existingBySDT != null && !existingBySDT.getMaKH().equals(kh.getMaKH())) {
+        MsgBox.alert(this, "SĐT " + kh.getSDT() + " đã tồn tại! Vui lòng nhập số khác.");
+        return;
+    }
+
+    // Kiểm tra trùng Email
+    KhachHang existingByEmail = khDAO.selectByEmail(kh.getEmail());
+    if (existingByEmail != null && !existingByEmail.getMaKH().equals(kh.getMaKH())) {
+        MsgBox.alert(this, "Email " + kh.getEmail() + " đã tồn tại! Vui lòng nhập email khác.");
+        return;
+    }
+
+    try {
+        khDAO.update(kh);
+        this.fillTable();
+        MsgBox.alert(this, "Cập nhật thành công!");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Cập nhật thất bại!");
+    }
+}
+
+
      void delete() {
     if (MsgBox.confirm(this, "Bạn thực sự muốn xóa khách hàng này?")) {
         String makh = txtMaKH.getText();

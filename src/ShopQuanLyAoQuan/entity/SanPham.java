@@ -13,21 +13,19 @@ public class SanPham {
     private String MaLoai;
     private String TenSP;
     private float GiaNhap;
-    private String Size;
-    private int TonKho;
+    private int SoLuongNhap;
     private String GhiChu;
     private String HinhAnh;
 
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String MaLoai, String TenSP, float GiaNhap, String Size, int TonKho, String GhiChu, String HinhAnh) {
+    public SanPham(String MaSP, String MaLoai, String TenSP, float GiaNhap, int SoLuongNhap, String GhiChu, String HinhAnh) {
         this.MaSP = MaSP;
         this.MaLoai = MaLoai;
         this.TenSP = TenSP;
         this.GiaNhap = GiaNhap;
-        this.Size = Size;
-        this.TonKho = TonKho;
+        this.SoLuongNhap = SoLuongNhap;
         this.GhiChu = GhiChu;
         this.HinhAnh = HinhAnh;
     }
@@ -64,20 +62,12 @@ public class SanPham {
         this.GiaNhap = GiaNhap;
     }
 
-    public String getSize() {
-        return Size;
+    public int getSoLuongNhap() {
+        return SoLuongNhap;
     }
 
-    public void setSize(String Size) {
-        this.Size = Size;
-    }
-
-    public int getTonKho() {
-        return TonKho;
-    }
-
-    public void setTonKho(int TonKho) {
-        this.TonKho = TonKho;
+    public void setSoLuongNhap(int SoLuongNhap) {
+        this.SoLuongNhap = SoLuongNhap;
     }
 
     public String getGhiChu() {

@@ -15,20 +15,20 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class KhachHangDAO extends ShopAoQuanDAO<KhachHang,String> {
-    final String INSERT_SQL ="insert into KhachHang(MaKH, HoTen, DiaChi, SDT, Email) VALUES(?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE KhachHang SET HoTen = ?, DiaChi= ?, SDT = ?, Email= ? where MaKH = ?";
+    final String INSERT_SQL ="insert into KhachHang(MaKH, HoTen, DiaChi, SDT, Email, GhiChu) VALUES(?,?,?,?,?,?)";
+    final String UPDATE_SQL ="UPDATE KhachHang SET HoTen = ?, DiaChi= ?, SDT = ?, Email= ?, GhiChu= ? where MaKH = ?";
     final String DELETE_SQL ="DELETE from KhachHang WHERE MaKH = ?";
     final String SELECT_ALL_SQL ="SELECT * FROM KhachHang";
     final String SELECT_BY_ID_SQL ="SELECT * FROM KhachHang WHERE MaKH= ?";
 
     @Override
     public void insert(KhachHang entity) {
-        jdbcHelper.Update(INSERT_SQL, entity.getMaKH(),entity.getHoTen(),entity.getDiaChi(),entity.getSDT(),entity.getEmail());
+        jdbcHelper.Update(INSERT_SQL, entity.getMaKH(),entity.getHoTen(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(), entity.getGhiChu());
     }
 
     @Override
     public void update(KhachHang entity) {
-        jdbcHelper.Update(UPDATE_SQL,entity.getHoTen(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getMaKH());
+        jdbcHelper.Update(UPDATE_SQL,entity.getHoTen(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(), entity.getGhiChu(),entity.getMaKH());
     }
 
     @Override
@@ -63,6 +63,7 @@ public class KhachHangDAO extends ShopAoQuanDAO<KhachHang,String> {
                 entity.setDiaChi(rs.getString("DiaChi"));
                 entity.setSDT(rs.getString("SDT"));
                 entity.setEmail(rs.getString("Email"));
+                entity.setGhiChu(rs.getString("GhiChu"));
                 list.add(entity);
             }
         } catch (Exception e) {
@@ -110,6 +111,18 @@ public KhachHang selectBySDT(String sdt) {
 
   return list.get(0);
 }
+public KhachHang selectByEmail(String email) {
+    String sql = "SELECT * FROM KhachHang WHERE Email = ?";
+
+    List<KhachHang> list = selectBySql(sql, email);
+
+    if (list.isEmpty()) {
+        return null;
+    }
+
+    return list.get(0);
+}
+
 
 
     

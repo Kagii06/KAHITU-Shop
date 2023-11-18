@@ -14,16 +14,18 @@ public class KhachHang {
     private String SDT;
     private String DiaChi;
     private String Email;
+    private String GhiChu;
 
     public KhachHang() {
     }
 
-    public KhachHang(String MaKH, String HoTen, String SDT, String DiaChi, String Email) {
+    public KhachHang(String MaKH, String HoTen, String SDT, String DiaChi, String Email, String GhiChu) {
         this.MaKH = MaKH;
         this.HoTen = HoTen;
         this.SDT = SDT;
         this.DiaChi = DiaChi;
         this.Email = Email;
+        this.GhiChu = GhiChu;
     }
 
     public String getMaKH() {
@@ -64,6 +66,14 @@ public class KhachHang {
 
     public void setEmail(String Email) {
         this.Email = Email;
+    }
+    
+    public String getGhiChu(){
+        return GhiChu;
+    }
+    
+    public void setGhiChu(String GhiChu){
+        this.GhiChu = GhiChu;
     }
     
     

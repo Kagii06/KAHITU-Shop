@@ -15,25 +15,25 @@ public class XImage {
         URL url = XImage.class.getResource("/QuanLyShopAoQuan/icon/logo1_preview_rev_1.png");
         return new ImageIcon(url).getImage();             
     }
-//    public static boolean save(File src)
-//    {
-//        File dst = new File("src\\main\\resources\\com\\fsm\\logos",src.getName());
-//        if(!dst.getParentFile().exists())
-//        {
-//            dst.getParentFile().mkdirs();//tạo thư mục
-//        }
-//        try {
-//            Path from = Paths.get(src.getAbsolutePath());
-//            Path to = Paths.get(dst.getAbsolutePath());
-//            Files.copy(from,to,StandardCopyOption.REPLACE_EXISTING);
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
-//    public static ImageIcon read(String fileName)
-//    {
-//        File path = new File("src\\main\\resources\\com\\fsm\\logos",fileName);
-//        return new ImageIcon(path.getAbsolutePath());
-//    }
+   public static boolean save(File src)
+    {
+        File dst = new File("src\\main\\resources\\com\\fsm\\logos",src.getName());
+        if(!dst.getParentFile().exists())
+        {
+            dst.getParentFile().mkdirs();//tạo thư mục
+        }
+        try {
+            Path from = Paths.get(src.getAbsolutePath());
+            Path to = Paths.get(dst.getAbsolutePath());
+            Files.copy(from,to,StandardCopyOption.REPLACE_EXISTING);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static ImageIcon read(String fileName)
+    {
+        File path = new File("src\\main\\resources\\com\\fsm\\logos",fileName);
+        return new ImageIcon(path.getAbsolutePath());
+    }
 }
