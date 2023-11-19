@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ShopQuanLyAoQuan.dao;
 
 import ShopQuanLyAoQuan.entity.DonHangChiTiet;
@@ -15,20 +11,20 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
-    final String INSERT_SQL ="insert into DonHangChiTiet(MaDHCT, MaSP, MaDH, SoLuong, DonGia, GhiChu) VALUES(?,?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE DonHangChiTiet SET MaSP = ?, MaDH= ?, SoLuong = ?, DonGia= ?, GhiChu= ? where MaDHCT = ?";
-    final String DELETE_SQL ="DELETE from DonHangChiTiet WHERE MaDHCT = ?";
-    final String SELECT_ALL_SQL ="SELECT * FROM DonHangChiTiet";
+    final String INSERT_SQL ="insert into DonHangChiTiet(MaSP, MaDH, SoLuong, GiaBan, GhiChu) VALUES(?,?,?,?,?)";
+    final String UPDATE_SQL ="UPDATE DonHangChiTiet SET MaSP = ?, MaDH= ?, SoLuong = ?, GiaBan= ?, GhiChu= ? where MaDH = ?";
+    final String DELETE_SQL ="DELETE from DonHangChiTiet WHERE MaDH = ?";
+    final String SELECT_ALL_SQL ="SELECT MaDHCT, MaDH, MaSP, SoLuong, GiaBan, GhiChu FROM DonHangChiTiet";
     final String SELECT_BY_ID_SQL ="SELECT * FROM DonHangChiTiet WHERE MaDHCT= ?";
 
     @Override
     public void insert(DonHangChiTiet entity) {
-        jdbcHelper.Update(INSERT_SQL, entity.getMaDHCT(),entity.getMaSP(),entity.getMaDH(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu());
+        jdbcHelper.Update(INSERT_SQL, entity.getMaDH(),entity.getMaSP(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu());
     }
 
     @Override
     public void update(DonHangChiTiet entity) {
-        jdbcHelper.Update(UPDATE_SQL,entity.getMaSP(),entity.getMaDH(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu(),entity.getMaDHCT());
+        jdbcHelper.Update(UPDATE_SQL,entity.getMaSP(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu(),entity.getMaDH());
     }
 
     @Override
@@ -58,10 +54,10 @@ public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
             while(rs.next()){
                 DonHangChiTiet entity = new DonHangChiTiet();
                 entity.setMaDHCT(rs.getString("MaDHCT"));
-                entity.setMaSP(rs.getString("MaSP"));
                 entity.setMaDH(rs.getString("MaDH"));
+                entity.setMaSP(rs.getString("MaSP"));
                 entity.setSoLuong(rs.getInt("SoLuong"));
-                entity.setDonGia(rs.getFloat("DonGia"));
+                entity.setDonGia(rs.getFloat("GiaBan"));
                 entity.setGhiChu(rs.getString("GhiChu"));
                 list.add(entity);
             }
