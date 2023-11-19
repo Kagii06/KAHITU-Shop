@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ShopQuanLyAoQuan.entity;
 
 /**
@@ -10,8 +6,8 @@ package ShopQuanLyAoQuan.entity;
  */
 public class DonHangChiTiet {
     private String MaDHCT;
-    private String MaSP;
     private String MaDH;
+    private String MaSP;
     private int SoLuong;
     private float DonGia;
     private String GhiChu;
@@ -19,7 +15,7 @@ public class DonHangChiTiet {
     public DonHangChiTiet() {
     }
 
-    public DonHangChiTiet(String MaDHCT, String MaSP, String MaDH, int SoLuong, float DonGia, String GhiChu) {
+    public DonHangChiTiet(String MaDHCT, String MaDH, String MaSP,  int SoLuong, float DonGia, String GhiChu) {
         this.MaDHCT = MaDHCT;
         this.MaSP = MaSP;
         this.MaDH = MaDH;

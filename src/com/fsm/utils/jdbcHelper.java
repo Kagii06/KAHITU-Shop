@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.fsm.utils;
 
 import java.sql.Connection;
@@ -18,7 +15,7 @@ public class jdbcHelper {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static String dburl = "jdbc:sqlserver://localhost;database=QLShop;encrypt=false";
     private static String user ="sa";
-    private static String pass ="Password12";
+    private static String pass ="123";
     
     static{
         try {

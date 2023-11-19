@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ShopQuanLyAoQuan.dao;
 
 import ShopQuanLyAoQuan.entity.DonHang;
@@ -21,6 +17,9 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
     final String DELETE_SQL ="DELETE from DonHang WHERE MaDH = ?";
     final String SELECT_ALL_SQL ="SELECT * FROM DonHang";
     final String SELECT_BY_ID_SQL ="SELECT * FROM DonHang WHERE MaDH= ?";
+    final String SELECT_TENBYID = "SELECT HOTEN FROM DONHANG INNER JOIN NHANVIEN \n" +
+                                  "ON NHANVIEN.MANV = DonHang.MANV\n" +
+                                  "WHERE DONHANG.MANV = 'NV01'";
 
     @Override
     public void insert(DonHang entity) {
@@ -71,6 +70,9 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
         }
         return list;
     }
+    public List<DonHang> selectNhanVienByMaNV(String maNV) {
+         return selectBySql(SELECT_TENBYID,maNV);
+    } 
     public List<Date> selectDay(){
         String sql = "select distinct NgayLap from DonHang order by NgayLap desc";
         List<Date> list = new ArrayList<>();
