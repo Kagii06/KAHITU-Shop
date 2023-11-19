@@ -30,21 +30,32 @@ public class DangNhapDialog extends javax.swing.JDialog {
         getContentPane().setBackground(Color.white);
     }
             
-     void DangNhap(){
-         String strMaNV = txtName.getText();
-         String strPass = new String(txtPass.getPassword());
-         TaiKhoan tk = dao.selectById(strMaNV);
-         if(tk == null){
-             MsgBox.alert(this, "Sai tên đăng nhập!");
-         }else{
-             if(!tk.getMatKhau().equals(strPass)){
-                 MsgBox.alert(this, "Sai mật khẩu!");
-             }else{
-                 Auth.user = tk;
-                 this.dispose();
-             }
-         }
-     }
+     void DangNhap() {
+    String strMaNV = txtName.getText();
+    String strPass = new String(txtPass.getPassword());
+
+    if (strMaNV.isEmpty() || strPass.isEmpty()) {
+        MsgBox.alert(this, "Vui lòng nhập tài khoản và mật khẩu!");
+        return; // Dừng việc thực hiện đăng nhập nếu thiếu thông tin
+    }
+
+    try {
+        TaiKhoan tk = dao.selectById(strMaNV);
+        if (tk == null) {
+            MsgBox.alert(this, "Sai tên đăng nhập!");
+        } else {
+            if (!tk.getMatKhau().equals(strPass)) {
+                MsgBox.alert(this, "Sai mật khẩu!");
+            } else {
+                Auth.user = tk;
+                this.dispose();
+            }
+        }
+    } catch (Exception e) {
+        // Xử lý ngoại lệ ở đây
+        MsgBox.alert(this, "Đã xảy ra lỗi: " + e.getMessage());
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -103,10 +103,15 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     String sdt = kh.getSDT();
     String email = kh.getEmail();
     String tenKH = kh.getHoTen();
+    String maKhachHang = kh.getMaKH();
 
     // Kiểm tra tên khách hàng không được để trống
     if (tenKH.isEmpty()) {
         MsgBox.alert(this, "Tên khách hàng không được để trống!");
+        return;
+    }
+     if (!validateMaKH(maKhachHang)) {
+        MsgBox.alert(this, "Mã KH không đúng định dạng!");
         return;
     }
 
@@ -160,6 +165,10 @@ boolean isValidEmail(String email) {
     // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
     return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
 }
+  boolean validateMaKH(String maKH) {
+    // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+    return maKH.matches("KH\\d+");
+  }
 
 
     void update() {
@@ -1297,8 +1306,7 @@ boolean isValidEmail(String email) {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        // TODO add your handling code here:
-         try {
+      try {
         String searchText = txtTim.getText();
         boolean searchByMaKH = rdoMaKH.isSelected();
         boolean searchByTenKH = rdoTenKH.isSelected();
@@ -1318,6 +1326,11 @@ boolean isValidEmail(String email) {
 
         DefaultTableModel tblModel = (DefaultTableModel) tblDanhSachKH.getModel();
         tblModel.setRowCount(0);
+
+        if (listKH.isEmpty()) {
+            MsgBox.alert(this, "Không tìm thấy mã khách hàng hoặc tên khách hàng.");
+            return;
+        }
 
         for (KhachHang kh : listKH) {
             Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};

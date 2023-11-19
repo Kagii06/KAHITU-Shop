@@ -44,7 +44,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         try {
             List<SanPham> listSP = spDAO.selectALl();
             for (SanPham sp : listSP) {
-                Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getGiaNhap(), sp.getMaLoai(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh()};
+                Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getGiaNhap(), sp.getMaLoai(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh(), sp.getHinhAnh()};
                 tblModel.addRow(row);
             }
         } catch (Exception e) {
@@ -92,11 +92,19 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     // Chuyển đổi int sang String trước khi đặt vào JTextField
     txtSoLuongNhap.setText(String.valueOf(sp.getSoLuongNhap()));
     txtGhiChu.setText(sp.getGhiChu());
-    if (sp.getHinhAnh() != null) {
-            lblHinhLogo.setToolTipText(sp.getHinhAnh());
-            lblHinhLogo.setIcon(XImage.read(sp.getHinhAnh()));
-        }
-    
+    if(sp.getHinhAnh() != null){
+        lblHinhLogo.setToolTipText(sp.getHinhAnh());
+        ImageIcon imageIcon = XImage.read(sp.getHinhAnh());
+
+        int lblWidth = lblHinhLogo.getWidth();
+        int lblHeight = lblHinhLogo.getHeight();
+
+        Image img = imageIcon.getImage().getScaledInstance(lblWidth, lblHeight, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(img);
+
+        lblHinhLogo.setIcon(scaledIcon);
+    }
+   
 }
 
      void setFormPLSP(PhanLoaiSanPham plsp) {
@@ -105,23 +113,22 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
   
     } 
     
-     void editSP(){
-        try {
-            String MaSP = (String) tblSanPham.getValueAt(row, 0);
-            SanPham sp = spDAO.selectById(MaSP);
-            if(sp!=null)
-            {
-                setFormSP(sp);
-                updateStatusSP();
-                jTabbedPane1.setSelectedIndex(0);
-            }
-        } catch (Exception e) {
-            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
-            System.out.println(e);
-            
+     void editSP() {
+    try {
+        String MaSP = (String) tblSanPham.getValueAt(row, 0);
+        SanPham sp = spDAO.selectById(MaSP);
+        if (sp != null) {
+            setFormSP(sp);
+//            setHinhAnh(sp.getHinhAnh());
+            updateStatusSP();
+            jTabbedPane1.setSelectedIndex(0);
         }
+    } catch (Exception e) {
+        MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
     }
-    
+}
+
+
     
 
   SanPham getFormSP() {
@@ -180,57 +187,170 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         MsgBox.alert(this, "Bạn không có quyền thêm sản phẩm!");
     } else {
         SanPham sp = getFormSP();
-
-        // Kiểm tra tính hợp lệ của dữ liệu trước khi thêm
-        if (validateForm(sp)) {
-            try {
-                spDAO.insert(sp);
-                this.fillTableSP();
-                this.clearFormSP();
-                MsgBox.alert(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại!");
-                System.out.println(e);
+        String maSP = sp.getMaSP();
+        String tenSP = sp.getTenSP();
+        String giaNhapStr = txtGiaNhap.getText(); // Lấy dữ liệu từ JTextField
+        String maLoai = sp.getMaLoai();
+        String soLuongNhapStr = txtSoLuongNhap.getText(); // Lấy dữ liệu từ JTextField
+        String hinhAnh = sp.getHinhAnh();
+        
+        // Kiểm tra tính hợp lệ của từng trường thông tin
+        if (maSP.isEmpty()) {
+            MsgBox.alert(this, "Mã sản phẩm không được để trống!");
+            return;
+        }
+      
+        if (spDAO.selectById(maSP) != null) {
+                MsgBox.alert(this, "Mã sản phẩm " + maSP + " đã tồn tại!");
+                return;
             }
+
+
+        if (tenSP.isEmpty()) {
+            MsgBox.alert(this, "Tên sản phẩm không được để trống!");
+            return;
+        }
+        if (spDAO.selectByTenSP(tenSP) != null) {
+                MsgBox.alert(this, "Tên sản phẩm " + tenSP + " đã tồn tại!");
+                return;
+            }
+
+        float giaNhap;
+        try {
+            giaNhap = Float.parseFloat(giaNhapStr);
+            if (giaNhap <= 0) {
+                MsgBox.alert(this, "Giá nhập phải lớn hơn 0!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            MsgBox.alert(this, "Giá nhập phải là số!");
+            return;
+        }
+
+        if (maLoai.isEmpty()) {
+            MsgBox.alert(this, "Mã loại không được để trống!");
+            return;
+        }
+  
+        int soLuongNhap;
+        try {
+            soLuongNhap = Integer.parseInt(soLuongNhapStr);
+            if (soLuongNhap <= 0) {
+                MsgBox.alert(this, "Số lượng nhập phải lớn hơn 0!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            MsgBox.alert(this, "Số lượng nhập phải là số nguyên!");
+            return;
+        }
+
+        if (hinhAnh.isEmpty()) {
+            MsgBox.alert(this, "Hình ảnh không được để trống!");
+            return;
+        }
+        if (!plspDAO.isMaLoaiExists(maLoai)) {
+        MsgBox.alert(this, "Mã loại không tồn tại!");
+        return;
+}
+        
+        try {
+            spDAO.insert(sp);
+            this.fillTableSP();
+            this.clearFormSP();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới thất bại!");
+            System.out.println(e);
         }
     }
 }
 
-// Phương thức để kiểm tra tính hợp lệ của dữ liệu trước khi thêm
-     private boolean validateForm(SanPham sp) {
-    // Kiểm tra các điều kiện tính hợp lệ ở đây
-    // Ví dụ: kiểm tra nếu các trường bắt buộc không được để trống
-
-    if (sp.getMaSP().isEmpty() || sp.getTenSP().isEmpty()) {
-        MsgBox.alert(this, "Mã sản phẩm và Tên sản phẩm không được để trống!");
-        return false;
-    }
-
-    // Các kiểm tra khác tùy thuộc vào yêu cầu của bạn
-
-    return true;
-}
 
      void updateSP() {
     if (!Auth.isManager()) {
         MsgBox.alert(this, "Bạn không có quyền cập nhật sản phẩm!");
     } else {
         SanPham sp = getFormSP();
+        String maSP = sp.getMaSP();
+        String tenSP = sp.getTenSP();
+        String giaNhapStr = txtGiaNhap.getText(); // Lấy dữ liệu từ JTextField
+        String maLoai = sp.getMaLoai();
+        String soLuongNhapStr = txtSoLuongNhap.getText(); // Lấy dữ liệu từ JTextField
+        String hinhAnh = sp.getHinhAnh();
+        
+        // Kiểm tra tính hợp lệ của từng trường thông tin
+        if (maSP.isEmpty()) {
+            MsgBox.alert(this, "Mã sản phẩm không được để trống!");
+            return;
+        }
+         
+           SanPham existingSP = spDAO.selectById(maSP);
+        if (existingSP != null && !existingSP.getMaSP().equals(sp.getMaSP())) {
+            MsgBox.alert(this, "Mã sản phẩm " + maSP + " đã tồn tại!");
+            return;
+        }
 
-        // Kiểm tra tính hợp lệ của dữ liệu trước khi cập nhật
-        if (validateForm(sp)) {
-            try {
-                spDAO.update(sp);
-                this.fillTableSP();
-                this.clearFormSP();
-                MsgBox.alert(this, "Cập nhật thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Cập nhật thất bại!");
-                System.out.println(e);
+        if (tenSP.isEmpty()) {
+            MsgBox.alert(this, "Tên sản phẩm không được để trống!");
+            return;
+        }
+        existingSP = spDAO.selectByTenSP(tenSP);
+        if (existingSP != null && !existingSP.getMaSP().equals(sp.getMaSP())) {
+            MsgBox.alert(this, "Tên sản phẩm " + tenSP + " đã tồn tại!");
+            return;
+        }
+
+        float giaNhap;
+        try {
+            giaNhap = Float.parseFloat(giaNhapStr);
+            if (giaNhap <= 0) {
+                MsgBox.alert(this, "Giá nhập phải lớn hơn 0!");
+                return;
             }
+        } catch (NumberFormatException e) {
+            MsgBox.alert(this, "Giá nhập phải là số!");
+            return;
+        }
+
+        if (maLoai.isEmpty()) {
+            MsgBox.alert(this, "Mã loại không được để trống!");
+            return;
+        }
+        
+
+        int soLuongNhap;
+        try {
+            soLuongNhap = Integer.parseInt(soLuongNhapStr);
+            if (soLuongNhap <= 0) {
+                MsgBox.alert(this, "Số lượng nhập phải lớn hơn 0!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            MsgBox.alert(this, "Số lượng nhập phải là số nguyên!");
+            return;
+        }
+
+        if (hinhAnh.isEmpty()) {
+            MsgBox.alert(this, "Hình ảnh không được để trống!");
+            return;
+        }
+        if (!plspDAO.isMaLoaiExists(maLoai)) {
+        MsgBox.alert(this, "Mã loại không tồn tại!");
+        return;
+}
+        
+        try {
+            spDAO.update(sp);
+            this.fillTableSP();
+            this.clearFormSP();
+            MsgBox.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật thất bại!");
+            System.out.println(e);
         }
     }
 }
+
 
       void deleteSP() {
         if (!Auth.isManager()) {
@@ -319,54 +439,83 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         row= - 1;
         updateStatusPLSP();
     }
-      void insertPLSP() {
+     void insertPLSP() {
     String maLoai = txtMaLoaiSP.getText();
     String tenLoai = txtTenLoaiSP.getText();
     
-    if (validateData(maLoai, tenLoai)) { // Kiểm tra tính hợp lệ của dữ liệu trước khi chèn
-        PhanLoaiSanPham model = new PhanLoaiSanPham();
-        model.setMaLoai(maLoai);
-        model.setTenLoai(tenLoai);
-      
+    if (maLoai.isEmpty()) {
+        MsgBox.alert(this, "Mã loại không được để trống!");
+        return;
+    } 
+  
+     if (tenLoai.isEmpty()) {
+        MsgBox.alert(this, "Tên loại không được để trống!");
+        return;
+    }
+    
+    if (plspDAO.isMaLoaiExists(maLoai)) {
+        MsgBox.alert(this, "Mã loại " + maLoai + " đã tồn tại! Vui lòng chọn mã khác.");
+        return;
+    }
+    
+    if (plspDAO.isTenLoaiExists(tenLoai)) {
+        MsgBox.alert(this, "Tên loại " + tenLoai + " đã tồn tại! Vui lòng chọn tên khác.");
+        return;
+    }
 
-        try {
-            plspDAO.insert(model);
-            fillTableLoaiSP();
-            clearForm();
-            MsgBox.alert(this, "Thêm mới thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Thêm mới thất bại! Lỗi: " + e.getMessage());
-        }
-    } else {
-        MsgBox.alert(this, "Dữ liệu không hợp lệ!");
+    PhanLoaiSanPham model = new PhanLoaiSanPham();
+    model.setMaLoai(maLoai);
+    model.setTenLoai(tenLoai);
+
+    try {
+        plspDAO.insert(model);
+        fillTableLoaiSP();
+        clearForm();
+        MsgBox.alert(this, "Thêm mới thành công!");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Thêm mới thất bại! Lỗi: " + e.getMessage());
     }
 }
-      boolean validateData(String maLoai, String tenLoai) {
-    // Kiểm tra dữ liệu ở đây, ví dụ:
-    // Kiểm tra xem maLoai và tenLoai có giá trị không trống hay không
-    return !maLoai.isEmpty() && !tenLoai.isEmpty();
-}
-      void updatePLSP() {
+     
+
+void updatePLSP() {
     String maLoai = txtMaLoaiSP.getText();
     String tenLoai = txtTenLoaiSP.getText();
     
-    if (validateData(maLoai, tenLoai)) { // Kiểm tra tính hợp lệ của dữ liệu trước khi cập nhật
-        PhanLoaiSanPham model = new PhanLoaiSanPham();
-        model.setMaLoai(maLoai);
-        model.setTenLoai(tenLoai);
-        
-        try {
-            plspDAO.update(model); // Gọi hàm cập nhật từ DAO hoặc Service của bạn
-            fillTableLoaiSP();
-            MsgBox.alert(this, "Cập nhật thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bại! Lỗi: " + e.getMessage());
-            
-        }
-    } else {
-        MsgBox.alert(this, "Dữ liệu không hợp lệ!");
+    if (maLoai.isEmpty()) {
+        MsgBox.alert(this, "Mã loại không được để trống!");
+        return;
+    }
+    
+    if (tenLoai.isEmpty()) {
+        MsgBox.alert(this, "Tên loại không được để trống!");
+        return;
+    }
+    
+    if (plspDAO.isMaLoaiExists(maLoai)) {
+        MsgBox.alert(this, "Mã loại " + maLoai + " đã tồn tại! Vui lòng chọn mã khác.");
+        return;
+    }
+    
+    if (plspDAO.isTenLoaiExists(tenLoai)) {
+        MsgBox.alert(this, "Tên loại " + tenLoai + " đã tồn tại! Vui lòng chọn tên khác.");
+        return;
+    }
+
+    PhanLoaiSanPham model = new PhanLoaiSanPham();
+    model.setMaLoai(maLoai);
+    model.setTenLoai(tenLoai);
+    
+    try {
+        plspDAO.update(model);
+        fillTableLoaiSP();
+        MsgBox.alert(this, "Cập nhật thành công!");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Cập nhật thất bại! Lỗi: " + e.getMessage());
     }
 }
+
+
       void deletePLSP() {
     String maLoai = txtMaLoaiSP.getText();
     
@@ -427,23 +576,49 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         }
         
     }
-     void ChonAnh() {
+    void ChonAnh() {
     if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
         File file = filechooser.getSelectedFile();
-        ImageIcon icon = new ImageIcon(file.getAbsolutePath());
+        
+        // Kiểm tra xem tệp đã chọn có phải là hình ảnh không
+        if (file.isFile() && isImageFile(file)) {
+            ImageIcon icon = new ImageIcon(file.getAbsolutePath());
 
-        // Lấy kích thước của JLabel
-        int lblWidth = lblHinhLogo.getWidth();
-        int lblHeight = lblHinhLogo.getHeight();
+            // Lấy kích thước của JLabel
+            int lblWidth = lblHinhLogo.getWidth();
+            int lblHeight = lblHinhLogo.getHeight();
 
-        // Thay đổi kích thước hình ảnh để vừa với kích thước của JLabel mà không làm biến dạng hình ảnh
-        Image img = icon.getImage().getScaledInstance(lblWidth, lblHeight, Image.SCALE_SMOOTH);
+            // Thay đổi kích thước hình ảnh để vừa với kích thước của JLabel mà không làm biến dạng hình ảnh
+            Image img = icon.getImage().getScaledInstance(lblWidth, lblHeight, Image.SCALE_SMOOTH);
 
-        ImageIcon newIcon = new ImageIcon(img); // Tạo ImageIcon mới từ hình ảnh đã thay đổi kích thước
-        lblHinhLogo.setIcon(newIcon); // Đặt ImageIcon mới vào JLabel
-        lblHinhLogo.setToolTipText(file.getName()); // Gán tên tệp tin làm thông tin công cụ gợi ý
+            ImageIcon newIcon = new ImageIcon(img); // Tạo ImageIcon mới từ hình ảnh đã thay đổi kích thước
+            lblHinhLogo.setIcon(newIcon); // Đặt ImageIcon mới vào JLabel
+            lblHinhLogo.setToolTipText(file.getName()); // Gán tên tệp tin làm thông tin công cụ gợi ý
+            lblHinhLogo.repaint(); // Cập nhật giao diện người dùng
+        } else {
+            // Xử lý khi tệp tin không phải là hình ảnh
+            // Thông báo hoặc xử lý khác tùy thuộc vào yêu cầu của bạn
+        }
     }
 }
+
+
+
+void setHinhAnh(String imagePath) {
+    if (imagePath != null) {
+        lblHinhLogo.setToolTipText(imagePath);
+        lblHinhLogo.setIcon(new ImageIcon(imagePath));
+    }
+}
+
+boolean isImageFile(File file) {
+    String name = file.getName();
+    String extension = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
+    return extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png") || extension.equals("gif");
+}
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -524,13 +699,13 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Giá SP", "Mã loại", "SL nhập", "Mô tả"
+                "Mã SP", "Tên SP", "Giá SP", "Mã loại", "SL nhập", "Mô tả", "Hinh"
             }
         ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -669,8 +844,8 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblHinhLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+                .addComponent(lblHinhLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -956,39 +1131,34 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(btnFirst2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPrev2))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnThem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMaLoaiSP))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenLoaiSP)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(btnFirst2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnPrev2))
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnThem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnXoa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btnSua2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnLuu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnNext2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnLast2)
-                                        .addGap(6, 6, 6)))))))
+                        .addComponent(btnNext2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLast2))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnSua2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLuu2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenLoaiSP)
+                    .addComponent(txtMaLoaiSP))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -1141,34 +1311,40 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
    
-        String searchText = txtTim.getText().trim();
-        boolean searchByMaSP = rdoMaSP.isSelected();
-        boolean searchByTenSP = rdoTenSP.isSelected();
+      String searchText = txtTim.getText().trim();
+boolean searchByMaSP = rdoMaSP.isSelected();
+boolean searchByTenSP = rdoTenSP.isSelected();
 
-        if (!searchByMaSP && !searchByTenSP) {
-            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
-            return;
-        }
+if (!searchByMaSP && !searchByTenSP) {
+    MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+    return;
+}
 
-        try {
-            List<SanPham> listSP;
+try {
+    List<SanPham> listSP;
 
-            if (searchByMaSP) {
-                listSP = spDAO.timKiem(searchText, true);
-            } else {
-                listSP = spDAO.timKiem(searchText, false);
-            }
+    if (searchByMaSP) {
+        listSP = spDAO.timKiem(searchText, true);
+    } else {
+        listSP = spDAO.timKiem(searchText, false);
+    }
 
-            DefaultTableModel tblModel = (DefaultTableModel) tblSanPham.getModel();
-            tblModel.setRowCount(0);
+    DefaultTableModel tblModel = (DefaultTableModel) tblSanPham.getModel();
+    tblModel.setRowCount(0);
 
-            for (SanPham sp : listSP) {
-                Object[] row = {sp.getMaSP(), sp.getMaLoai(), sp.getTenSP(), sp.getGiaNhap(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh()};
-                tblModel.addRow(row);
-            }
-        } catch (Exception ex) {
-            MsgBox.alert(this, "Lỗi khi tìm kiếm sản phẩm");
-        }        // TODO add your handling code here:
+    if (listSP.isEmpty()) {
+        MsgBox.alert(this, "Không tìm thấy sản phẩm.");
+        return;
+    }
+
+    for (SanPham sp : listSP) {
+        Object[] row = {sp.getMaSP(), sp.getMaLoai(), sp.getTenSP(), sp.getGiaNhap(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh()};
+        tblModel.addRow(row);
+    }
+} catch (Exception ex) {
+    MsgBox.alert(this, "Lỗi khi tìm kiếm sản phẩm");
+}
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -1203,10 +1379,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLuu2ActionPerformed
 
     private void lblHinhLogoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhLogoMousePressed
-        if(evt.getClickCount()==2)
-        {
-            ChonAnh();
-        }  
+      this.ChonAnh();
     }//GEN-LAST:event_lblHinhLogoMousePressed
 
     private void tblLoaiSPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiSPMousePressed

@@ -16,7 +16,7 @@ import java.sql.ResultSet;
  */
 public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
     final String INSERT_SQL ="insert into SanPham(MaSP,MaLoai,TenSP,GiaNhap,SoLuongNhap,GhiChu,HinhAnh) VALUES(?,?,?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE SanPham MaLoai= ?, TenSP = ?, GiaNhap= ?, SoLuongNhap= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
+    final String UPDATE_SQL ="UPDATE SanPham SET MaLoai= ?, TenSP = ?, GiaNhap= ?, SoLuongNhap= ?, GhiChu= ?, HinhAnh= ? where MaSP = ?";
     final String DELETE_SQL ="DELETE from SanPham WHERE MaSP = ?";
     final String SELECT_ALL_SQL ="SELECT * FROM SanPham";
     final String SELECT_BY_ID_SQL ="SELECT * FROM SanPham WHERE MaSP= ?";
@@ -98,7 +98,17 @@ public class SanPhamDAO extends ShopAoQuanDAO<SanPham,String> {
         throw new RuntimeException(e);
     }
     return list;
+    
 }
+    public SanPham selectByTenSP(String tenSP) {
+    String sql = "SELECT * FROM SanPham WHERE TenSP = ?";
+    List<SanPham> list = selectBySql(sql, tenSP);
+    if (list.isEmpty()) {
+        return null;
+    }
+    return list.get(0);
+}
+
 
     
 }

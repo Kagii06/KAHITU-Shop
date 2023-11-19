@@ -6,6 +6,7 @@ package ShopQuanLyAoQuan.dao;
 
 import ShopQuanLyAoQuan.entity.PhanLoaiSanPham;
 import com.fsm.utils.jdbcHelper;
+import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -66,5 +67,33 @@ public class PhanLoaiSanPhamDAO extends ShopAoQuanDAO<PhanLoaiSanPham,String> {
         }
         return list;
     }
+    public boolean isMaLoaiExists(String maLoai) {
+    String SELECT_BY_MA_LOAI_SQL = "SELECT COUNT(*) FROM PhanLoaiSanPham WHERE MaLoai = ?";
+    try {
+        ResultSet rs = jdbcHelper.query(SELECT_BY_MA_LOAI_SQL, maLoai);
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return false;
+}
+    public boolean isTenLoaiExists(String tenLoai) {
+    String SELECT_BY_TEN_LOAI_SQL = "SELECT COUNT(*) FROM PhanLoaiSanPham WHERE TenLoai = ?";
+    try {
+        ResultSet rs = jdbcHelper.query(SELECT_BY_TEN_LOAI_SQL, tenLoai);
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return false;
+}
+
+ 
     
 }
