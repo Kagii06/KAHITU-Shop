@@ -31,7 +31,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         
     }
 
-    void fillTable(){
+    void fillTable() {
         DefaultTableModel tblModel = (DefaultTableModel) tblDanhSachKH.getModel();
         tblModel.setRowCount(0);
         try {
@@ -45,7 +45,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    void setForm(KhachHang kh){
+
+    void setForm(KhachHang kh) {
         txtMaKH.setText(kh.getMaKH());
         txtTenKH.setText(kh.getHoTen());
         txtDiaChi.setText(kh.getDiaChi());
@@ -53,12 +54,12 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         txtSDT.setText(kh.getSDT());
         txtGhiChu.setText(kh.getGhiChu());
     }
-    void edit(){
+
+    void edit() {
         try {
             String MaKH = (String) tblDanhSachKH.getValueAt(row, 0);
             KhachHang kh = khDAO.selectById(MaKH);
-            if(kh!=null)
-            {
+            if (kh != null) {
                 setForm(kh);
                 updateStatus();
                 jTabbedPane1.setSelectedIndex(0);
@@ -68,7 +69,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    KhachHang getForm(){
+
+    KhachHang getForm() {
         KhachHang kh = new KhachHang();
         kh.setMaKH(txtMaKH.getText());
         kh.setHoTen(txtTenKH.getText());
@@ -78,10 +80,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         kh.setGhiChu(txtGhiChu.getText());
         return kh;
     }
-     void updateStatus(){
-        boolean edit = this.row>=0;
+
+    void updateStatus() {
+        boolean edit = this.row >= 0;
         boolean first = this.row == 0;
-        boolean last = this.row == tblDanhSachKH.getRowCount()-1;
+        boolean last = this.row == tblDanhSachKH.getRowCount() - 1;
         txtMaKH.setEditable(!edit);
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
@@ -91,181 +94,180 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
     }
-     void clearForm(){
+
+    void clearForm() {
         this.setForm(new KhachHang());
         this.updateStatus();
-        row= - 1;
+        row = - 1;
         updateStatus();
     }
-     
+
     void insert() {
-    KhachHang kh = getForm();
-    String sdt = kh.getSDT();
-    String email = kh.getEmail();
-    String tenKH = kh.getHoTen();
-    String maKhachHang = kh.getMaKH();
+        KhachHang kh = getForm();
+        String sdt = kh.getSDT();
+        String email = kh.getEmail();
+        String tenKH = kh.getHoTen();
+        String maKhachHang = kh.getMaKH();
 
-    // Kiểm tra tên khách hàng không được để trống
-    if (tenKH.isEmpty()) {
-        MsgBox.alert(this, "Tên khách hàng không được để trống!");
-        return;
-    }
-     if (!validateMaKH(maKhachHang)) {
-        MsgBox.alert(this, "Mã KH không đúng định dạng!");
-        return;
-    }
+        // Kiểm tra tên khách hàng không được để trống
+        if (tenKH.isEmpty()) {
+            MsgBox.alert(this, "Tên khách hàng không được để trống!");
+            return;
+        }
+        if (!validateMaKH(maKhachHang)) {
+            MsgBox.alert(this, "Mã KH không đúng định dạng!");
+            return;
+        }
 
-    // Kiểm tra định dạng và trùng SĐT
-    if (!isValidPhoneNumber(sdt)) {
-        MsgBox.alert(this, "SĐT không hợp lệ!");
-        return;
-    }
+        // Kiểm tra định dạng và trùng SĐT
+        if (!isValidPhoneNumber(sdt)) {
+            MsgBox.alert(this, "SĐT không hợp lệ!");
+            return;
+        }
 
-    // Kiểm tra định dạng và trùng Email
-    if (!isValidEmail(email)) {
-        MsgBox.alert(this, "Email không hợp lệ!");
-        return;
-    }
-    if (khDAO.selectById(kh.getMaKH()) != null) {
-        MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
-        return;
-    }
+        // Kiểm tra định dạng và trùng Email
+        if (!isValidEmail(email)) {
+            MsgBox.alert(this, "Email không hợp lệ!");
+            return;
+        }
+        if (khDAO.selectById(kh.getMaKH()) != null) {
+            MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
+            return;
+        }
 
-    if (khDAO.selectBySDT(sdt) != null) {
-        MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
-        return;
-    }
+        if (khDAO.selectBySDT(sdt) != null) {
+            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+            return;
+        }
 
-    if (khDAO.selectByEmail(email) != null) {
-        MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
-        return;
-    }
-    
+        if (khDAO.selectByEmail(email) != null) {
+            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
+            return;
+        }
 
-    try {
-        khDAO.insert(kh);
-        fillTable();
-        clearForm();
-        MsgBox.alert(this, "Thêm mới thành công");
-    } catch (Exception e) {
-        MsgBox.alert(this, "Thêm mới thất bại");
-    }
-}
-
-// Hàm kiểm tra định dạng SĐT
-boolean isValidPhoneNumber(String phoneNumber) {
-    // Thực hiện kiểm tra định dạng số điện thoại ở đây
-    // Ví dụ đơn giản: kiểm tra độ dài số điện thoại
-    return phoneNumber.matches("\\d{10}"); // Kiểm tra xem có 10 chữ số hay không
-}
-
-// Hàm kiểm tra định dạng Email
-boolean isValidEmail(String email) {
-    // Thực hiện kiểm tra định dạng Email ở đây
-    // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
-    return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
-}
-  boolean validateMaKH(String maKH) {
-    // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
-    return maKH.matches("KH\\d+");
-  }
-
-
-    void update() {
-    KhachHang kh = getForm();
-    
-
-    // Kiểm tra tên khách hàng không được để trống
-    if (kh.getHoTen().isEmpty()) {
-        MsgBox.alert(this, "Tên khách hàng không được để trống!");
-        return;
-    }
-
-    // Kiểm tra định dạng Email
-    String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-    if (!kh.getEmail().matches(emailPattern)) {
-        MsgBox.alert(this, "Định dạng Email không hợp lệ!");
-        return;
-    }
-
-    // Kiểm tra định dạng SĐT
-    String phonePattern = "\\d{10,11}";
-    if (!kh.getSDT().matches(phonePattern)) {
-        MsgBox.alert(this, "Định dạng SĐT không hợp lệ!");
-        return;
-    }
-    KhachHang existing = khDAO.selectById(kh.getMaKH());
-    if (existing != null && !existing.getMaKH().equals(kh.getMaKH())) {
-        MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
-        return;
-    }
-     // Kiểm tra trùng SĐT
-    KhachHang existingBySDT = khDAO.selectBySDT(kh.getSDT());
-    if (existingBySDT != null && !existingBySDT.getMaKH().equals(kh.getMaKH())) {
-        MsgBox.alert(this, "SĐT " + kh.getSDT() + " đã tồn tại! Vui lòng nhập số khác.");
-        return;
-    }
-
-    // Kiểm tra trùng Email
-    KhachHang existingByEmail = khDAO.selectByEmail(kh.getEmail());
-    if (existingByEmail != null && !existingByEmail.getMaKH().equals(kh.getMaKH())) {
-        MsgBox.alert(this, "Email " + kh.getEmail() + " đã tồn tại! Vui lòng nhập email khác.");
-        return;
-    }
-
-    try {
-        khDAO.update(kh);
-        this.fillTable();
-        MsgBox.alert(this, "Cập nhật thành công!");
-    } catch (Exception e) {
-        MsgBox.alert(this, "Cập nhật thất bại!");
-    }
-}
-
-
-     void delete() {
-    if (MsgBox.confirm(this, "Bạn thực sự muốn xóa khách hàng này?")) {
-        String makh = txtMaKH.getText();
         try {
-            khDAO.delete(makh);
-            this.fillTable();
-            this.clearForm();
-            MsgBox.alert(this, "Xóa thành công!");
+            khDAO.insert(kh);
+            fillTable();
+            clearForm();
+            MsgBox.alert(this, "Thêm mới thành công");
         } catch (Exception e) {
-            MsgBox.alert(this, "Xóa thất bại!");
+            MsgBox.alert(this, "Thêm mới thất bại");
         }
     }
-}
-    
-     void first(){
+
+// Hàm kiểm tra định dạng SĐT
+    boolean isValidPhoneNumber(String phoneNumber) {
+        // Thực hiện kiểm tra định dạng số điện thoại ở đây
+        // Ví dụ đơn giản: kiểm tra độ dài số điện thoại
+        return phoneNumber.matches("\\d{10}"); // Kiểm tra xem có 10 chữ số hay không
+    }
+
+// Hàm kiểm tra định dạng Email
+    boolean isValidEmail(String email) {
+        // Thực hiện kiểm tra định dạng Email ở đây
+        // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
+        return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
+    }
+
+    boolean validateMaKH(String maKH) {
+        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+        return maKH.matches("KH\\d+");
+    }
+
+    void update() {
+        KhachHang kh = getForm();
+
+        // Kiểm tra tên khách hàng không được để trống
+        if (kh.getHoTen().isEmpty()) {
+            MsgBox.alert(this, "Tên khách hàng không được để trống!");
+            return;
+        }
+
+        // Kiểm tra định dạng Email
+        String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        if (!kh.getEmail().matches(emailPattern)) {
+            MsgBox.alert(this, "Định dạng Email không hợp lệ!");
+            return;
+        }
+
+        // Kiểm tra định dạng SĐT
+        String phonePattern = "\\d{10,11}";
+        if (!kh.getSDT().matches(phonePattern)) {
+            MsgBox.alert(this, "Định dạng SĐT không hợp lệ!");
+            return;
+        }
+        KhachHang existing = khDAO.selectById(kh.getMaKH());
+        if (existing != null && !existing.getMaKH().equals(kh.getMaKH())) {
+            MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
+            return;
+        }
+        // Kiểm tra trùng SĐT
+        KhachHang existingBySDT = khDAO.selectBySDT(kh.getSDT());
+        if (existingBySDT != null && !existingBySDT.getMaKH().equals(kh.getMaKH())) {
+            MsgBox.alert(this, "SĐT " + kh.getSDT() + " đã tồn tại! Vui lòng nhập số khác.");
+            return;
+        }
+
+        // Kiểm tra trùng Email
+        KhachHang existingByEmail = khDAO.selectByEmail(kh.getEmail());
+        if (existingByEmail != null && !existingByEmail.getMaKH().equals(kh.getMaKH())) {
+            MsgBox.alert(this, "Email " + kh.getEmail() + " đã tồn tại! Vui lòng nhập email khác.");
+            return;
+        }
+
+        try {
+            khDAO.update(kh);
+            this.fillTable();
+            MsgBox.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa khách hàng này?")) {
+            String makh = txtMaKH.getText();
+            try {
+                khDAO.delete(makh);
+                this.fillTable();
+                this.clearForm();
+                MsgBox.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void first() {
         row = 0;
         edit();
-       tblDanhSachKH.setRowSelectionInterval(row, row);
+        tblDanhSachKH.setRowSelectionInterval(row, row);
     }
-    void prev(){
+
+    void prev() {
         row--;
-        if(row<0)
-        {
-            row=0; 
-        }else{
+        if (row < 0) {
+            row = 0;
+        } else {
             tblDanhSachKH.setRowSelectionInterval(row, row);
             edit();
         }
     }
-    void next(){
-        if(row < tblDanhSachKH.getRowCount()-1)
-        {
+
+    void next() {
+        if (row < tblDanhSachKH.getRowCount() - 1) {
             row++;
             tblDanhSachKH.setRowSelectionInterval(row, row);
             edit();
-            
+
         }
     }
-    void last(){
-        row = tblDanhSachKH.getRowCount()-1;
+
+    void last() {
+        row = tblDanhSachKH.getRowCount() - 1;
         tblDanhSachKH.setRowSelectionInterval(row, row);
         edit();
-        
+
     }
      
     
@@ -1042,7 +1044,7 @@ boolean isValidEmail(String email) {
         );
 
         btnFirst.setBackground(new java.awt.Color(255, 204, 255));
-        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/previous-track-icon.png"))); // NOI18N
+        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstActionPerformed(evt);
@@ -1050,7 +1052,7 @@ boolean isValidEmail(String email) {
         });
 
         btnPrev.setBackground(new java.awt.Color(255, 204, 255));
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-backward-icon.png"))); // NOI18N
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrevActionPerformed(evt);
@@ -1058,7 +1060,7 @@ boolean isValidEmail(String email) {
         });
 
         btnNext.setBackground(new java.awt.Color(255, 204, 255));
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-forward-icon.png"))); // NOI18N
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -1066,7 +1068,7 @@ boolean isValidEmail(String email) {
         });
 
         btnLast.setBackground(new java.awt.Color(255, 204, 255));
-        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/next-track-icon.png"))); // NOI18N
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);
@@ -1096,14 +1098,15 @@ boolean isValidEmail(String email) {
                         .addComponent(btnXoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLuu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                         .addComponent(btnFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnPrev)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnNext)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLast))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLast)
+                        .addGap(41, 41, 41))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()

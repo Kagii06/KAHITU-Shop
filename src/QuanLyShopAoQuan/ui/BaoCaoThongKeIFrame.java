@@ -39,35 +39,35 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
             model.addElement(ngay);
         }
     }
-    
-    void fillTableDoanhThu(){
-        DefaultTableModel model = (DefaultTableModel)tblDoanhThu.getModel();
+
+    void fillTableDoanhThu() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
         model.setRowCount(0);
-        if(cboNgay.getSelectedItem() !=null){
-        Date ngay = (Date)cboNgay.getSelectedItem();
-        List<Object[]> list = dao.getDoanhThu(ngay);
-        for (Object[] row : list) {
-            model.addRow(row);
-        }
+        if (cboNgay.getSelectedItem() != null) {
+            Date ngay = (Date) cboNgay.getSelectedItem();
+            List<Object[]> list = dao.getDoanhThu(ngay);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
         }
     }
-    
-    void fillTableTonKho(){
-        DefaultTableModel model = (DefaultTableModel)tblTonKho.getModel();
+
+    void fillTableTonKho() {
+        DefaultTableModel model = (DefaultTableModel) tblTonKho.getModel();
         model.setRowCount(0);
- 
+
         List<Object[]> list = dao.getTonKho();
         for (Object[] row : list) {
             model.addRow(row);
         }
     }
-    
+
     private void calculateSum() {
         // Get the column index you want to sum
         int columnIndexToSum = 2; // Assuming you want to sum the third column (index 2)
 
         // Get the TableModel from the JTable
-        DefaultTableModel model = (DefaultTableModel)tblDoanhThu.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
 
         // Iterate through the rows and calculate the sum
         double sum = 0;
@@ -76,25 +76,25 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         }
         txtTongDoanhThu.setText(Double.toString(sum));
     }
-    
-    public void selectTabs(int index){
+
+    public void selectTabs(int index) {
         tabs.setSelectedIndex(index);
     }
-    
-    void fillTableTonKhoID(){
-        DefaultTableModel model = (DefaultTableModel)tblTonKho.getModel();
+
+    void fillTableTonKhoID() {
+        DefaultTableModel model = (DefaultTableModel) tblTonKho.getModel();
         model.setRowCount(0);
- 
+
         List<Object[]> list = dao.getTonKhobyID(txtTim.getText());
         for (Object[] row : list) {
             model.addRow(row);
         }
     }
-    
-    void fillTableTonKhoName(){
-        DefaultTableModel model = (DefaultTableModel)tblTonKho.getModel();
+
+    void fillTableTonKhoName() {
+        DefaultTableModel model = (DefaultTableModel) tblTonKho.getModel();
         model.setRowCount(0);
- 
+
         List<Object[]> list = dao.getTonKhobyName(txtTim.getText());
         for (Object[] row : list) {
             model.addRow(row);

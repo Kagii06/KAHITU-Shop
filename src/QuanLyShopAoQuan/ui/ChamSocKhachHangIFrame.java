@@ -52,7 +52,7 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         
     }
     
-     void fillTable(){
+    void fillTable() {
         DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
         tblModel.setRowCount(0);
         try {
@@ -65,17 +65,16 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-     
-        void setForm(KhachHang kh){
+
+    void setForm(KhachHang kh) {
         txtTo.setText(kh.getEmail());
     }
-     
-     void edit(){
+
+    void edit() {
         try {
             String MaKH = (String) tblKhachHang.getValueAt(row, 0);
             KhachHang kh = khDAO.selectById(MaKH);
-            if(kh!=null)
-            {
+            if (kh != null) {
                 setForm(kh);
 //                updateStatus();
             }
@@ -83,22 +82,22 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-     
-     public void attachFile() {
+
+    public void attachFile() {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             duongDan = selectedFile.getAbsolutePath();
             JOptionPane.showMessageDialog(this, "File attached: " + selectedFile.getName());
-        System.out.println("Selected File Path: " + selectedFile.getAbsolutePath());
+            System.out.println("Selected File Path: " + selectedFile.getAbsolutePath());
             // Thực hiện các thao tác liên quan đến việc đính kèm file
             // ở đây, bạn có thể lưu trữ đường dẫn của file hoặc thực hiện các thao tác khác.
         }
     }
-    
-    public void sendEmail() throws IOException{
-        
+
+    public void sendEmail() throws IOException {
+
         String to = txtTo.getText();
         String subject = txtSubject.getText();
         String message = txtDescription.getText();
@@ -118,8 +117,6 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-        
-
         // Tạo đối tượng Session
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -128,16 +125,16 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         });
 
         try {
-    // Tạo đối tượng MimeMessage
-    Message mimeMessage = new MimeMessage(session);
+            // Tạo đối tượng MimeMessage
+            Message mimeMessage = new MimeMessage(session);
 
-    // Đặt thông tin người gửi và người nhận
-    mimeMessage.setFrom(new InternetAddress(username));
-    mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-    mimeMessage.setSubject(subject);
-    mimeMessage.setText(message);
-    
-     // Tạo đối tượng MimeBodyPart cho nội dung văn bản
+            // Đặt thông tin người gửi và người nhận
+            mimeMessage.setFrom(new InternetAddress(username));
+            mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            mimeMessage.setSubject(subject);
+            mimeMessage.setText(message);
+
+            // Tạo đối tượng MimeBodyPart cho nội dung văn bản
             MimeBodyPart textBodyPart = new MimeBodyPart();
             textBodyPart.setText(message);
 
@@ -145,34 +142,33 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             File selectedFile = new File(duongDan);
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(textBodyPart);
-                //add file
-                if(selectedFile != null){
+            //add file
+            if (selectedFile != null) {
                 MimeBodyPart attachmentBodyPart = new MimeBodyPart();
                 DataSource source = new FileDataSource(selectedFile);
                 attachmentBodyPart.setDataHandler(new DataHandler(source));
                 attachmentBodyPart.setFileName(selectedFile.getName());
                 multipart.addBodyPart(attachmentBodyPart);
-                }
+            }
 
             // Đặt nội dung của thư
             mimeMessage.setContent(multipart);
 
-    // Lấy đối tượng Transport
+            // Lấy đối tượng Transport
             javax.mail.Transport transport = session.getTransport("smtp");
 
+            // Kết nối và gửi email
+            transport.connect(username, password);
+            transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
 
-    // Kết nối và gửi email
-    transport.connect(username, password);
-    transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-
-    // Đóng kết nối
-    transport.close();
-     System.out.println("file: "+selectedFile);
-    JOptionPane.showMessageDialog(this, "Email sent successfully!");
-} catch (MessagingException ex) {
-    JOptionPane.showMessageDialog(this, "Error sending email: " + ex.getMessage());
-    ex.printStackTrace();
-}
+            // Đóng kết nối
+            transport.close();
+            System.out.println("file: " + selectedFile);
+            JOptionPane.showMessageDialog(this, "Email sent successfully!");
+        } catch (MessagingException ex) {
+            JOptionPane.showMessageDialog(this, "Error sending email: " + ex.getMessage());
+            ex.printStackTrace();
+        }
 
     }
 

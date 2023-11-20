@@ -14,64 +14,58 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         initComponents();
         fillToTable();
     }
-    void fillToTable()
-    {
-         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
-         model.setRowCount(0);
-         try {
+    void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
+        model.setRowCount(0);
+        try {
             List<NhanVien> list = dao.selectALl();
-            for(NhanVien nv : list)
-            {
-                Object[] row = 
-                {
-                  nv.getMaNV(),nv.getHoTen(),nv.getDiaChi(),nv.getSDT(),nv.getEmail(),nv.getNgaySinh(),nv.getLuong(),nv.getGhiChu()
-                };
+            for (NhanVien nv : list) {
+                Object[] row
+                        = {
+                            nv.getMaNV(), nv.getHoTen(), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getNgaySinh(), nv.getLuong(), nv.getGhiChu()
+                        };
                 model.addRow(row);
             }
-           
+
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-   void Search()
-    {
+
+    void Search() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
-        model.setRowCount(0); 
+        model.setRowCount(0);
         try {
             String keyword = txtSearch.getText();
             boolean searchByMaNV = rdoMaNV.isSelected();
 
-            List<NhanVien> list ;
+            List<NhanVien> list;
             if (searchByMaNV) {
-            list = dao.timkiemByMaNVOrTenNV(keyword, true);
+                list = dao.timkiemByMaNVOrTenNV(keyword, true);
             } else {
                 list = dao.timkiemByMaNVOrTenNV(keyword, false);
             }
-            if(list != null)
-            {
-               for (NhanVien nv : list) {
-                Object[] row = {
-                    nv.getMaNV(),nv.getHoTen(),nv.getDiaChi(),nv.getSDT(),nv.getEmail(),nv.getNgaySinh(),nv.getLuong(),nv.getGhiChu()
-                };
-                model.addRow(row); 
+            if (list != null) {
+                for (NhanVien nv : list) {
+                    Object[] row = {
+                        nv.getMaNV(), nv.getHoTen(), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getNgaySinh(), nv.getLuong(), nv.getGhiChu()
+                    };
+                    model.addRow(row);
                 }
-            }else
-            {
-                MsgBox.alert(this, "Không tìm thấy !");  
+            } else {
+                MsgBox.alert(this, "Không tìm thấy !");
             }
-           
+
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 
-    void edit()
-    {
+    void edit() {
         try {
-            String maNV = (String)tblNhanVien.getValueAt(this.row, 0);
+            String maNV = (String) tblNhanVien.getValueAt(this.row, 0);
             NhanVien model = dao.selectById(maNV);
-            if(model != null)
-            {
+            if (model != null) {
                 setForm(model);
                 updateStatus();
 //                tabs.setSelectedIndex(0); 
@@ -80,8 +74,8 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    NhanVien getForm()
-    {
+
+    NhanVien getForm() {
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMaNV.getText());
         nv.setHoTen(txtTenNV.getText());
@@ -94,8 +88,8 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
 //        nv.setVaiTro(rdoNhanVien.isSelected());
         return nv;
     }
-    void setForm(NhanVien model)
-    {
+
+    void setForm(NhanVien model) {
         txtMaNV.setText(model.getMaNV());
         txtTenNV.setText(model.getHoTen());
         txtDiaChi.setText(model.getDiaChi());
@@ -107,8 +101,8 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
 //        rdoTruongPhong.setSelected(model.isVaiTro());
 //        rdoNhanVien.setSelected(!model.isVaiTro());
     }
-    void updateStatus()
-    {
+
+    void updateStatus() {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
         boolean last = this.row == tblNhanVien.getRowCount() - 1;
@@ -117,14 +111,14 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         btnLuu.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
-    
+
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
     }
-        void clear()
-    {
+
+    void clear() {
         NhanVien nv = new NhanVien();
         txtMaNV.setText("");
         txtTenNV.setText("");
@@ -138,26 +132,25 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         this.row = -1;
         updateStatus();
     }
-        
-    void insert()
-    {
+
+    void insert() {
         try {
             NhanVien model = getForm();
-        try {
-            dao.insert(model);
-            this.fillToTable();
-            this.clear();
-            MsgBox.alert(this, "Thêm mới thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Thêm mới thất bại!");
-        }
+            try {
+                dao.insert(model);
+                this.fillToTable();
+                this.clear();
+                MsgBox.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Thêm mới thất bại!");
+            }
         } catch (Exception e) {
             MsgBox.alert(this, "Không được để trống!");
-        }  
+        }
     }
-    void update()
-    {
-       NhanVien model = getForm();
+
+    void update() {
+        NhanVien model = getForm();
         try {
             dao.update(model);
             this.fillToTable();
@@ -167,10 +160,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    void delete()
-    {
-        if(MsgBox.confirm(this, "Bạn thực sự muốn xóa chuyên đề này?")){
-          String maNV = txtMaNV.getText();
+
+    void delete() {
+        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa chuyên đề này?")) {
+            String maNV = txtMaNV.getText();
             try {
                 dao.delete(maNV);
                 this.fillToTable();
@@ -178,32 +171,30 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
                 MsgBox.alert(this, "Xóa thành công!");
             } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại!");
-            }  
-        }         
+            }
+        }
     }
-    void first()
-    {
+
+    void first() {
         row = 0;
         edit();
     }
-    void prev()
-    {
-        if(row > 0)
-        {
+
+    void prev() {
+        if (row > 0) {
             row--;
             edit();
         }
     }
-    void next()
-    {
-        if(row < tblNhanVien.getRowCount() - 1)
-        {
+
+    void next() {
+        if (row < tblNhanVien.getRowCount() - 1) {
             row++;
             edit();
         }
     }
-    void last()
-    {
+
+    void last() {
         row = tblNhanVien.getRowCount() - 1;
         edit();
     }
@@ -398,7 +389,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         });
 
         btnFirst.setBackground(new java.awt.Color(255, 204, 255));
-        btnFirst.setText("⏮");
+        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstActionPerformed(evt);
@@ -406,7 +397,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         });
 
         btnPrev.setBackground(new java.awt.Color(255, 204, 255));
-        btnPrev.setText("⏪");
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrevActionPerformed(evt);
@@ -414,7 +405,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         });
 
         btnNext.setBackground(new java.awt.Color(255, 204, 255));
-        btnNext.setText("⏩");
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -422,7 +413,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         });
 
         btnLast.setBackground(new java.awt.Color(255, 204, 255));
-        btnLast.setText("⏭");
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);

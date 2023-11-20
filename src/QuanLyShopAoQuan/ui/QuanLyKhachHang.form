@@ -240,14 +240,15 @@
                               <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnLuu" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="226" max="32767" attributes="0"/>
+                              <EmptySpace pref="161" max="32767" attributes="0"/>
                               <Component id="btnFirst" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnPrev" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnLast" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -354,7 +355,7 @@
                           <Component id="btnLast" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnNext" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPrev" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnFirst" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFirst" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1390,7 +1391,7 @@
                   <Color blue="ff" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/previous-track-icon.png"/>
+                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/First.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -1403,7 +1404,7 @@
                   <Color blue="ff" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/fast-backward-icon.png"/>
+                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/Previous.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -1416,7 +1417,7 @@
                   <Color blue="ff" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/fast-forward-icon.png"/>
+                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/Next.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -1429,7 +1430,7 @@
                   <Color blue="ff" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/next-track-icon.png"/>
+                  <Image iconType="3" name="/QuanLyShopAoQuan/icon/Last.png"/>
                 </Property>
               </Properties>
               <Events>

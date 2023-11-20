@@ -17,7 +17,7 @@ public class XImage {
     }
    public static boolean save(File src)
     {
-        File dst = new File("C:\\Users\\Huy Nguyen\\Documents\\NetBeansProjects\\KAHITU\\DuAn1_Nhom5\\src\\QuanLyShopAoQuan\\logos",src.getName());
+        File dst = new File("C:\\FPT Polytechnic\\QuanLyDuAn1\\DuAn1_Nhom5\\src\\QuanLyShopAoQuan\\logos",src.getName());
 //        if(!dst.getParentFile().exists())
 //        {
 //            dst.getParentFile().mkdirs();//tạo thư mục
@@ -33,7 +33,7 @@ public class XImage {
     }
     public static ImageIcon read(String fileName)
     {
-        File path = new File("C:\\Users\\Huy Nguyen\\Documents\\NetBeansProjects\\KAHITU\\DuAn1_Nhom5\\src\\QuanLyShopAoQuan\\logos",fileName);
+        File path = new File("C:\\FPT Polytechnic\\QuanLyDuAn1\\DuAn1_Nhom5\\src\\QuanLyShopAoQuan\\logos",fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
 }

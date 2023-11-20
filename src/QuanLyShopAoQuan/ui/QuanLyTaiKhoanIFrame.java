@@ -14,32 +14,28 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         initComponents();
         fillToTable();
     }
-    void fillToTable()
-    {
-         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
-         model.setRowCount(0);
-         try {
+    void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
+        model.setRowCount(0);
+        try {
             List<TaiKhoan> list = dao.selectALl();
-            for(TaiKhoan tk : list)
-            {
-                Object[] row = 
-                {
-                  tk.getMaNV(), tk.getMatKhau(),tk.getHoTen(),tk.isVaiTro() ? "Admin" : "Nhân viên"
-                };
+            for (TaiKhoan tk : list) {
+                Object[] row
+                        = {
+                            tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
+                        };
                 model.addRow(row);
-            } 
+            }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
-    void edit()
-    {
+    void edit() {
         try {
-            String maNV = (String)tblTaiKhoan.getValueAt(this.row, 0);
+            String maNV = (String) tblTaiKhoan.getValueAt(this.row, 0);
             TaiKhoan model = dao.selectById(maNV);
-            if(model != null)
-            {
+            if (model != null) {
                 setForm(model);
                 updateStatus();
             }
@@ -47,41 +43,38 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    void timKiem()
-    {
-       
+
+    void timKiem() {
+
         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
-        model.setRowCount(0); 
+        model.setRowCount(0);
         try {
             String keyword = txtTimKiem.getText();
             boolean searchByMaNV = rdoMaNV.isSelected();
 
-            List<TaiKhoan> list ;
+            List<TaiKhoan> list;
             if (searchByMaNV) {
-            list = dao.timkiemByMaNVOrTenNV(keyword, true);
+                list = dao.timkiemByMaNVOrTenNV(keyword, true);
             } else {
                 list = dao.timkiemByMaNVOrTenNV(keyword, false);
             }
-            if(list != null)
-            {
-               for (TaiKhoan tk : list) {
-                Object[] row = {
-                    tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
-                };
-                model.addRow(row); 
+            if (list != null) {
+                for (TaiKhoan tk : list) {
+                    Object[] row = {
+                        tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
+                    };
+                    model.addRow(row);
                 }
-            }else
-            {
-                MsgBox.alert(this, "Không tìm thấy !");  
+            } else {
+                MsgBox.alert(this, "Không tìm thấy !");
             }
-           
+
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
-   
-    TaiKhoan getForm()
-    {
+
+    TaiKhoan getForm() {
         TaiKhoan tk = new TaiKhoan();
         tk.setMaNV(txtMaNV.getText());
         tk.setMatKhau(new String(txtMatKhau.getPassword()));
@@ -89,16 +82,16 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         tk.setVaiTro(rdoTruongPhong.isSelected());
         return tk;
     }
-    void setForm(TaiKhoan model)
-    {
+
+    void setForm(TaiKhoan model) {
         txtMaNV.setText(model.getMaNV());
         txtHoTen.setText(model.getHoTen());
         txtMatKhau.setText(model.getMatKhau());
         rdoTruongPhong.setSelected(model.isVaiTro());
         rdoMaNV.setSelected(!model.isVaiTro());
     }
-    void updateStatus()
-    {
+
+    void updateStatus() {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
         boolean last = this.row == tblTaiKhoan.getRowCount() - 1;
@@ -107,14 +100,14 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         btnLuu.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
-    
+
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
     }
-    void clear()
-    {
+
+    void clear() {
         TaiKhoan nv = new TaiKhoan();
         txtMaNV.setText("");
         txtHoTen.setText("");
@@ -125,21 +118,20 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         updateStatus();
     }
 
-     void insert()
-    {
-           TaiKhoan model = getForm();
-            try {
-                dao.insert(model);
-                this.fillToTable();
-                this.clear();
-                MsgBox.alert(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại!");
-                System.out.println(e);
-            }    
+    void insert() {
+        TaiKhoan model = getForm();
+        try {
+            dao.insert(model);
+            this.fillToTable();
+            this.clear();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới thất bại!");
+            System.out.println(e);
+        }
     }
-     void update()
-    {
+
+    void update() {
         TaiKhoan model = getForm();
         try {
             dao.update(model);
@@ -149,14 +141,12 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Cập nhật thất bại!");
         }
     }
-     void delete()
-    {
-        if(!Auth.isManager())
-        {
-            MsgBox.alert(this,"Bạn không có quyền xóa tài khoản!");
-        }else
-        {
-            if(MsgBox.confirm(this, "Bạn thực sự muốn xóa tài khoản này?"));
+
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xóa tài khoản!");
+        } else {
+            if (MsgBox.confirm(this, "Bạn thực sự muốn xóa tài khoản này?"));
             String maNV = txtMaNV.getText();
             try {
                 dao.delete(maNV);
@@ -168,29 +158,27 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             }
         }
     }
-     void first()
-    {
+
+    void first() {
         row = 0;
         edit();
     }
-    void prev()
-    {
-        if(row > 0)
-        {
+
+    void prev() {
+        if (row > 0) {
             row--;
             edit();
         }
     }
-    void next()
-    {
-        if(row < tblTaiKhoan.getRowCount() - 1)
-        {
+
+    void next() {
+        if (row < tblTaiKhoan.getRowCount() - 1) {
             row++;
             edit();
         }
     }
-    void last()
-    {
+
+    void last() {
         row = tblTaiKhoan.getRowCount() - 1;
         edit();
     }
@@ -341,7 +329,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblTaiKhoan);
 
         btnFirst.setBackground(new java.awt.Color(255, 204, 255));
-        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/previous-track-icon.png"))); // NOI18N
+        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstActionPerformed(evt);
@@ -349,7 +337,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         });
 
         btnPrev.setBackground(new java.awt.Color(255, 204, 255));
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-backward-icon.png"))); // NOI18N
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrevActionPerformed(evt);
@@ -424,7 +412,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         );
 
         btnNext.setBackground(new java.awt.Color(255, 204, 255));
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-forward-icon.png"))); // NOI18N
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -441,7 +429,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         });
 
         btnLast.setBackground(new java.awt.Color(255, 204, 255));
-        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/next-track-icon.png"))); // NOI18N
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);

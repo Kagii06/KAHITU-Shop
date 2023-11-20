@@ -8,6 +8,7 @@ public class DonHangChiTiet {
     private String MaDHCT;
     private String MaDH;
     private String MaSP;
+    private String TenSP;
     private int SoLuong;
     private float DonGia;
     private String GhiChu;
@@ -39,6 +40,7 @@ public class DonHangChiTiet {
     public void setMaSP(String MaSP) {
         this.MaSP = MaSP;
     }
+    
 
     public String getMaDH() {
         return MaDH;

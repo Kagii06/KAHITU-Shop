@@ -21,7 +21,7 @@ import javax.swing.Timer;
  * @author MMSI
  */
 public class TrangChu extends javax.swing.JFrame {
-    int width = 200,height = 600;
+    int width = 200,height = 700;
     DangNhapDialog dangnhap = new DangNhapDialog(this, rootPaneCheckingEnabled);
     QuanLyTaiKhoanIFrame tk = new QuanLyTaiKhoanIFrame();
     QuanLyNhanVienIFrame nv = new QuanLyNhanVienIFrame();
@@ -34,14 +34,13 @@ public class TrangChu extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    void init()
-    {
+    void init() {
         setIconImage(XImage.getAppIcon());
         setTitle("FSM - TRANG CHỦ");
         jDesktopPane.setBackground(Color.decode("#FFEDED"));
         setLayout(new BorderLayout());
-        setSize(1200, 700);
-        add(pnlThanhDuoi,BorderLayout.SOUTH);
+        setSize(1200, 730);
+        add(pnlThanhDuoi, BorderLayout.SOUTH);
         getContentPane().add(jDesktopPane);
         getContentPane().add(pnlMain);
 //        new Timer(1000, new ActionListener() {
@@ -53,49 +52,47 @@ public class TrangChu extends javax.swing.JFrame {
 //    }).start();
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
-        
+
         this.OpenWelcome();
         OpenLogin();
     }
-    void openMenuBar()
-    {
+
+    void openMenuBar() {
         // tạo luồng chạy song song với luồng chính
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int i = 0; i < width ; i++)
-                {
-                pnlMenu.setSize(i, height);
-                try {
-                    Thread.sleep(2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                for (int i = 0; i < width; i++) {
+                    pnlMenu.setSize(i, height);
+                    try {
+                        Thread.sleep(2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }).start();
     }
-    void closeMenuBar()
-    {
+
+    void closeMenuBar() {
         // tạo luồng chạy song song với luồng chính
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int i = width; i > 0 ; i--)
-        {
-            pnlMenu.setSize(i, height);
-            try {
-                    Thread.sleep(2);
-            } catch (InterruptedException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+                for (int i = width; i > 0; i--) {
+                    pnlMenu.setSize(i, height);
+                    try {
+                        Thread.sleep(2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         }).start();
-    
+
     }
-    
-    void clear(){
+
+    void clear() {
         tk.dispose();
         nv.dispose();
         kh.dispose();
@@ -104,19 +101,20 @@ public class TrangChu extends javax.swing.JFrame {
         dh.dispose();
         cskh.dispose();
     }
-    
-    void OpenWelcome(){
-         new ChaoDialog(this, true).setVisible(true);
-     }
-     void OpenLogin(){
+
+    void OpenWelcome() {
+        new ChaoDialog(this, true).setVisible(true);
+    }
+
+    void OpenLogin() {
 //         new DangNhapJDialog(this, true).setVisible(true);
-            DangNhapDialog dangNhap = new DangNhapDialog(this, true);
-            dangNhap.setVisible(true);
-            dangNhap.DangNhap();
-         
-     }
-     void dangXuat()
-     {
+        DangNhapDialog dangNhap = new DangNhapDialog(this, true);
+        dangNhap.setVisible(true);
+        dangNhap.DangNhap();
+
+    }
+
+    void dangXuat() {
         pnlDangXuat.setBackground(Color.decode("#FFDFDF"));
         pnlChamSocKhachHang.setBackground(Color.white);
         pnlKhachHang.setBackground(Color.white);
@@ -127,13 +125,13 @@ public class TrangChu extends javax.swing.JFrame {
         pnlThongKe.setBackground(Color.white);
         pnlTroGiup.setBackground(Color.white);
         pnldonHang.setBackground(Color.white);
-        
+
         dispose();
         dangnhap.setVisible(true);
-     }
-    void ketThuc()
-    {
-        if(MsgBox.confirm(this, "Bạn muốn kết thúc làm việc?"));
+    }
+
+    void ketThuc() {
+        if (MsgBox.confirm(this, "Bạn muốn kết thúc làm việc?"));
         System.exit(0);
     }
 
@@ -176,7 +174,7 @@ public class TrangChu extends javax.swing.JFrame {
         pnlThanhDuoi = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         lblDongHo = new javax.swing.JLabel();
-        ImageIcon icon = new ImageIcon(getClass().getResource("ShopAoQuan2.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("ShopAoQuan5.png"));
         Image img = icon.getImage();
         jDesktopPane = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -545,7 +543,7 @@ public class TrangChu extends javax.swing.JFrame {
             .addGroup(pnlThanhDuoiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 826, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 943, Short.MAX_VALUE)
                 .addComponent(lblDongHo)
                 .addGap(17, 17, 17))
         );
@@ -564,7 +562,7 @@ public class TrangChu extends javax.swing.JFrame {
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
+            .addGap(0, 1113, Short.MAX_VALUE)
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,7 +579,7 @@ public class TrangChu extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                    .addGap(0, 203, Short.MAX_VALUE)
+                    .addGap(0, 204, Short.MAX_VALUE)
                     .addComponent(jDesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         pnlMainLayout.setVerticalGroup(
@@ -713,7 +711,7 @@ public class TrangChu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1317, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

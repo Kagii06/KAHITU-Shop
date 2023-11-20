@@ -11,20 +11,20 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
-    final String INSERT_SQL ="insert into DonHangChiTiet(MaSP, MaDH, SoLuong, GiaBan, GhiChu) VALUES(?,?,?,?,?)";
-    final String UPDATE_SQL ="UPDATE DonHangChiTiet SET MaSP = ?, MaDH= ?, SoLuong = ?, GiaBan= ?, GhiChu= ? where MaDH = ?";
-    final String DELETE_SQL ="DELETE from DonHangChiTiet WHERE MaDH = ?";
-    final String SELECT_ALL_SQL ="SELECT MaDHCT, MaDH, MaSP, SoLuong, GiaBan, GhiChu FROM DonHangChiTiet";
+    final String INSERT_SQL ="INSERT INTO DonHangChiTiet( MaSP, MaDH, SoLuong, GiaBan, GhiChu)  VALUES(?,?,?,?,?)";
+    final String UPDATE_SQL ="UPDATE DonHangChiTiet SET MaSP = ?, MaDH= ?, SoLuong = ?, GiaBan= ?, GhiChu= ? where MaDHCT = ?";
+    final String DELETE_SQL ="DELETE from DonHangChiTiet WHERE MaDHCT = ?";
+    final String SELECT_ALL_SQL ="SELECT MaDHCT, MaDH, MaSP, SoLuong, GiaBan, GhiChu FROM DonHangChiTiet ";
     final String SELECT_BY_ID_SQL ="SELECT * FROM DonHangChiTiet WHERE MaDHCT= ?";
 
     @Override
     public void insert(DonHangChiTiet entity) {
-        jdbcHelper.Update(INSERT_SQL, entity.getMaDH(),entity.getMaSP(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu());
+        jdbcHelper.Update(INSERT_SQL, entity.getMaSP(),entity.getMaDH(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu());
     }
 
     @Override
     public void update(DonHangChiTiet entity) {
-        jdbcHelper.Update(UPDATE_SQL,entity.getMaSP(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu(),entity.getMaDH());
+        jdbcHelper.Update(UPDATE_SQL,entity.getMaSP(),entity.getMaDH(),entity.getSoLuong(),entity.getDonGia(),entity.getGhiChu(),entity.getMaDHCT());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
                 DonHangChiTiet entity = new DonHangChiTiet();
                 entity.setMaDHCT(rs.getString("MaDHCT"));
                 entity.setMaDH(rs.getString("MaDH"));
-                entity.setMaSP(rs.getString("MaSP"));
+                entity.setMaSP(rs.getString("MaSP"));              
                 entity.setSoLuong(rs.getInt("SoLuong"));
                 entity.setDonGia(rs.getFloat("GiaBan"));
                 entity.setGhiChu(rs.getString("GhiChu"));
