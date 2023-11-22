@@ -96,5 +96,51 @@ public class NhanVienDAO extends ShopAoQuanDAO<NhanVien,String> {
     }
     return list;
     }
+    public NhanVien selectBySDT(String sdt) {
+    String SELECT_BY_SDT_SQL = "SELECT * FROM NhanVien WHERE SDT = ?";
+    try {
+        ResultSet rs = jdbcHelper.query(SELECT_BY_SDT_SQL, sdt);
+        if (rs.next()) {
+            NhanVien nhanVien = new NhanVien();
+            nhanVien.setMaNV(rs.getString("MaNV"));
+            // Cập nhật các trường thông tin khác tương ứng
+            return nhanVien;
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return null;
+}
+
+public NhanVien selectByEmail(String email) {
+    String SELECT_BY_EMAIL_SQL = "SELECT * FROM NhanVien WHERE Email = ?";
+    try {
+        ResultSet rs = jdbcHelper.query(SELECT_BY_EMAIL_SQL, email);
+        if (rs.next()) {
+            NhanVien nhanVien = new NhanVien();
+            nhanVien.setMaNV(rs.getString("MaNV"));
+            // Cập nhật các trường thông tin khác tương ứng
+            return nhanVien;
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return null;
+}
+public boolean maNVExists(String maNV) {
+    // Viết truy vấn kiểm tra sự tồn tại của MaNV trong cơ sở dữ liệu
+    String sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = ?";
+    try {
+        ResultSet rs = jdbcHelper.query(sql, maNV);
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    return false;
+}
+
     
 }

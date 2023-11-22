@@ -33,33 +33,35 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
     }
 
     void Search() {
-        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
-        model.setRowCount(0);
-        try {
-            String keyword = txtSearch.getText();
-            boolean searchByMaNV = rdoMaNV.isSelected();
+    DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
+    model.setRowCount(0);
+    try {
+        String keyword = txtSearch.getText();
+        boolean searchByMaNV = rdoMaNV.isSelected();
 
-            List<NhanVien> list;
-            if (searchByMaNV) {
-                list = dao.timkiemByMaNVOrTenNV(keyword, true);
-            } else {
-                list = dao.timkiemByMaNVOrTenNV(keyword, false);
-            }
-            if (list != null) {
-                for (NhanVien nv : list) {
-                    Object[] row = {
-                        nv.getMaNV(), nv.getHoTen(), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getNgaySinh(), nv.getLuong(), nv.getGhiChu()
-                    };
-                    model.addRow(row);
-                }
-            } else {
-                MsgBox.alert(this, "Không tìm thấy !");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<NhanVien> list;
+        if (searchByMaNV) {
+            list = dao.timkiemByMaNVOrTenNV(keyword, true);
+        } else {
+            list = dao.timkiemByMaNVOrTenNV(keyword, false);
         }
+
+        if (!list.isEmpty()) {
+            for (NhanVien nv : list) {
+                Object[] row = {
+                    nv.getMaNV(), nv.getHoTen(), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getNgaySinh(), nv.getLuong(), nv.getGhiChu()
+                };
+                model.addRow(row);
+            }
+        } else {
+            String searchType = searchByMaNV ? "Mã NV" : "Tên NV";
+            MsgBox.alert(this, searchType + " '" + keyword + "' không tồn tại!");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
 
     void edit() {
         try {
@@ -134,26 +136,124 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
     }
 
     void insert() {
-        try {
-            NhanVien model = getForm();
-            try {
-                dao.insert(model);
-                this.fillToTable();
-                this.clear();
-                MsgBox.alert(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại!");
-            }
-        } catch (Exception e) {
-            MsgBox.alert(this, "Không được để trống!");
+    try {
+        NhanVien model = getForm();
+        String sdt = model.getSDT();
+        String email = model.getEmail();
+        String maNV = model.getMaNV();
+
+  
+        // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
+        if (!validateMaNV(maNV)) {
+        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+        return;
+    }
+
+        if (!isValidPhoneNumber(sdt)) {
+            MsgBox.alert(this, "SĐT không hợp lệ!");
+            return;
         }
+
+        // Kiểm tra định dạng và trùng Email
+        if (!isValidEmail(email)) {
+            MsgBox.alert(this, "Email không hợp lệ!");
+            return;
+        }
+       
+
+        if (dao.selectById(model.getMaNV()) != null) {
+            MsgBox.alert(this, "Mã nhân viên " + model.getMaNV() + " đã tồn tại! Vui lòng nhập mã khác.");
+            return;
+        }
+
+        if (dao.selectBySDT(sdt) != null) {
+            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+            return;
+        }
+
+        if (dao.selectByEmail(email) != null) {
+            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
+            return;
+        }
+
+        try {
+            dao.insert(model);
+            fillToTable();
+            clear();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới thất bại!");
+            System.out.println(e);
+        }
+    } catch (Exception e) {
+        MsgBox.alert(this, "Không được để trống!");
+    }
+}
+
+    boolean isValidPhoneNumber(String phoneNumber) {
+        // Thực hiện kiểm tra định dạng số điện thoại ở đây
+        return phoneNumber.matches("\\d+"); // 
+    }
+
+    boolean validateMaNV(String maNV) {
+        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+        return maNV.matches("NV\\d+");
+    }
+
+// Hàm kiểm tra định dạng Email
+    boolean isValidEmail(String email) {
+        // Thực hiện kiểm tra định dạng Email ở đây
+        // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
+        return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
     }
 
     void update() {
         NhanVien model = getForm();
+        String sdt = model.getSDT();
+        String email = model.getEmail();
+        String tenNV = model.getHoTen();
+        String maNV = model.getMaNV();
+
+        // Kiểm tra tên nhân viên không được để trống
+        if (tenNV.isEmpty()) {
+            MsgBox.alert(this, "Tên nhân viên không được để trống!");
+            return;
+        }
+
+        // Kiểm tra định dạng và trùng SĐT
+        if (!isValidPhoneNumber(sdt)) {
+            MsgBox.alert(this, "SĐT không hợp lệ!");
+            return;
+        }
+
+        // Kiểm tra định dạng và trùng Email
+        if (!isValidEmail(email)) {
+            MsgBox.alert(this, "Email không hợp lệ!");
+            return;
+        }
+
+        // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
+        if (!validateMaNV(maNV)) {
+            MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+            return;
+        }
+
+        // Kiểm tra SĐT và Email có trùng với nhân viên khác không
+        NhanVien existingSDT = dao.selectBySDT(sdt);
+        if (existingSDT != null && !existingSDT.getMaNV().equals(maNV)) {
+            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+            return;
+        }
+
+        NhanVien existingEmail = dao.selectByEmail(email);
+        if (existingEmail != null && !existingEmail.getMaNV().equals(maNV)) {
+            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
+            return;
+        }
+
         try {
             dao.update(model);
-            this.fillToTable();
+            fillToTable();
             MsgBox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");

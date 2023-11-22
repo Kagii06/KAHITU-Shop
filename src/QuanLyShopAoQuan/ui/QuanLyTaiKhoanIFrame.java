@@ -44,35 +44,37 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         }
     }
 
-    void timKiem() {
+   void timKiem() {
+    DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
+    model.setRowCount(0);
 
-        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
-        model.setRowCount(0);
-        try {
-            String keyword = txtTimKiem.getText();
-            boolean searchByMaNV = rdoMaNV.isSelected();
+    try {
+        String keyword = txtTimKiem.getText();
+        boolean searchByMaNV = rdoMaNV.isSelected();
 
-            List<TaiKhoan> list;
-            if (searchByMaNV) {
-                list = dao.timkiemByMaNVOrTenNV(keyword, true);
-            } else {
-                list = dao.timkiemByMaNVOrTenNV(keyword, false);
-            }
-            if (list != null) {
-                for (TaiKhoan tk : list) {
-                    Object[] row = {
-                        tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
-                    };
-                    model.addRow(row);
-                }
-            } else {
-                MsgBox.alert(this, "Không tìm thấy !");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<TaiKhoan> list;
+        if (searchByMaNV) {
+            list = dao.timkiemByMaNVOrTenNV(keyword, true);
+        } else {
+            list = dao.timkiemByMaNVOrTenNV(keyword, false);
         }
+
+        if (list != null && !list.isEmpty()) {
+            for (TaiKhoan tk : list) {
+                Object[] row = {
+                    tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
+                };
+                model.addRow(row);
+            }
+        } else {
+            String searchType = searchByMaNV ? "Mã NV" : "Tên NV";
+            MsgBox.alert(this, searchType + " '" + keyword + "' không tồn tại!");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
 
     TaiKhoan getForm() {
         TaiKhoan tk = new TaiKhoan();
@@ -118,21 +120,63 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         updateStatus();
     }
 
-    void insert() {
-        TaiKhoan model = getForm();
-        try {
-            dao.insert(model);
-            this.fillToTable();
-            this.clear();
-            MsgBox.alert(this, "Thêm mới thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Thêm mới thất bại!");
-            System.out.println(e);
-        }
+   void insert() {
+    TaiKhoan model = getForm();
+    String maNV = model.getMaNV();
+    
+    if (!validateMaNV(maNV)) {
+        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+        return;
+    }
+    if (model.getMaNV().isEmpty()) {
+        MsgBox.alert(this, "Mã NV không được để trống!");
+        return;
+    }
+
+    if (model.getHoTen().isEmpty()) {
+        MsgBox.alert(this, "Họ tên không được để trống!");
+        return;
+    }
+
+    if (model.getMatKhau().isEmpty()) {
+        MsgBox.alert(this, "Mật khẩu không được để trống!");
+        return;
+    }
+    
+
+    try {
+        dao.insert(model);
+        this.fillToTable();
+        this.clear();
+        MsgBox.alert(this, "Thêm mới thành công!");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Thêm mới thất bại!");
+        System.out.println(e);
+    }
+}
+    boolean validateMaNV(String maNV) {
+        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+        return maNV.matches("NV\\d+");
     }
 
     void update() {
         TaiKhoan model = getForm();
+
+        if (model.getMaNV().isEmpty()) {
+            MsgBox.alert(this, "Mã NV không được để trống!");
+            return;
+        }
+
+        if (model.getHoTen().isEmpty()) {
+            MsgBox.alert(this, "Họ tên không được để trống!");
+            return;
+        }
+
+        if (model.getMatKhau().isEmpty()) {
+            MsgBox.alert(this, "Mật khẩu không được để trống!");
+            return;
+        }
+
         try {
             dao.update(model);
             this.fillToTable();
@@ -141,6 +185,9 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Cập nhật thất bại!");
         }
     }
+
+        
+
 
     void delete() {
         if (!Auth.isManager()) {
@@ -361,6 +408,11 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         buttonGroup1.add(rdoNhanVien);
         rdoNhanVien.setSelected(true);
         rdoNhanVien.setText("Nhân viên");
+        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNhanVienActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdoTruongPhong);
         rdoTruongPhong.setText("Trưởng phòng");
@@ -563,6 +615,10 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_tblTaiKhoanMousePressed
+
+    private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoNhanVienActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

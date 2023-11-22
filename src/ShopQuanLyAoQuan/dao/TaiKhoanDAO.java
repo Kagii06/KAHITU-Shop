@@ -88,4 +88,6 @@ public class TaiKhoanDAO extends ShopAoQuanDAO<TaiKhoan,String> {
     }
     return list;
     }
+   
+
 }
