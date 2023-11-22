@@ -19,7 +19,7 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
     final String SELECT_BY_ID_SQL ="SELECT * FROM DonHang WHERE MaDH= ?";
     final String SELECT_TENBYID = "SELECT HOTEN FROM DONHANG INNER JOIN NHANVIEN \n" +
                                   "ON NHANVIEN.MANV = DonHang.MANV\n" +
-                                  "WHERE DONHANG.MANV = 'NV01'";
+                                  "WHERE DONHANG.MANV = ?";
 
     @Override
     public void insert(DonHang entity) {
@@ -80,6 +80,39 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
             ResultSet rs = jdbcHelper.query(sql);
             while(rs.next()){
                 list.add(rs.getDate(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public List<String> selectMonth() {
+        String sql = "SELECT \n"
+                + "    CONCAT(YEAR(NgayLap), '-', MONTH(NgayLap)) \n"
+                + "FROM DonHang\n"
+                + "GROUP BY YEAR(NgayLap), MONTH(NgayLap);";
+        List<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public List<Integer> selectYear() {
+        String sql = "SELECT YEAR(NgayLap) FROM DonHang GROUP BY YEAR(NgayLap);";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
             }
             rs.getStatement().getConnection().close();
             return list;

@@ -6,6 +6,9 @@ package QuanLyShopAoQuan.ui;
 
 import ShopQuanLyAoQuan.dao.DonHangDAO;
 import ShopQuanLyAoQuan.dao.ThongKeDAO;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -29,6 +32,10 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         calculateSum();
         fillTableTonKho();
         buttonGroup1.clearSelection();
+        fillComboBoxThang();
+        fillComboBoxYear();
+        fillComboBoxNgayBatDau();
+        fillComboBoxNgayKetThuc();
     }
     
     void fillComboBoxNgay() {
@@ -37,6 +44,63 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         List<Date> list = dhDAO.selectDay();
         for (Date ngay : list) {
             model.addElement(ngay);
+        }
+    }
+    
+    void fillComboBoxNgayBatDau() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTuNgay.getModel();
+        model.removeAllElements();
+        List<Date> list = dhDAO.selectDay();
+        for (Date ngay : list) {
+            model.addElement(ngay);
+        }
+    }
+    
+    void fillComboBoxNgayKetThuc() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboDenNgay.getModel();
+        model.removeAllElements();
+        List<Date> list = dhDAO.selectDay();
+        for (Date ngay : list) {
+            model.addElement(ngay);
+        }
+    }
+    
+//    private static String formatDate(String pattern, String yyyyMM) {
+//        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//        return sdf.format(yyyyMM);
+//    }
+    
+    private static String formatMonthYear(String monthYearString) {
+        // Tách chuỗi tháng và năm
+        String[] parts = monthYearString.split("-");
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+
+        // Chuyển đổi chuỗi tháng và năm sang LocalDate
+        LocalDate date = LocalDate.of(year, month, 1);
+
+        // Định dạng lại thành yyyy,MM
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+    }
+    
+    void fillComboBoxThang() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheoThang.getModel();
+        model.removeAllElements();
+        List<String> list = dhDAO.selectMonth();
+        
+        for (String month : list) {
+            String monthAndYear = formatMonthYear(month);
+            model.addElement(monthAndYear);
+        }
+    }
+    
+    void fillComboBoxYear() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheoNam.getModel();
+        model.removeAllElements();
+        List<Integer> list = dhDAO.selectYear();
+        
+        for (Integer year : list) {
+            model.addElement(year);
         }
     }
 
@@ -49,6 +113,46 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
             for (Object[] row : list) {
                 model.addRow(row);
             }
+        }
+    }
+    
+    void fillTableDoanhThuTheoThang() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        if (cboTheoThang.getSelectedItem() != null) {
+            String month = (String) cboTheoThang.getSelectedItem();
+            List<Object[]> list = dao.getDoanhThuTheoMonth(month);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        }
+    }
+    
+    void fillTableDoanhThuTheoYear() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        if (cboTheoNam.getSelectedItem() != null) {
+            Integer year = (Integer) cboTheoNam.getSelectedItem();
+            List<Object[]> list = dao.getDoanhThuTheoYear(year);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        }
+    }
+    
+    
+   void fillTableDoanhThuTheoNgay() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        if(cboTuNgay.getSelectedItem() != null){
+            Date ngayBatDau = (Date) cboTuNgay.getSelectedItem();
+            if (cboDenNgay.getSelectedItem() !=null) {
+            Date ngayKetThuc = (Date) cboDenNgay.getSelectedItem();
+            List<Object[]> list = dao.getDoanhThuTheoKhoangNgay(ngayBatDau,ngayKetThuc);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        }
         }
     }
 
@@ -121,6 +225,14 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTongDoanhThu = new javax.swing.JTextField();
+        cboTheoThang = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cboTheoNam = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        cboTuNgay = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        cboDenNgay = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -172,30 +284,81 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        cboTheoThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTheoThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTheoThangActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Theo Tháng:");
+
+        jLabel7.setText("Theo Năm:");
+
+        cboTheoNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTheoNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTheoNamActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Doanh Thu Từ Ngày:");
+
+        cboTuNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel9.setText("Đến:");
+
+        cboDenNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDenNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDenNgayActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(235, 235, 235)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(235, 235, 235)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cboNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cboTheoThang, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cboTheoNam, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cboTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cboDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,10 +369,20 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cboNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTheoThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(cboTheoNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cboTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(cboDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -263,7 +436,7 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTim, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addComponent(btnTim, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(rdoTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,7 +479,7 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -397,16 +570,42 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
+    private void cboTheoThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheoThangActionPerformed
+        // TODO add your handling code here:
+        fillTableDoanhThuTheoThang();
+        calculateSum();
+    }//GEN-LAST:event_cboTheoThangActionPerformed
+
+    private void cboTheoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheoNamActionPerformed
+        // TODO add your handling code here:
+        fillTableDoanhThuTheoYear();
+        calculateSum();
+    }//GEN-LAST:event_cboTheoNamActionPerformed
+
+    private void cboDenNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDenNgayActionPerformed
+        // TODO add your handling code here:
+        fillTableDoanhThuTheoNgay();
+        calculateSum();
+    }//GEN-LAST:event_cboDenNgayActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTim;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cboDenNgay;
     private javax.swing.JComboBox<String> cboNgay;
+    private javax.swing.JComboBox<String> cboTheoNam;
+    private javax.swing.JComboBox<String> cboTheoThang;
+    private javax.swing.JComboBox<String> cboTuNgay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

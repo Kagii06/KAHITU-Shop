@@ -1094,7 +1094,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         });
 
         btnLast2.setBackground(new java.awt.Color(255, 204, 255));
-        btnLast2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/next-track-icon.png"))); // NOI18N
+        btnLast2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
         btnLast2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLast2ActionPerformed(evt);
@@ -1102,7 +1102,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         });
 
         btnNext2.setBackground(new java.awt.Color(255, 204, 255));
-        btnNext2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-forward-icon.png"))); // NOI18N
+        btnNext2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
         btnNext2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNext2ActionPerformed(evt);
@@ -1110,7 +1110,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         });
 
         btnFirst2.setBackground(new java.awt.Color(255, 204, 255));
-        btnFirst2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/previous-track-icon.png"))); // NOI18N
+        btnFirst2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
         btnFirst2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirst2ActionPerformed(evt);
@@ -1118,7 +1118,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         });
 
         btnPrev2.setBackground(new java.awt.Color(255, 204, 255));
-        btnPrev2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/fast-backward-icon.png"))); // NOI18N
+        btnPrev2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
         btnPrev2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrev2ActionPerformed(evt);

@@ -489,9 +489,10 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     void delete_DHCT() {
         if (MsgBox.confirm(this, "Bạn thực sự muốn xóa đơn này?")) {
-            String maHD = txtMaHD.getText();
+            int i = tblDHCT.getSelectedRow();
+            String maHDCT = String.valueOf(tblDHCT.getValueAt(i, 0));
             try {
-                dhctDAO.delete(maHD);
+                dhctDAO.delete(maHDCT);
                 this.fillToTable_DHCT();
                 index--;
                 MsgBox.alert(this, "Xóa thành công!");
@@ -1160,6 +1161,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     private void btnXoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa2ActionPerformed
         // TODO add your handling code here:
         delete_DHCT();
+        fillToTable_DHCT();
     }//GEN-LAST:event_btnXoa2ActionPerformed
 
     private void btnFirst2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst2ActionPerformed

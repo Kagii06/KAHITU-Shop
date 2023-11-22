@@ -6,7 +6,12 @@
             <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/ChamSocKhachHangIFrame.java</file>
             <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/QuanLyDonHangIFrame.java</file>
             <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/QuanLySanPhamIFrame.java</file>
+            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/DonHangDAO.java</file>
+            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/KhachHangDAO.java</file>
             <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/QuanLyShopAoQuan/ui/TrangChu.java</file>
+            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/SanPhamDAO.java</file>
+            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/PhanLoaiSanPhamDAO.java</file>
+            <file>file:/C:/FPT%20Polytechnic/QuanLyDuAn1/DuAn1_Nhom5/src/ShopQuanLyAoQuan/dao/NhanVienDAO.java</file>
         </group>
     </open-files>
 </project-private>

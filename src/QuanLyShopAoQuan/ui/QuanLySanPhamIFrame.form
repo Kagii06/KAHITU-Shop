@@ -895,7 +895,7 @@
                           <Color blue="ff" green="cc" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/next-track-icon.png"/>
+                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/Last.png"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -908,7 +908,7 @@
                           <Color blue="ff" green="cc" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/fast-forward-icon.png"/>
+                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/Next.png"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -921,7 +921,7 @@
                           <Color blue="ff" green="cc" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/previous-track-icon.png"/>
+                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/First.png"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -934,7 +934,7 @@
                           <Color blue="ff" green="cc" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/fast-backward-icon.png"/>
+                          <Image iconType="3" name="/QuanLyShopAoQuan/icon/Previous.png"/>
                         </Property>
                       </Properties>
                       <Events>

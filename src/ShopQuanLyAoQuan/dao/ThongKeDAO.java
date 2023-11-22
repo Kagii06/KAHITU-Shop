@@ -31,6 +31,7 @@ public class ThongKeDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        
     }
    
     
@@ -38,6 +39,24 @@ public class ThongKeDAO {
         String sql ="{CALL sp_ThongKeDoanhThu(?)}";
         String[] cols ={"NhanVien","SoKH","DoanhThu"};
         return getListOfArray(sql, cols, day);
+    }
+    
+    public List<Object[]> getDoanhThuTheoMonth(String month){
+        String sql ="{CALL sp_ThongKeDoanhThuTheoMonth(?)}";
+        String[] cols ={"NhanVien","SoKH","DoanhThu"};
+        return getListOfArray(sql, cols, month);
+    }
+    
+    public List<Object[]> getDoanhThuTheoYear(int year){
+        String sql ="{CALL sp_ThongKeDoanhThuTheoYear(?)}";
+        String[] cols ={"NhanVien","SoKH","DoanhThu"};
+        return getListOfArray(sql, cols, year);
+    }
+    
+    public List<Object[]> getDoanhThuTheoKhoangNgay(Date dayFrom,Date dayTo){
+        String sql ="{CALL sp_ThongKeDoanhThuTheoNgay(?,?)}";
+        String[] cols ={"NhanVien","SoKH","DoanhThu"};
+        return getListOfArray(sql, cols, dayFrom,dayTo);
     }
     
     public List<Object[]> getTonKho(){
