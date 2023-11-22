@@ -163,7 +163,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
         boolean last = this.row == tblSanPham.getRowCount() - 1;
-        txtMaSP.setEditable(!edit);
+        txtMaSP.setEditable(edit);
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
@@ -638,7 +638,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         btnLuu = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtTim = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
         rdoMaSP = new javax.swing.JRadioButton();
         rdoTenSP = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
@@ -715,7 +715,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
         btnThem.setBackground(new java.awt.Color(255, 204, 255));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Add.png"))); // NOI18N
-        btnThem.setText("Thêm");
+        btnThem.setText("Mới");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -752,19 +752,34 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
-        jButton10.setBackground(new java.awt.Color(255, 204, 255));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Search.png"))); // NOI18N
-        jButton10.setText("Tìm kiếm");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnTimKiem.setBackground(new java.awt.Color(255, 204, 255));
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Search.png"))); // NOI18N
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnTimKiemActionPerformed(evt);
             }
         });
 
         rdoMaSP.setSelected(true);
         rdoMaSP.setText("Mã sản phẩm");
+        rdoMaSP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoMaSPItemStateChanged(evt);
+            }
+        });
+        rdoMaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoMaSPActionPerformed(evt);
+            }
+        });
 
         rdoTenSP.setText("Tên sản phẩm");
+        rdoTenSP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoTenSPItemStateChanged(evt);
+            }
+        });
 
         jLabel9.setText("Thông tin sản phẩm");
 
@@ -779,7 +794,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(rdoMaSP)
                     .addComponent(rdoTenSP)
-                    .addComponent(jButton10))
+                    .addComponent(btnTimKiem))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -794,7 +809,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(rdoTenSP)
                 .addGap(18, 18, 18)
-                .addComponent(jButton10)
+                .addComponent(btnTimKiem)
                 .addGap(31, 31, 31))
         );
 
@@ -1059,7 +1074,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
         btnThem2.setBackground(new java.awt.Color(255, 204, 255));
         btnThem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Add.png"))); // NOI18N
-        btnThem2.setText("Thêm");
+        btnThem2.setText("Mới");
         btnThem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThem2ActionPerformed(evt);
@@ -1252,7 +1267,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1281,7 +1296,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
     private void btnThem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem2ActionPerformed
         // TODO add your handling code here:
-        insertPLSP();
+        clearForm();
     }//GEN-LAST:event_btnThem2ActionPerformed
 
     private void btnNext2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext2ActionPerformed
@@ -1290,7 +1305,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        insertSP();
+        clearFormSP();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -1305,46 +1320,46 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
-        clearFormSP();
+        insertSP();
     }//GEN-LAST:event_btnLuuActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
    
-      String searchText = txtTim.getText().trim();
-boolean searchByMaSP = rdoMaSP.isSelected();
-boolean searchByTenSP = rdoTenSP.isSelected();
+        String searchText = txtTim.getText().trim();
+        boolean searchByMaSP = rdoMaSP.isSelected();
+        boolean searchByTenSP = rdoTenSP.isSelected();
 
-if (!searchByMaSP && !searchByTenSP) {
-    MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
-    return;
-}
+        if (!searchByMaSP && !searchByTenSP) {
+            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+            return;
+        }
 
-try {
-    List<SanPham> listSP;
+        try {
+            List<SanPham> listSP;
 
-    if (searchByMaSP) {
-        listSP = spDAO.timKiem(searchText, true);
-    } else {
-        listSP = spDAO.timKiem(searchText, false);
-    }
+            if (searchByMaSP) {
+                listSP = spDAO.timKiem(searchText, true);
+            } else {
+                listSP = spDAO.timKiem(searchText, false);
+            }
 
-    DefaultTableModel tblModel = (DefaultTableModel) tblSanPham.getModel();
-    tblModel.setRowCount(0);
+            DefaultTableModel tblModel = (DefaultTableModel) tblSanPham.getModel();
+            tblModel.setRowCount(0);
 
-    if (listSP.isEmpty()) {
-        MsgBox.alert(this, "Không tìm thấy sản phẩm.");
-        return;
-    }
+            if (listSP.isEmpty()) {
+                MsgBox.alert(this, "Không tìm thấy sản phẩm.");
+                return;
+            }
 
-    for (SanPham sp : listSP) {
-        Object[] row = {sp.getMaSP(), sp.getMaLoai(), sp.getTenSP(), sp.getGiaNhap(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh()};
-        tblModel.addRow(row);
-    }
-} catch (Exception ex) {
-    MsgBox.alert(this, "Lỗi khi tìm kiếm sản phẩm");
-}
+            for (SanPham sp : listSP) {
+                Object[] row = {sp.getMaSP(), sp.getMaLoai(), sp.getTenSP(), sp.getGiaNhap(), sp.getSoLuongNhap(), sp.getGhiChu(), sp.getHinhAnh()};
+                tblModel.addRow(row);
+            }
+        } catch (Exception ex) {
+            MsgBox.alert(this, "Lỗi khi tìm kiếm sản phẩm");
+        }
 
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
@@ -1374,7 +1389,7 @@ try {
 
     private void btnLuu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu2ActionPerformed
         // TODO add your handling code here:
-        clearForm();
+        insertPLSP();
     }//GEN-LAST:event_btnLuu2ActionPerformed
 
     private void lblHinhLogoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhLogoMousePressed
@@ -1417,6 +1432,24 @@ try {
        lastPLSP();
     }//GEN-LAST:event_btnLast2ActionPerformed
 
+    private void rdoMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoMaSPActionPerformed
+
+    private void rdoMaSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoMaSPItemStateChanged
+        // TODO add your handling code here:
+          if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+            rdoTenSP.setSelected(false);
+        }
+    }//GEN-LAST:event_rdoMaSPItemStateChanged
+
+    private void rdoTenSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoTenSPItemStateChanged
+        // TODO add your handling code here:
+         if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+            rdoMaSP.setSelected(false);
+        }
+    }//GEN-LAST:event_rdoTenSPItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -1433,9 +1466,9 @@ try {
     private javax.swing.JButton btnSua2;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThem2;
+    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa2;
-    private javax.swing.JButton jButton10;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
