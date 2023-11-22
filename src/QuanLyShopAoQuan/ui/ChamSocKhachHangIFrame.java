@@ -97,7 +97,14 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     }
 
     public void sendEmail() throws IOException {
-
+        if(txtTo.getText().isEmpty()){
+            MsgBox.alert(this, "Vui lòng chọn khách hàng cần gửi Mail!");
+            return;
+        }
+        if(txtSubject.getText().isEmpty() && txtDescription.getText().isEmpty()){
+             MsgBox.alert(this, "Không thể gửi thư không có tiêu đề và nội dung thư!");
+             return;
+        }
         String to = txtTo.getText();
         String subject = txtSubject.getText();
         String message = txtDescription.getText();
@@ -170,6 +177,40 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+    }
+    
+    public void TimKiem(){
+        try {
+        String searchText = txtTimkiem.getText();
+        boolean searchByMaKH = rdoMaKH.isSelected();
+        boolean searchByTenKH = rdoTenKH.isSelected();
+        if(searchText.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
+            return;
+        }
+        if (!searchByMaKH && !searchByTenKH) {
+            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+            return;
+        }
+
+        List<KhachHang> listKH;
+
+        if (searchByMaKH) {
+            listKH = khDAO.timKiem(searchText, true);
+        } else {
+            listKH = khDAO.timKiem(searchText, false);
+        }
+
+        DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
+        tblModel.setRowCount(0);
+
+        for (KhachHang kh : listKH) {
+            Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
+            tblModel.addRow(row);
+        }
+    } catch (Exception e) {
+        MsgBox.alert(this, "Lỗi khi tìm kiếm khách hàng");
+    }
     }
 
     /**
@@ -420,7 +461,9 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         try {
             // TODO add your handling code here:
-            sendEmail();
+                sendEmail();
+                
+            
         } catch (IOException ex) {
             Logger.getLogger(ChamSocKhachHangIFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -441,34 +484,7 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        try {
-        String searchText = txtTimkiem.getText();
-        boolean searchByMaKH = rdoMaKH.isSelected();
-        boolean searchByTenKH = rdoTenKH.isSelected();
-
-        if (!searchByMaKH && !searchByTenKH) {
-            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
-            return;
-        }
-
-        List<KhachHang> listKH;
-
-        if (searchByMaKH) {
-            listKH = khDAO.timKiem(searchText, true);
-        } else {
-            listKH = khDAO.timKiem(searchText, false);
-        }
-
-        DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
-        tblModel.setRowCount(0);
-
-        for (KhachHang kh : listKH) {
-            Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
-            tblModel.addRow(row);
-        }
-    } catch (Exception e) {
-        MsgBox.alert(this, "Lỗi khi tìm kiếm khách hàng");
-    }
+        TimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
