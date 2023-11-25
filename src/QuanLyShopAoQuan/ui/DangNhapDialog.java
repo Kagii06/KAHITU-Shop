@@ -7,6 +7,8 @@ import com.fsm.utils.Auth;
 import com.fsm.utils.MsgBox;
 import com.fsm.utils.XImage;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -28,6 +30,17 @@ public class DangNhapDialog extends javax.swing.JDialog {
         setTitle("FSM - ĐĂNG NHẬP ");
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
+        setDefaultCloseOperation(DangNhapDialog.DISPOSE_ON_CLOSE); 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Xử lý các tác vụ trước khi đóng form nếu cần
+                // ...
+
+                // Đóng chương trình khi form được đóng
+                System.exit(0);
+            }
+        });
     }
             
      void DangNhap() {

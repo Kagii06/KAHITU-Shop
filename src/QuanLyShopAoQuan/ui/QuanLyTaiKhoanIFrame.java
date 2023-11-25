@@ -51,7 +51,10 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
     try {
         String keyword = txtTimKiem.getText();
         boolean searchByMaNV = rdoMaNV.isSelected();
-
+        if(keyword.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
+            return;
+        }
         List<TaiKhoan> list;
         if (searchByMaNV) {
             list = dao.timkiemByMaNVOrTenNV(keyword, true);

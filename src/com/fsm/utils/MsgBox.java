@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.fsm.utils;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class MsgBox {
     /**
      * Hiển thị thông báo cho người dùng

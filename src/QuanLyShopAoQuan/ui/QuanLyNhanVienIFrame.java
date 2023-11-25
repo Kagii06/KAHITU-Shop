@@ -38,7 +38,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
     try {
         String keyword = txtSearch.getText();
         boolean searchByMaNV = rdoMaNV.isSelected();
-
+        if(keyword.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
+            return;
+        }
         List<NhanVien> list;
         if (searchByMaNV) {
             list = dao.timkiemByMaNVOrTenNV(keyword, true);
@@ -239,17 +242,17 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         }
 
         // Kiểm tra SĐT và Email có trùng với nhân viên khác không
-        NhanVien existingSDT = dao.selectBySDT(sdt);
-        if (existingSDT != null && !existingSDT.getMaNV().equals(maNV)) {
-            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
-            return;
-        }
-
-        NhanVien existingEmail = dao.selectByEmail(email);
-        if (existingEmail != null && !existingEmail.getMaNV().equals(maNV)) {
-            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
-            return;
-        }
+//        NhanVien existingSDT = dao.selectBySDT(sdt);
+//        if (existingSDT != null && !existingSDT.getMaNV().equals(maNV)) {
+//            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+//            return;
+//        }
+//
+//        NhanVien existingEmail = dao.selectByEmail(email);
+//        if (existingEmail != null && !existingEmail.getMaNV().equals(maNV)) {
+//            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
+//            return;
+//        }
 
         try {
             dao.update(model);

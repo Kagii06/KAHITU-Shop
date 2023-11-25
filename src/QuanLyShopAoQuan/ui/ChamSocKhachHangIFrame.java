@@ -32,12 +32,6 @@ import javax.mail.internet.MimeMultipart;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
-
-
-/**
- *
- * @author MMSI
- */
 public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     KhachHangDAO khDAO = new KhachHangDAO();
     int row = 0;
@@ -108,14 +102,14 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         String to = txtTo.getText();
         String subject = txtSubject.getText();
         String message = txtDescription.getText();
-
         // Thông tin tài khoản email của bạn
         String username = "leetub4@gmail.com";
         String password = "mdeb ymtc aunb ieii";
-
+//            String username = txtUsername.getText();
+//            String password = txtPass.getText();
+            
         // Cài đặt cấu hình cho JavaMail API
         Properties props = new Properties();
-
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -150,7 +144,7 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(textBodyPart);
             //add file
-            if (selectedFile != null) {
+            if (selectedFile.exists() && selectedFile.isFile()) {
                 MimeBodyPart attachmentBodyPart = new MimeBodyPart();
                 DataSource source = new FileDataSource(selectedFile);
                 attachmentBodyPart.setDataHandler(new DataHandler(source));
@@ -163,8 +157,8 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
 
             // Lấy đối tượng Transport
             javax.mail.Transport transport = session.getTransport("smtp");
-
-            // Kết nối và gửi email
+//
+//            // Kết nối và gửi email
             transport.connect(username, password);
             transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
 
@@ -188,10 +182,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
             return;
         }
-        if (!searchByMaKH && !searchByTenKH) {
-            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
-            return;
-        }
+//        if (!searchByMaKH && !searchByTenKH) {
+//            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+//            return;
+//        }
 
         List<KhachHang> listKH;
 
@@ -203,11 +197,18 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
 
         DefaultTableModel tblModel = (DefaultTableModel) tblKhachHang.getModel();
         tblModel.setRowCount(0);
-
-        for (KhachHang kh : listKH) {
+        if(!listKH.isEmpty())
+        {
+           for (KhachHang kh : listKH) {
             Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getDiaChi(), kh.getEmail(), kh.getSDT()};
             tblModel.addRow(row);
+            } 
+        }else
+        {
+            String searchType = searchByMaKH ? "Mã NV" : "Tên NV";
+            MsgBox.alert(this, searchType + " '" + searchText + "' không tồn tại!");
         }
+        
     } catch (Exception e) {
         MsgBox.alert(this, "Lỗi khi tìm kiếm khách hàng");
     }
@@ -237,6 +238,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         btnAddFile = new javax.swing.JButton();
         btnSend = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPass = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -299,17 +304,32 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("USERNAME:");
+
+        txtUsername.setText("leetub4@gmail.com");
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("PASS:");
+
+        txtPass.setText("mdeb ymtc aunb ieii");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel5))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -318,11 +338,19 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
                         .addComponent(btnSend))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSubject, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtPass))))
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
@@ -330,25 +358,26 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(btnAddFile))
-                        .addGap(21, 21, 21))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSend)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(btnAddFile)
+                    .addComponent(btnSend))
+                .addGap(17, 17, 17))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -432,10 +461,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -487,6 +516,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
         TimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFile;
@@ -498,6 +531,8 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -508,8 +543,10 @@ public class ChamSocKhachHangIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdoTenKH;
     private javax.swing.JTable tblKhachHang;
     private javax.swing.JTextArea txtDescription;
+    private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtSubject;
     private javax.swing.JTextField txtTimkiem;
     private javax.swing.JTextField txtTo;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

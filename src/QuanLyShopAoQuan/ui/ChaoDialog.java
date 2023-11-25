@@ -26,7 +26,9 @@ public class ChaoDialog extends javax.swing.JDialog {
         setTitle("HỆ THỐNG QUẢN LÝ SHOP ÁO QUẦN ");
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
-       
+        pgbChao.setStringPainted(true);
+        pgbChao.setForeground(Color.BLACK);
+        
         new Timer(20, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -34,9 +36,11 @@ public class ChaoDialog extends javax.swing.JDialog {
            if(value < 100)
            {
                pgbChao.setValue(value + 1);
+               pgbChao.setString("Loading... "+value + "%");
            }else 
            {
                ChaoDialog.this.dispose();
+               ((Timer) e.getSource()).stop();
            }
         }
     }).start();

@@ -134,6 +134,59 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
+   
+    public boolean check_HoaDon()
+    {
+        if(txtMaHD.getText().equals(""))
+        {
+            MsgBox.alert(this, "Không được để trống mã hóa đơn!");
+            txtMaHD.requestFocus();
+            return false;
+        }
+         if(txtNgayLap.getText().equals("") || !txtNgayLap.getText().matches("\\d{4}-\\d{2}-\\d{2}"))
+        {
+            MsgBox.alert(this, "Nhập ngày lập (với định dạng yyyy-MM-dd)!");
+            txtNgayLap.requestFocus();
+            return false;
+        }
+        if(txtMaKH.getText().equals(""))
+        {
+            MsgBox.alert(this, "Không được để trống mã khách hàng!");
+            txtMaKH.requestFocus();
+            return false;
+        }
+       
+        if(txtTongTien.getText().equals("") || !txtTongTien.getText().matches("\\d+"))
+        {
+            MsgBox.alert(this, "Nhập tổng tiền ( dưới dạng số) !");
+            txtTongTien.requestFocus();
+            return false;
+        }   
+        return true;    
+    }
+    public boolean check_HoaDonChiTiet()
+    {
+        if(txtMaHoaDon.getText().equals(""))
+        {
+            MsgBox.alert(this, "Không được để trống mã hóa đơn!");
+            txtMaHoaDon.requestFocus();
+            return false;
+        }
+        if(txtSoLuong.getText().equals("") || !txtSoLuong.getText().matches("\\d"))
+        {
+             MsgBox.alert(this, "Nhập số lượng (dạng số)!");
+             txtSoLuong.requestFocus();
+             return false;
+        }
+        if(txtDonGia.getText().equals("") || !txtDonGia.getText().matches("\\d+"))
+        {
+            MsgBox.alert(this, "Nhập đơn giá ( dưới dạng số) !");
+            txtDonGia.requestFocus();
+            return false;
+        }
+           
+        return true;
+    }
 
     void edit() {
         try {
@@ -394,26 +447,31 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     void insert() {
         try {
-            DonHang model = getFormDonHang();
-            try {
-
+            
+            if(check_HoaDon())
+            {
+                DonHang model = getFormDonHang();
+                try {
                 dao.insert(model);
-
                 this.fillToTable();
                 this.clear();
                 MsgBox.alert(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại!");
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Thêm mới thất bại!");
+                }  
             }
+            
         } catch (Exception e) {
-            MsgBox.alert(this, "Không được để trống!");
+            MsgBox.alert(this, "Lỗi insert đơn hàng!");
         }
     }
 
     void insert_DHCT() {
         try {
-            DonHangChiTiet model = getFormDonHangChiTiet();
-            try {
+            if(check_HoaDonChiTiet())
+            {
+               DonHangChiTiet model = getFormDonHangChiTiet();
+                try {
 
                 dhctDAO.insert(model);
 
@@ -421,56 +479,63 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                 index++;
                 this.clear();
                 MsgBox.alert(this, "Thêm mới thành công!");
-            } catch (Exception e) {
+                } catch (Exception e) {
                 e.printStackTrace();
                 MsgBox.alert(this, "Thêm mới thất bại!" + e);
+                } 
             }
+            
         } catch (Exception e) {
-            MsgBox.alert(this, "Không được để trống!");
+            MsgBox.alert(this, "Lỗi insert đơn hàng chi tiết!");
         }
     }
 
     void update() throws Exception {
-        DonHang model = getFormDonHang();
-        try {
+        if(check_HoaDon())
+        {
+         DonHang model = getFormDonHang();
+         try {
             dao.update(model);
             this.fillToTable();
             MsgBox.alert(this, "Cập nhật thành công!");
-        } catch (Exception e) {
+         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
             System.out.println(e);
+         }   
         }
     }
 
     void updateDHCT() throws Exception {
 //       DonHangChiTiet model = getFormDonHangChiTiet();
-        try {
+        if(check_HoaDonChiTiet())
+        {
+            try {
+                int i = tblDHCT.getSelectedRow();
+                String maDHCT = String.valueOf(tblDHCT.getValueAt(i, 0));
+                DonHangChiTiet dhct = dhctDAO.selectById(maDHCT);
+                dhct.setMaDH(txtMaHoaDon.getText());
 
-            int i = tblDHCT.getSelectedRow();
-            String maDHCT = String.valueOf(tblDHCT.getValueAt(i, 0));
-            DonHangChiTiet dhct = dhctDAO.selectById(maDHCT);
-            dhct.setMaDH(txtMaHoaDon.getText());
+                String TenSelect = (String) cboSP.getSelectedItem();
+                SanPham SelectSanPham = getNhanVienBytenSP(TenSelect);
 
-            String TenSelect = (String) cboSP.getSelectedItem();
-            SanPham SelectSanPham = getNhanVienBytenSP(TenSelect);
+                if (SelectSanPham != null) {
+                    String maSP = SelectSanPham.getMaSP();
+                    dhct.setMaSP(maSP);
+                }
 
-            if (SelectSanPham != null) {
-                String maSP = SelectSanPham.getMaSP();
-                dhct.setMaSP(maSP);
+                dhct.setDonGia(Float.parseFloat(txtDonGia.getText()));
+
+                dhct.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+                dhct.setGhiChu(txtGhiChu.getText());
+                dhctDAO.update(dhct);
+
+                this.fillToTable_DHCT();
+                MsgBox.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Cập nhật thất bại!");
+                System.out.println(e);
             }
-
-            dhct.setDonGia(Float.parseFloat(txtDonGia.getText()));
-
-            dhct.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-            dhct.setGhiChu(txtGhiChu.getText());
-            dhctDAO.update(dhct);
-
-            this.fillToTable_DHCT();
-            MsgBox.alert(this, "Cập nhật thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bại!");
-            System.out.println(e);
-        }
+        }  
     }
 
     void delete() {

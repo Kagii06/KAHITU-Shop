@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package QuanLyShopAoQuan.ui;
 
 import ShopQuanLyAoQuan.dao.SanPhamDAO;
@@ -626,6 +622,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -761,6 +758,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(rdoMaSP);
         rdoMaSP.setSelected(true);
         rdoMaSP.setText("Mã sản phẩm");
         rdoMaSP.addItemListener(new java.awt.event.ItemListener() {
@@ -774,6 +772,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(rdoTenSP);
         rdoTenSP.setText("Tên sản phẩm");
         rdoTenSP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1328,11 +1327,14 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         String searchText = txtTim.getText().trim();
         boolean searchByMaSP = rdoMaSP.isSelected();
         boolean searchByTenSP = rdoTenSP.isSelected();
-
-        if (!searchByMaSP && !searchByTenSP) {
-            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+        if(searchText.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
             return;
         }
+//        if (!searchByMaSP && !searchByTenSP) {
+//            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+//            return;
+//        }
 
         try {
             List<SanPham> listSP;
@@ -1469,6 +1471,7 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa2;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

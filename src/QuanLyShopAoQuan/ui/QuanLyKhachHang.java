@@ -286,6 +286,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSachKH = new javax.swing.JTable();
@@ -409,6 +410,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Thông tin ");
 
+        buttonGroup1.add(rdoMaKH);
+        rdoMaKH.setSelected(true);
         rdoMaKH.setText("Theo Mã KH");
         rdoMaKH.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -421,7 +424,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             }
         });
 
-        rdoTenKH.setSelected(true);
+        buttonGroup1.add(rdoTenKH);
         rdoTenKH.setText("Theo Tên KH");
         rdoTenKH.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1314,8 +1317,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         boolean searchByMaKH = rdoMaKH.isSelected();
         boolean searchByTenKH = rdoTenKH.isSelected();
 
-        if (!searchByMaKH && !searchByTenKH) {
-            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+        if(searchText.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
             return;
         }
 
@@ -1376,6 +1379,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;

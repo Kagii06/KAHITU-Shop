@@ -30,6 +30,7 @@ public class TrangChu extends javax.swing.JFrame {
     QuanLyDonHangIFrame dh = new QuanLyDonHangIFrame();
     ChamSocKhachHangIFrame cskh = new ChamSocKhachHangIFrame();
     BaoCaoThongKeIFrame bctk = new BaoCaoThongKeIFrame();
+    HuongDanSuDungIFrame hdsd = new HuongDanSuDungIFrame();
     public TrangChu() {
         initComponents();
         init();
@@ -100,6 +101,7 @@ public class TrangChu extends javax.swing.JFrame {
         bctk.dispose();
         dh.dispose();
         cskh.dispose();
+        hdsd.dispose();
     }
 
     void OpenWelcome() {
@@ -134,7 +136,151 @@ public class TrangChu extends javax.swing.JFrame {
         if (MsgBox.confirm(this, "Bạn muốn kết thúc làm việc?"));
         System.exit(0);
     }
-
+    void QuanLyTaiKhoan()
+    {
+        pnlTaikhoan.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(tk).setVisible(true);
+        
+    }
+    void QuanLyNhanVien()
+    {
+        pnlNhanVien.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(nv).setVisible(true);
+        
+    }
+    void QuanLyKhachHang()
+    {
+        pnlKhachHang.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(kh).setVisible(true);
+    }
+    void QuanLySanPham()
+    {
+        pnlSanPham.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(sp).setVisible(true);
+    }
+    void QuanLyDonHang()
+    {
+        pnldonHang.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(dh).setVisible(true);
+    } 
+    void ChamSocKhachHang()
+    {
+        pnlChamSocKhachHang.setBackground(Color.decode("#FFDFDF"));
+        pnlTrangChu.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(cskh).setVisible(true);
+    }
+    void TroGiup()
+    {
+         pnlTroGiup.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlThongKe.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        jDesktopPane.removeAll();
+        jDesktopPane.add(hdsd).setVisible(true);
+    }
+    void BaoCaoThongKe()
+    {
+        pnlThongKe.setBackground(Color.decode("#FFDFDF"));
+        pnlChamSocKhachHang.setBackground(Color.white);
+        pnlKhachHang.setBackground(Color.white);
+        pnlDangXuat.setBackground(Color.white);
+        pnlNhanVien.setBackground(Color.white);
+        pnlSanPham.setBackground(Color.white);
+        pnlTaikhoan.setBackground(Color.white);
+        pnlTrangChu.setBackground(Color.white);
+        pnlTroGiup.setBackground(Color.white);
+        pnldonHang.setBackground(Color.white);
+        
+        clear();
+        
+        jDesktopPane.removeAll();
+        jDesktopPane.add(bctk).setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -769,186 +915,52 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void pnlTaikhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaikhoanMousePressed
         // TODO add your handling code here:
-        pnlTaikhoan.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(tk).setVisible(true);
-        
-        
+        QuanLyTaiKhoan();
     }//GEN-LAST:event_pnlTaikhoanMousePressed
 
     private void pnlNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMousePressed
         // TODO add your handling code here:
-        pnlNhanVien.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(nv).setVisible(true);
-        
-        
+        QuanLyNhanVien();
     }//GEN-LAST:event_pnlNhanVienMousePressed
 
     private void pnlSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMousePressed
         // TODO add your handling code here:
-        pnlSanPham.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(sp).setVisible(true);
-        
-       
+       QuanLySanPham();
     }//GEN-LAST:event_pnlSanPhamMousePressed
 
     private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
         // TODO add your handling code here:
-        pnlKhachHang.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(kh).setVisible(true);
-        
-       
+       QuanLyKhachHang();
     }//GEN-LAST:event_pnlKhachHangMousePressed
 
     private void pnlChamSocKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlChamSocKhachHangMousePressed
         // TODO add your handling code here:
-        pnlChamSocKhachHang.setBackground(Color.decode("#FFDFDF"));
-        pnlTrangChu.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(cskh).setVisible(true);
-        
+        ChamSocKhachHang();
     }//GEN-LAST:event_pnlChamSocKhachHangMousePressed
 
     private void pnldonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnldonHangMousePressed
         // TODO add your handling code here:
-        pnldonHang.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(dh).setVisible(true);
-
+        QuanLyDonHang();
     }//GEN-LAST:event_pnldonHangMousePressed
 
     private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
         // TODO add your handling code here:
-        pnlThongKe.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-        
-        jDesktopPane.removeAll();
-        jDesktopPane.add(bctk).setVisible(true);
-
+        BaoCaoThongKe();
     }//GEN-LAST:event_pnlThongKeMousePressed
 
     private void pnlTroGiupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTroGiupMousePressed
         // TODO add your handling code here:
-        pnlTroGiup.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlDangXuat.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        clear();
-
+       TroGiup();
     }//GEN-LAST:event_pnlTroGiupMousePressed
 
     private void pnlDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMousePressed
         // TODO add your handling code here:
-        pnlDangXuat.setBackground(Color.decode("#FFDFDF"));
-        pnlChamSocKhachHang.setBackground(Color.white);
-        pnlKhachHang.setBackground(Color.white);
-        pnlTrangChu.setBackground(Color.white);
-        pnlNhanVien.setBackground(Color.white);
-        pnlSanPham.setBackground(Color.white);
-        pnlTaikhoan.setBackground(Color.white);
-        pnlThongKe.setBackground(Color.white);
-        pnlTroGiup.setBackground(Color.white);
-        pnldonHang.setBackground(Color.white);
-        
-        dispose();
-        dangnhap.setVisible(true);
-        
+       dangXuat();
     }//GEN-LAST:event_pnlDangXuatMousePressed
 
     private void lblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMousePressed
         // TODO add your handling code here:
-         pnlSanPham.setBackground(Color.decode("#FFDFDF"));
+        pnlSanPham.setBackground(Color.decode("#FFDFDF"));
         pnlChamSocKhachHang.setBackground(Color.white);
         pnlKhachHang.setBackground(Color.white);
         pnlDangXuat.setBackground(Color.white);
