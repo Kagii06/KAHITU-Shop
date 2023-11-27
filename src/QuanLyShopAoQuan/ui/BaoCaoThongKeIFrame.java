@@ -27,6 +27,7 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
      */
     public BaoCaoThongKeIFrame() {
         initComponents();
+        this.selectTabs(0);
         fillComboBoxNgay();
         txtTongDoanhThu.setEditable(false);
         calculateSum();
@@ -203,6 +204,10 @@ public class BaoCaoThongKeIFrame extends javax.swing.JInternalFrame {
         for (Object[] row : list) {
             model.addRow(row);
         }
+    }
+      public void selectTab(int index)
+    {
+        tabs.setSelectedIndex(index);
     }
     
     /**
