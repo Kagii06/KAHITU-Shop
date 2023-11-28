@@ -10,10 +10,6 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
- *
- * @author Admin
- */
 public class DangNhapDialog extends javax.swing.JDialog {
     TaiKhoanDAO dao = new TaiKhoanDAO();
     /**

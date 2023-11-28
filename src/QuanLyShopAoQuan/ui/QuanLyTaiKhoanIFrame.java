@@ -22,7 +22,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             for (TaiKhoan tk : list) {
                 Object[] row
                         = {
-                            tk.getMaNV(), tk.getMatKhau(), tk.getHoTen(), tk.isVaiTro() ? "Admin" : "Nhân viên"
+                            tk.getMaNV(), tk.getHoTen(),tk.getMatKhau(), tk.isVaiTro() ? "Admin" : "Nhân viên"
                         };
                 model.addRow(row);
             }

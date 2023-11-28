@@ -189,7 +189,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     } catch (Exception e) {
-        MsgBox.alert(this, "Không được để trống!");
+        MsgBox.alert(this, "Lỗi!");
     }
 }
 
