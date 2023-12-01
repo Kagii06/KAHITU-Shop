@@ -58,6 +58,7 @@ public class DangNhapDialog extends javax.swing.JDialog {
             } else {
                 Auth.user = tk;
                 this.dispose();
+               
             }
         }
     } catch (Exception e) {

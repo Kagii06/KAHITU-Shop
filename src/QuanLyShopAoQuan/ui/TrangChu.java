@@ -115,6 +115,7 @@ public class TrangChu extends javax.swing.JFrame {
         DangNhapDialog dangNhap = new DangNhapDialog(this, true);
         dangNhap.setVisible(true);
         dangNhap.DangNhap();
+        
 
     }
 

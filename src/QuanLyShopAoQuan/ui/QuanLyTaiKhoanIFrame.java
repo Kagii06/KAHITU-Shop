@@ -1,4 +1,4 @@
-package QuanLyShopAoQuan.ui;
+    package QuanLyShopAoQuan.ui;
 
 import ShopQuanLyAoQuan.dao.TaiKhoanDAO;
 import ShopQuanLyAoQuan.entity.TaiKhoan;
@@ -123,7 +123,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         updateStatus();
     }
 
-   void insert() {
+  void insert() {
     TaiKhoan model = getForm();
     String maNV = model.getMaNV();
     
@@ -131,7 +131,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
         return;
     }
-    if (model.getMaNV().isEmpty()) {
+    if (maNV.isEmpty()) {
         MsgBox.alert(this, "Mã NV không được để trống!");
         return;
     }
@@ -141,13 +141,23 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         return;
     }
 
+    if (!model.getHoTen().matches("[\\p{L} \\p{M}]+")) {
+        MsgBox.alert(this, "Họ tên chỉ được chứa ký tự chữ!");
+        return;
+    }
+
     if (model.getMatKhau().isEmpty()) {
         MsgBox.alert(this, "Mật khẩu không được để trống!");
         return;
     }
-    
 
     try {
+        // Kiểm tra mã nhân viên không trùng
+        if (dao.isMaNVTaken(model.getMaNV())) {
+            MsgBox.alert(this, "Mã nhân viên đã tồn tại!");
+            return;
+        }
+
         dao.insert(model);
         this.fillToTable();
         this.clear();
@@ -157,6 +167,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         System.out.println(e);
     }
 }
+
     boolean validateMaNV(String maNV) {
         // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
         return maNV.matches("NV\\d+");
@@ -164,6 +175,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
 
     void update() {
         TaiKhoan model = getForm();
+        String maNV = model.getMaNV();
 
         if (model.getMaNV().isEmpty()) {
             MsgBox.alert(this, "Mã NV không được để trống!");
@@ -174,6 +186,10 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Họ tên không được để trống!");
             return;
         }
+        if (!model.getHoTen().matches("[\\p{L} \\p{M}]+")) {
+        MsgBox.alert(this, "Họ tên chỉ được chứa ký tự chữ!");
+        return;
+    }
 
         if (model.getMatKhau().isEmpty()) {
             MsgBox.alert(this, "Mật khẩu không được để trống!");

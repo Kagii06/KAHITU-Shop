@@ -147,10 +147,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
 
   
         // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
-        if (!validateMaNV(maNV)) {
-        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
-        return;
-    }
+//        if (!validateMaNV(maNV)) {
+//        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+//        return;
+//    }
 
         if (!isValidPhoneNumber(sdt)) {
             MsgBox.alert(this, "SĐT không hợp lệ!");
@@ -189,7 +189,8 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     } catch (Exception e) {
-        MsgBox.alert(this, "Lỗi!");
+        MsgBox.alert(this, "Lỗi!:"+e);
+        
     }
 }
 
@@ -198,10 +199,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         return phoneNumber.matches("\\d+"); // 
     }
 
-    boolean validateMaNV(String maNV) {
-        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
-        return maNV.matches("NV\\d+");
-    }
+//    boolean validateMaNV(String maNV) {
+//        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+//        return maNV.matches("NV\\d+");
+//    }
 
 // Hàm kiểm tra định dạng Email
     boolean isValidEmail(String email) {
@@ -236,10 +237,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         }
 
         // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
-        if (!validateMaNV(maNV)) {
-            MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
-            return;
-        }
+//        if (!validateMaNV(maNV)) {
+//            MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+//            return;
+//        }
 
         // Kiểm tra SĐT và Email có trùng với nhân viên khác không
 //        NhanVien existingSDT = dao.selectBySDT(sdt);
@@ -261,11 +262,12 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
             System.out.println(e);
+            
         }
     }
 
     void delete() {
-        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa chuyên đề này?")) {
+        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa nhân viên này?")) {
             String maNV = txtMaNV.getText();
             try {
                 dao.delete(maNV);

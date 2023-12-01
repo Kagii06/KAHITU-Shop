@@ -86,7 +86,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         boolean first = this.row == 0;
         boolean last = this.row == tblDanhSachKH.getRowCount() - 1;
         txtMaKH.setEditable(!edit);
-        btnThem.setEnabled(!edit);
+        btnLuu.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
         btnFirst.setEnabled(edit && !first);
@@ -118,6 +118,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Mã KH không đúng định dạng!");
             return;
         }
+          if (!tenKH.matches("[\\p{L} \\p{M}]+")) {
+        MsgBox.alert(this, "Tên khách hàng chỉ được viết bằng chữ !");
+        return;
+    }
 
         // Kiểm tra định dạng và trùng SĐT
         if (!isValidPhoneNumber(sdt)) {
@@ -159,7 +163,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     boolean isValidPhoneNumber(String phoneNumber) {
         // Thực hiện kiểm tra định dạng số điện thoại ở đây
         // Ví dụ đơn giản: kiểm tra độ dài số điện thoại
-        return phoneNumber.matches("\\d{10}"); // Kiểm tra xem có 10 chữ số hay không
+        return phoneNumber.matches("\\d{10,12}"); 
     }
 
 // Hàm kiểm tra định dạng Email
@@ -191,7 +195,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         }
 
         // Kiểm tra định dạng SĐT
-        String phonePattern = "\\d{10,11}";
+        String phonePattern = "\\d{10,12}";
         if (!kh.getSDT().matches(phonePattern)) {
             MsgBox.alert(this, "Định dạng SĐT không hợp lệ!");
             return;
@@ -492,7 +496,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
         btnThem.setBackground(new java.awt.Color(255, 204, 255));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Add.png"))); // NOI18N
-        btnThem.setText("Thêm");
+        btnThem.setText("Mới");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -519,7 +523,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
         btnLuu.setBackground(new java.awt.Color(255, 204, 255));
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Save.png"))); // NOI18N
-        btnLuu.setText("Mới");
+        btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -1101,7 +1105,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLuu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                         .addComponent(btnFirst)
                         .addGap(18, 18, 18)
                         .addComponent(btnPrev)
@@ -1246,7 +1250,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        insert();
+        clearForm();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1308,7 +1312,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
-        clearForm();
+        insert();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed

@@ -88,6 +88,20 @@ public class TaiKhoanDAO extends ShopAoQuanDAO<TaiKhoan,String> {
     }
     return list;
     }
+    
+    public boolean isMaNVTaken(String maNV) {
+        String sql = "SELECT COUNT(*) AS count FROM TaiKhoan WHERE MaNV = ?";
+        try {
+            ResultSet rs = jdbcHelper.query(sql, maNV);
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
    
 
 }

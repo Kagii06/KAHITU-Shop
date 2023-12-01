@@ -250,7 +250,7 @@
                               <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnLuu" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="161" max="32767" attributes="0"/>
+                              <EmptySpace pref="172" max="32767" attributes="0"/>
                               <Component id="btnFirst" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnPrev" min="-2" max="-2" attributes="0"/>
@@ -408,7 +408,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/QuanLyShopAoQuan/icon/Add.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
@@ -450,7 +450,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/QuanLyShopAoQuan/icon/Save.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
