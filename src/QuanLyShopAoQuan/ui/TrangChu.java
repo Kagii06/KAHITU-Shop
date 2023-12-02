@@ -77,7 +77,7 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     void closeMenuBar() {
-        // tạo luồng chạy song song với luồng chính
+        // tạo luồng chạy& song song với luồng chính
         new Thread(new Runnable() {
             @Override
             public void run() {

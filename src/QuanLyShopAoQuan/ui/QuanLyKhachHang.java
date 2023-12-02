@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package QuanLyShopAoQuan.ui;
 
 import ShopQuanLyAoQuan.dao.KhachHangDAO;
@@ -180,7 +176,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     void update() {
         KhachHang kh = getForm();
-
+        if(tblDanhSachKH.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            }else
+        {
         // Kiểm tra tên khách hàng không được để trống
         if (kh.getHoTen().isEmpty()) {
             MsgBox.alert(this, "Tên khách hàng không được để trống!");
@@ -226,10 +226,17 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
         }
+        }
     }
 
     void delete() {
-        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa khách hàng này?")) {
+        
+         if(tblDanhSachKH.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }else
+         {
+             if (MsgBox.confirm(this, "Bạn thực sự muốn xóa khách hàng này?")) {
             String makh = txtMaKH.getText();
             try {
                 khDAO.delete(makh);
@@ -239,7 +246,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại!");
             }
-        }
+            }
+         }
+        
     }
 
     void first() {

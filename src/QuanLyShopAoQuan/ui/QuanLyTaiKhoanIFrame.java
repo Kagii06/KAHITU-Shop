@@ -176,7 +176,11 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
     void update() {
         TaiKhoan model = getForm();
         String maNV = model.getMaNV();
-
+         if(tblTaiKhoan.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            } else
+         {
         if (model.getMaNV().isEmpty()) {
             MsgBox.alert(this, "Mã NV không được để trống!");
             return;
@@ -195,7 +199,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Mật khẩu không được để trống!");
             return;
         }
-
+       
         try {
             dao.update(model);
             this.fillToTable();
@@ -203,6 +207,7 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
         }
+         }
     }
 
         
@@ -212,16 +217,23 @@ public class QuanLyTaiKhoanIFrame extends javax.swing.JInternalFrame {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền xóa tài khoản!");
         } else {
-            if (MsgBox.confirm(this, "Bạn thực sự muốn xóa tài khoản này?"));
-            String maNV = txtMaNV.getText();
-            try {
+            if(tblTaiKhoan.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }
+            else if (MsgBox.confirm(this, "Bạn thực sự muốn xóa tài khoản này?"))
+            {
+              String maNV = txtMaNV.getText();
+                try {
                 dao.delete(maNV);
                 this.fillToTable();
                 this.clear();
                 MsgBox.alert(this, "Xóa thành công!");
-            } catch (Exception e) {
+                } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại!");
+            }  
             }
+            
         }
     }
 

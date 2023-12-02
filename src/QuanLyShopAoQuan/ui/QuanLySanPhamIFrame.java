@@ -261,7 +261,11 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     void updateSP() {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền cập nhật sản phẩm!");
-        } else {
+        }else if(tblSanPham.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            }   
+        else {
             SanPham sp = getFormSP();
             String maSP = sp.getMaSP();
             String tenSP = sp.getTenSP();
@@ -345,7 +349,11 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
     void deleteSP() {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền xóa sản phẩm này!");
-        } else if (MsgBox.confirm(this, "Bạn thực sự muốn xóa sản phẩm này?")) {
+        } else if ((tblSanPham.getSelectedRow()== -1))
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }
+        else if (MsgBox.confirm(this, "Bạn thực sự muốn xóa sản phẩm này?")) {
             String masp = txtMaSP.getText();
             try {
                 spDAO.delete(masp);

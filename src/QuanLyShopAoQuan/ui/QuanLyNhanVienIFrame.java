@@ -64,6 +64,47 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         e.printStackTrace();
     }
 }
+    public boolean check()
+    {
+        
+      if(txtMaNV.getText().isEmpty())
+      {
+          MsgBox.alert(this, "Không được để trống mã NV");
+          txtMaNV.requestFocus();
+          return false;
+      }
+        if (txtTenNV.getText().isEmpty()) {
+            MsgBox.alert(this, "Tên nhân viên không được để trống!");
+            return false;
+        }
+        if (!txtMaNV.getText().matches("^NV\\d+")) {
+            MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+            return false;
+        }
+
+        if (!txtSDT.getText().matches("^\\d{8,12}$")) {
+            MsgBox.alert(this, "SĐT không hợp lệ!");
+            return false;
+        }
+        // Kiểm tra định dạng và trùng Email
+        if (!txtEmail.getText().matches("^(.+)@(.+)$")) {
+            MsgBox.alert(this, "Email không hợp lệ!");
+            return false;
+        }
+        if(txtNgaySinh.getText().equals("") || !txtNgaySinh.getText().matches("\\d{4}-\\d{2}-\\d{2}"))
+        {
+            MsgBox.alert(this, "Nhập ngày sinh (với định dạng yyyy-MM-dd)!");
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+        if(!txtLuong.getText().matches("\\d+"))
+        {
+            MsgBox.alert(this, "Nhập lương ( dưới dạng số) !");
+            txtLuong.requestFocus();
+            return false;
+        }
+      return true;  
+    }
 
 
     void edit() {
@@ -139,164 +180,93 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
     }
 
     void insert() {
-    boolean checkDate = true;
-        try {
-            XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Ngày sinh không đúng định dạng!");
-            //return;
-            checkDate = false;
-        }
-        try {
-        NhanVien model = getForm();
-        String sdt = model.getSDT();
-        String email = model.getEmail();
-        String maNV = model.getMaNV();
+    try {
+        if(check())
+        {
+            NhanVien model = getForm();
 
-  
-        // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
-        if (!validateMaNV(maNV)) {
-        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
-        return;
-    }
-
-        if (!isValidPhoneNumber(sdt)) {
-            MsgBox.alert(this, "SĐT không hợp lệ!");
-            return;
-        }
-
-        // Kiểm tra định dạng và trùng Email
-        if (!isValidEmail(email)) {
-            MsgBox.alert(this, "Email không hợp lệ!");
-            return;
-        }
-        // Kiểm tra định dạng ngày sinh 
-//        try {
-//            XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd");
-//        } catch (Exception e) {
-//            MsgBox.alert(this, "Ngày sinh không đúng định dạng!");
-//            return;
-//        }
-       
-
-        if (dao.selectById(model.getMaNV()) != null) {
+            String sdt = model.getSDT();
+            String email = model.getEmail();
+            String maNV = model.getMaNV();
+            
+            if (dao.selectById(model.getMaNV()) != null) {
             MsgBox.alert(this, "Mã nhân viên " + model.getMaNV() + " đã tồn tại! Vui lòng nhập mã khác.");
             return;
         }
-
-        if (dao.selectBySDT(sdt) != null) {
-            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
-            return;
-        }
-
-        if (dao.selectByEmail(email) != null) {
+             if (dao.selectByEmail(email) != null) {
             MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
             return;
         }
-
-        try {
-            dao.insert(model);
-            fillToTable();
-            clear();
-            MsgBox.alert(this, "Thêm mới thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Thêm mới thất bại!");
-            
+             
+        if (dao.selectBySDT(sdt) != null) {
+            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
+            return; 
         }
+            try {
+                
+                
+                dao.insert(model);
+                this.fillToTable();
+                this.clear();
+                MsgBox.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Thêm mới thất bại!");
+                System.out.println(e);
+            }
+        }    
     } catch (Exception e) {
-        if (checkDate) MsgBox.alert(this, "Lỗi!:"+e);
-        
+        MsgBox.alert(this, "Lỗi insert!");
     }
 }
-    
-    boolean checkDate(String date){
-        return date.matches("\\d{4}-\\d{2}-\\d{2}");
-    }
-    
-    boolean isValidPhoneNumber(String phoneNumber) {
-        // Thực hiện kiểm tra định dạng số điện thoại ở đây
-        return phoneNumber.matches("\\d+"); // 
-    }
 
-    boolean validateMaNV(String maNV) {
-        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
-        return maNV.matches("NV\\d+");
-    }
-
-// Hàm kiểm tra định dạng Email
-    boolean isValidEmail(String email) {
-        // Thực hiện kiểm tra định dạng Email ở đây
-        // Ví dụ đơn giản: kiểm tra xem Email có đúng định dạng không
-        return email.matches("^(.+)@(.+)$"); // Kiểm tra xem có @ giữa các ký tự hay không
-    }
-
+   
     void update() {
-        NhanVien model = getForm();
-        String sdt = model.getSDT();
-        String email = model.getEmail();
-        String tenNV = model.getHoTen();
-        String maNV = model.getMaNV();
-
-        // Kiểm tra tên nhân viên không được để trống
-        if (tenNV.isEmpty()) {
-            MsgBox.alert(this, "Tên nhân viên không được để trống!");
-            return;
-        }
-
-        // Kiểm tra định dạng và trùng SĐT
-        if (!isValidPhoneNumber(sdt)) {
-            MsgBox.alert(this, "SĐT không hợp lệ!");
-            return;
-        }
-
-        // Kiểm tra định dạng và trùng Email
-        if (!isValidEmail(email)) {
-            MsgBox.alert(this, "Email không hợp lệ!");
-            return;
-        }
-
-        // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
-//        if (!validateMaNV(maNV)) {
-//            MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
-//            return;
-//        }
-
-        // Kiểm tra SĐT và Email có trùng với nhân viên khác không
-//        NhanVien existingSDT = dao.selectBySDT(sdt);
-//        if (existingSDT != null && !existingSDT.getMaNV().equals(maNV)) {
-//            MsgBox.alert(this, "SĐT " + sdt + " đã tồn tại! Vui lòng nhập số khác.");
-//            return;
-//        }
-//
-//        NhanVien existingEmail = dao.selectByEmail(email);
-//        if (existingEmail != null && !existingEmail.getMaNV().equals(maNV)) {
-//            MsgBox.alert(this, "Email " + email + " đã tồn tại! Vui lòng nhập email khác.");
-//            return;
-//        }
-
         try {
-            dao.update(model);
-            fillToTable();
-            MsgBox.alert(this, "Cập nhật thành công!");
+            if(tblNhanVien.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            }
+            else if(check())
+            {
+                try {
+                   NhanVien model = getForm();
+                   dao.update(model);
+                   fillToTable();
+                   MsgBox.alert(this, "Cập nhật thành công!");
+               } catch (Exception e) {
+                   MsgBox.alert(this, "Cập nhật thất bại!");
+                   System.out.println(e);
+               }
+            }
         } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bại!");
-            System.out.println(e);
-            
+            MsgBox.alert(this, "Lỗi update!");
         }
     }
 
     void delete() {
-        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa nhân viên này?")) {
+        try {
+            if(tblNhanVien.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }
+            else if(MsgBox.confirm(this, "Bạn thực sự muốn xóa nhân viên này?"))  {
             String maNV = txtMaNV.getText();
             try {
                 dao.delete(maNV);
                 this.fillToTable();
                 this.clear();
+               
                 MsgBox.alert(this, "Xóa thành công!");
+                    
+                
             } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại!");
             }
         }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi xóa!");
+        }
+        
     }
 
     void first() {

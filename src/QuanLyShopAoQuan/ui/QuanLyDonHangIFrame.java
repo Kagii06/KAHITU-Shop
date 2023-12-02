@@ -491,7 +491,10 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     }
 
     void update() throws Exception {
-        if(check_HoaDon())
+        if(tblDonHang.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            }else if(check_HoaDon())
         {
          DonHang model = getFormDonHang();
          try {
@@ -507,7 +510,10 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     void updateDHCT() throws Exception {
 //       DonHangChiTiet model = getFormDonHangChiTiet();
-        if(check_HoaDonChiTiet())
+        if(tblDHCT.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng muốn sửa!");
+            }else if(check_HoaDonChiTiet())
         {
             try {
                 int i = tblDHCT.getSelectedRow();
@@ -539,6 +545,11 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     }
 
     void delete() {
+         if(tblDonHang.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }else
+         {
         if (MsgBox.confirm(this, "Bạn thực sự muốn xóa đơn hàng này?")) {
             String maHD = txtMaHD.getText();
             try {
@@ -549,11 +560,15 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại!");
             }
-        }
+        }}
     }
 
     void delete_DHCT() {
-        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa đơn này?")) {
+         if(tblDHCT.getSelectedRow()== -1)
+            {
+                MsgBox.alert(this, "Phải chọn dòng cần xóa!");
+            }
+         else if (MsgBox.confirm(this, "Bạn thực sự muốn xóa đơn này?")) {
             int i = tblDHCT.getSelectedRow();
             String maHDCT = String.valueOf(tblDHCT.getValueAt(i, 0));
             try {
