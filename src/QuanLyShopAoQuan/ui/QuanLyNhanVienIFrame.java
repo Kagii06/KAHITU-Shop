@@ -139,7 +139,15 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
     }
 
     void insert() {
-    try {
+    boolean checkDate = true;
+        try {
+            XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Ngày sinh không đúng định dạng!");
+            //return;
+            checkDate = false;
+        }
+        try {
         NhanVien model = getForm();
         String sdt = model.getSDT();
         String email = model.getEmail();
@@ -147,10 +155,10 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
 
   
         // Kiểm tra mã nhân viên không được để trống và phải hợp lệ
-//        if (!validateMaNV(maNV)) {
-//        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
-//        return;
-//    }
+        if (!validateMaNV(maNV)) {
+        MsgBox.alert(this, "Mã nhân viên không đúng định dạng!");
+        return;
+    }
 
         if (!isValidPhoneNumber(sdt)) {
             MsgBox.alert(this, "SĐT không hợp lệ!");
@@ -162,6 +170,13 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Email không hợp lệ!");
             return;
         }
+        // Kiểm tra định dạng ngày sinh 
+//        try {
+//            XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd");
+//        } catch (Exception e) {
+//            MsgBox.alert(this, "Ngày sinh không đúng định dạng!");
+//            return;
+//        }
        
 
         if (dao.selectById(model.getMaNV()) != null) {
@@ -186,23 +201,27 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Thêm mới thành công!");
         } catch (Exception e) {
             MsgBox.alert(this, "Thêm mới thất bại!");
-            System.out.println(e);
+            
         }
     } catch (Exception e) {
-        MsgBox.alert(this, "Lỗi!:"+e);
+        if (checkDate) MsgBox.alert(this, "Lỗi!:"+e);
         
     }
 }
-
+    
+    boolean checkDate(String date){
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
+    
     boolean isValidPhoneNumber(String phoneNumber) {
         // Thực hiện kiểm tra định dạng số điện thoại ở đây
         return phoneNumber.matches("\\d+"); // 
     }
 
-//    boolean validateMaNV(String maNV) {
-//        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
-//        return maNV.matches("NV\\d+");
-//    }
+    boolean validateMaNV(String maNV) {
+        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+        return maNV.matches("NV\\d+");
+    }
 
 // Hàm kiểm tra định dạng Email
     boolean isValidEmail(String email) {

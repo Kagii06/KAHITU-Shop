@@ -36,7 +36,8 @@ public class ThongKeDAO {
    
     
     public List<Object[]> getDoanhThu(Date day){
-        String sql ="{CALL sp_ThongKeDoanhThu(?)}";
+        String sql ="{CALL sp_Tho"
+                + "ngKeDoanhThu(?)}";
         String[] cols ={"NhanVien","SoKH","DoanhThu"};
         return getListOfArray(sql, cols, day);
     }

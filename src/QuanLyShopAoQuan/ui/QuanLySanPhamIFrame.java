@@ -629,10 +629,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtTim = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
@@ -655,10 +651,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         txtMaLoai = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         lblHinhLogo = new javax.swing.JLabel();
-        btnFirst = new javax.swing.JButton();
-        btnPrev = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLast = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -680,6 +672,14 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         btnNext2 = new javax.swing.JButton();
         btnFirst2 = new javax.swing.JButton();
         btnPrev2 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
+        btnFirst = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
 
         setMaximizable(true);
 
@@ -709,42 +709,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblSanPham);
-
-        btnThem.setBackground(new java.awt.Color(255, 204, 255));
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Add.png"))); // NOI18N
-        btnThem.setText("Mới");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnSua.setBackground(new java.awt.Color(255, 204, 255));
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/files-edit-icon.png"))); // NOI18N
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setBackground(new java.awt.Color(255, 204, 255));
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Delete.png"))); // NOI18N
-        btnXoa.setText("Xoá");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnLuu.setBackground(new java.awt.Color(255, 204, 255));
-        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Save.png"))); // NOI18N
-        btnLuu.setText("Lưu");
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
@@ -934,38 +898,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                     .addContainerGap(135, Short.MAX_VALUE)))
         );
 
-        btnFirst.setBackground(new java.awt.Color(255, 204, 255));
-        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
-        btnFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFirstActionPerformed(evt);
-            }
-        });
-
-        btnPrev.setBackground(new java.awt.Color(255, 204, 255));
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
-        btnPrev.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrevActionPerformed(evt);
-            }
-        });
-
-        btnNext.setBackground(new java.awt.Color(255, 204, 255));
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-
-        btnLast.setBackground(new java.awt.Color(255, 204, 255));
-        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
-        btnLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLastActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -973,23 +905,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnThem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnXoa)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLuu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPrev)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNext)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLast)
-                        .addGap(65, 65, 65))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1006,18 +921,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThem)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnXoa)
-                        .addComponent(btnLuu))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnLast)
-                        .addComponent(btnNext)
-                        .addComponent(btnPrev)
-                        .addComponent(btnFirst)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1246,6 +1149,74 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("LOẠI SẢN PHẨM", jPanel3);
 
+        btnThem.setBackground(new java.awt.Color(255, 204, 255));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Add.png"))); // NOI18N
+        btnThem.setText("Mới");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnSua.setBackground(new java.awt.Color(255, 204, 255));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/files-edit-icon.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setBackground(new java.awt.Color(255, 204, 255));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Delete.png"))); // NOI18N
+        btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        btnLuu.setBackground(new java.awt.Color(255, 204, 255));
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Save.png"))); // NOI18N
+        btnLuu.setText("Lưu");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
+
+        btnFirst.setBackground(new java.awt.Color(255, 204, 255));
+        btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
+
+        btnPrev.setBackground(new java.awt.Color(255, 204, 255));
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+
+        btnNext.setBackground(new java.awt.Color(255, 204, 255));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnLast.setBackground(new java.awt.Color(255, 204, 255));
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1253,11 +1224,29 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(301, 301, 301)
-                        .addComponent(jLabel15)))
+                        .addComponent(jLabel15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btnThem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnXoa)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLuu)
+                                .addGap(198, 198, 198)
+                                .addComponent(btnFirst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPrev)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnNext)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLast))
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1267,7 +1256,18 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnThem)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoa)
+                        .addComponent(btnLuu))
+                    .addComponent(btnFirst)
+                    .addComponent(btnPrev)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1286,46 +1286,111 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaSPActionPerformed
+    private void btnPrev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev2ActionPerformed
+        prevPLSP();
+    }//GEN-LAST:event_btnPrev2ActionPerformed
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+    private void btnFirst2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst2ActionPerformed
         // TODO add your handling code here:
-        nextSP();
-    }//GEN-LAST:event_btnNextActionPerformed
+        firstPLSP();
+    }//GEN-LAST:event_btnFirst2ActionPerformed
+
+    private void btnNext2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext2ActionPerformed
+        nextPLSP();
+    }//GEN-LAST:event_btnNext2ActionPerformed
+
+    private void btnLast2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast2ActionPerformed
+        lastPLSP();
+    }//GEN-LAST:event_btnLast2ActionPerformed
+
+    private void btnLuu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu2ActionPerformed
+        // TODO add your handling code here:
+        insertPLSP();
+    }//GEN-LAST:event_btnLuu2ActionPerformed
+
+    private void btnXoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa2ActionPerformed
+        // TODO add your handling code here:
+        deletePLSP();
+    }//GEN-LAST:event_btnXoa2ActionPerformed
+
+    private void btnSua2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua2ActionPerformed
+        // TODO add your handling code here:
+        updatePLSP();
+    }//GEN-LAST:event_btnSua2ActionPerformed
 
     private void btnThem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem2ActionPerformed
         // TODO add your handling code here:
         clearForm();
     }//GEN-LAST:event_btnThem2ActionPerformed
 
-    private void btnNext2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext2ActionPerformed
-        nextPLSP();
-    }//GEN-LAST:event_btnNext2ActionPerformed
+    private void tblLoaiSPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiSPMousePressed
+        if(evt.getClickCount()==1)
+        {
+            row = tblLoaiSP.getSelectedRow();
+            this.row = tblLoaiSP.rowAtPoint(evt.getPoint());
+            editPLSP();
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        clearFormSP();
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        updateSP();
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-        deleteSP();
-    }//GEN-LAST:event_btnXoaActionPerformed
+            // Check if the tab index is not 1 (index of "Loại Sản Phẩm" tab)
+            if (jTabbedPane1.getSelectedIndex() != 1) {
+                jTabbedPane1.setSelectedIndex(1); // Set the tab back to "Loại Sản Phẩm"
+            }
+        }
+    }//GEN-LAST:event_tblLoaiSPMousePressed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
         insertSP();
     }//GEN-LAST:event_btnLuuActionPerformed
 
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        lastSP();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        nextSP();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+
+        // TODO add your handling code here:
+        prevSP();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        firstSP();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void lblHinhLogoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhLogoMousePressed
+        this.ChonAnh();
+    }//GEN-LAST:event_lblHinhLogoMousePressed
+
+    private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSPActionPerformed
+
+    private void rdoTenSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoTenSPItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+            rdoMaSP.setSelected(false);
+        }
+    }//GEN-LAST:event_rdoTenSPItemStateChanged
+
+    private void rdoMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoMaSPActionPerformed
+
+    private void rdoMaSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoMaSPItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+            rdoTenSP.setSelected(false);
+        }
+    }//GEN-LAST:event_rdoMaSPItemStateChanged
+
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-   
+
         String searchText = txtTim.getText().trim();
         boolean searchByMaSP = rdoMaSP.isSelected();
         boolean searchByTenSP = rdoTenSP.isSelected();
@@ -1333,10 +1398,10 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Vui lòng nhập thông tin cần tìm!");
             return;
         }
-//        if (!searchByMaSP && !searchByTenSP) {
-//            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
-//            return;
-//        }
+        //        if (!searchByMaSP && !searchByTenSP) {
+            //            MsgBox.alert(this, "Vui lòng chọn một trong hai loại tìm kiếm.");
+            //            return;
+            //        }
 
         try {
             List<SanPham> listSP;
@@ -1362,97 +1427,31 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             MsgBox.alert(this, "Lỗi khi tìm kiếm sản phẩm");
         }
-
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
-    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        firstSP();
-    }//GEN-LAST:event_btnFirstActionPerformed
+        deleteSP();
+    }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        prevSP();
-    }//GEN-LAST:event_btnPrevActionPerformed
+        updateSP();
+    }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        lastSP();
-    }//GEN-LAST:event_btnLastActionPerformed
-
-    private void btnSua2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua2ActionPerformed
-        // TODO add your handling code here:
-        updatePLSP();
-    }//GEN-LAST:event_btnSua2ActionPerformed
-
-    private void btnXoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa2ActionPerformed
-        // TODO add your handling code here:
-        deletePLSP();
-    }//GEN-LAST:event_btnXoa2ActionPerformed
-
-    private void btnLuu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu2ActionPerformed
-        // TODO add your handling code here:
-        insertPLSP();
-    }//GEN-LAST:event_btnLuu2ActionPerformed
-
-    private void lblHinhLogoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhLogoMousePressed
-      this.ChonAnh();
-    }//GEN-LAST:event_lblHinhLogoMousePressed
-
-    private void tblLoaiSPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiSPMousePressed
-         if(evt.getClickCount()==1)
-    {
-        row = tblLoaiSP.getSelectedRow();
-        this.row = tblLoaiSP.rowAtPoint(evt.getPoint());
-        editPLSP();
-        
-        // Check if the tab index is not 1 (index of "Loại Sản Phẩm" tab)
-        if (jTabbedPane1.getSelectedIndex() != 1) {
-            jTabbedPane1.setSelectedIndex(1); // Set the tab back to "Loại Sản Phẩm"
-        }
-    }
-    }//GEN-LAST:event_tblLoaiSPMousePressed
+        clearFormSP();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
-             if(evt.getClickCount()==1)
+        if(evt.getClickCount()==1)
         {
             row = tblSanPham.getSelectedRow();
             this.row = tblSanPham.rowAtPoint(evt.getPoint());
-           editSP();
+            editSP();
         }
     }//GEN-LAST:event_tblSanPhamMousePressed
-
-    private void btnFirst2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst2ActionPerformed
-        // TODO add your handling code here:
-        firstPLSP();
-    }//GEN-LAST:event_btnFirst2ActionPerformed
-
-    private void btnPrev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev2ActionPerformed
-        prevPLSP();
-    }//GEN-LAST:event_btnPrev2ActionPerformed
-
-    private void btnLast2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast2ActionPerformed
-       lastPLSP();
-    }//GEN-LAST:event_btnLast2ActionPerformed
-
-    private void rdoMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoMaSPActionPerformed
-
-    private void rdoMaSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoMaSPItemStateChanged
-        // TODO add your handling code here:
-          if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
-            rdoTenSP.setSelected(false);
-        }
-    }//GEN-LAST:event_rdoMaSPItemStateChanged
-
-    private void rdoTenSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoTenSPItemStateChanged
-        // TODO add your handling code here:
-         if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
-            rdoMaSP.setSelected(false);
-        }
-    }//GEN-LAST:event_rdoTenSPItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
