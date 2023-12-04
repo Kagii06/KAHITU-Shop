@@ -218,6 +218,7 @@ public class QuanLyNhanVienIFrame extends javax.swing.JInternalFrame {
         MsgBox.alert(this, "Lỗi insert!");
     }
 }
+     
 
    
     void update() {

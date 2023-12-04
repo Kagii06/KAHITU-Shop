@@ -156,14 +156,13 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             return false;
         }
        
-        if(txtTongTien.getText().equals("") || !txtTongTien.getText().matches("\\d+"))
-        {
-            MsgBox.alert(this, "Nhập tổng tiền ( dưới dạng số) !");
+        if(txtTongTien.getText().isEmpty() || !txtTongTien.getText().matches("\\d+") || Integer.parseInt(txtTongTien.getText()) <= 0) {
+            MsgBox.alert(this, "Nhập tổng tiền là số nguyên lớn hơn 0!");
             txtTongTien.requestFocus();
             return false;
-        }   
+         }
         return true;    
-    }
+        }
     public boolean check_HoaDonChiTiet()
     {
         if(txtMaHoaDon.getText().equals(""))
@@ -172,11 +171,11 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             txtMaHoaDon.requestFocus();
             return false;
         }
-        if(txtSoLuong.getText().equals("") || !txtSoLuong.getText().matches("\\d"))
-        {
-             MsgBox.alert(this, "Nhập số lượng (dạng số)!");
-             txtSoLuong.requestFocus();
-             return false;
+          // Kiểm tra số lượng là số nguyên và lớn hơn 0
+        if(!txtSoLuong.getText().matches("\\d+") || Integer.parseInt(txtSoLuong.getText()) <= 0) {
+            MsgBox.alert(this, "Nhập số lượng là số nguyên lớn hơn 0!");
+            txtSoLuong.requestFocus();
+            return false;
         }
         if(txtDonGia.getText().equals("") || !txtDonGia.getText().matches("\\d+"))
         {

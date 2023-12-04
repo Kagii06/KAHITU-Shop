@@ -170,7 +170,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }
 
     boolean validateMaKH(String maKH) {
-        // Kiểm tra định dạng mã sản phẩm, ví dụ: SP + số
+        // Kiểm tra định dạng mã khách hàng, ví dụ: KH + số
         return maKH.matches("KH\\d+");
     }
 
@@ -200,24 +200,23 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Định dạng SĐT không hợp lệ!");
             return;
         }
-        KhachHang existing = khDAO.selectById(kh.getMaKH());
-        if (existing != null && !existing.getMaKH().equals(kh.getMaKH())) {
-            MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
-            return;
-        }
-        // Kiểm tra trùng SĐT
-        KhachHang existingBySDT = khDAO.selectBySDT(kh.getSDT());
-        if (existingBySDT != null && !existingBySDT.getMaKH().equals(kh.getMaKH())) {
-            MsgBox.alert(this, "SĐT " + kh.getSDT() + " đã tồn tại! Vui lòng nhập số khác.");
-            return;
-        }
-
-        // Kiểm tra trùng Email
-        KhachHang existingByEmail = khDAO.selectByEmail(kh.getEmail());
-        if (existingByEmail != null && !existingByEmail.getMaKH().equals(kh.getMaKH())) {
-            MsgBox.alert(this, "Email " + kh.getEmail() + " đã tồn tại! Vui lòng nhập email khác.");
-            return;
-        }
+//        KhachHang existing = khDAO.selectById(kh.getMaKH());
+//        if (existing != null && !existing.getMaKH().equals(kh.getMaKH())) {
+//            MsgBox.alert(this, "Mã khách hàng " + kh.getMaKH() + " đã tồn tại! Vui lòng nhập mã khác.");
+//            return;
+//        }
+//
+//        KhachHang existingBySDT = khDAO.selectBySDT(kh.getSDT());
+//        if (existingBySDT != null && !existingBySDT.getMaKH().equals(kh.getMaKH()) && !kh.getSDT().equals(existingBySDT.getSDT())) {
+//            MsgBox.alert(this, "SĐT " + kh.getSDT() + " đã tồn tại! Vui lòng nhập số khác.");
+//            return;
+//        }
+//
+//        KhachHang existingByEmail = khDAO.selectByEmail(kh.getEmail());
+//        if (existingByEmail != null && !existingByEmail.getMaKH().equals(kh.getMaKH()) && !kh.getEmail().equals(existingByEmail.getEmail())) {
+//            MsgBox.alert(this, "Email " + kh.getEmail() + " đã tồn tại! Vui lòng nhập email khác.");
+//            return;
+//        }
 
         try {
             khDAO.update(kh);
@@ -225,6 +224,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
+            System.err.println(e);
         }
         }
     }
