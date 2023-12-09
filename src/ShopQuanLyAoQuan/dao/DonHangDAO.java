@@ -20,6 +20,9 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
     final String SELECT_TENBYID = "SELECT HOTEN FROM DONHANG INNER JOIN NHANVIEN \n" +
                                   "ON NHANVIEN.MANV = DonHang.MANV\n" +
                                   "WHERE DONHANG.MANV = ?";
+    final String UPDATE_TongTien ="UPDATE DonHang SET TongTien= ? where MaDH = ?";
+    final String SELECT_GetTongTien ="select TongTien from DonHang where MaDH = ?";
+    
 
     @Override
     public void insert(DonHang entity) {
@@ -29,6 +32,10 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
     @Override
     public void update(DonHang entity) {
         jdbcHelper.Update(UPDATE_SQL,entity.getMaKH(),entity.getMaNV(),entity.getNgayLap(),entity.getTongTien(),entity.getGhiChu(),entity.getMaDH());
+    }
+    
+    public void updateTongTien(DonHang entity) {
+        jdbcHelper.Update(UPDATE_TongTien,entity.getTongTien(),entity.getMaDH());
     }
 
     @Override
@@ -72,7 +79,12 @@ public class DonHangDAO extends ShopAoQuanDAO<DonHang,String> {
     }
     public List<DonHang> selectNhanVienByMaNV(String maNV) {
          return selectBySql(SELECT_TENBYID,maNV);
-    } 
+    }
+    
+    public List<DonHang> selectNhanVienByMaDH(String maDH) {
+         return selectBySql(SELECT_GetTongTien,maDH);
+    }
+    
     public List<Date> selectDay(){
         String sql = "select distinct NgayLap from DonHang order by NgayLap desc";
         List<Date> list = new ArrayList<>();

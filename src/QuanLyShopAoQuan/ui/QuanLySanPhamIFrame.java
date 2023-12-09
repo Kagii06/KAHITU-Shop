@@ -506,19 +506,6 @@ public class QuanLySanPhamIFrame extends javax.swing.JInternalFrame {
         return;
     }
 
-//    PhanLoaiSanPham existingPLSP = plspDAO.selectById(maLoai);
-//    if (existingPLSP != null && !existingPLSP.getMaLoai().equals(plsp.getMaLoai())) {
-//        MsgBox.alert(this, "Mã loại " + maLoai + " đã tồn tại! Vui lòng chọn mã khác.");
-//        return;
-//    }
-//
-//    if (plspDAO.isTenLoaiExists(tenLoai)) {
-//        PhanLoaiSanPham existingByTenLoai = plspDAO.selectById(tenLoai);
-//        if (existingByTenLoai != null && !existingByTenLoai.getMaLoai().equals(maLoai)) {
-//            MsgBox.alert(this, "Tên loại " + tenLoai + " đã tồn tại! Vui lòng chọn tên khác.");
-//            return;
-//        }
-//    }
 
     PhanLoaiSanPham model = new PhanLoaiSanPham();
     model.setMaLoai(maLoai);

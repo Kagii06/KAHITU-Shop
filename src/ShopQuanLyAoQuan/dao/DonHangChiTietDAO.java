@@ -16,6 +16,7 @@ public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
     final String DELETE_SQL ="DELETE from DonHangChiTiet WHERE MaDHCT = ?";
     final String SELECT_ALL_SQL ="SELECT MaDHCT, MaDH, MaSP, SoLuong, GiaBan, GhiChu FROM DonHangChiTiet ";
     final String SELECT_BY_ID_SQL ="SELECT * FROM DonHangChiTiet WHERE MaDHCT= ?";
+    final String SELECT_BY_ID_MaDH ="SELECT * FROM DonHangChiTiet where MaDH = ?";
 
     @Override
     public void insert(DonHangChiTiet entity) {
@@ -44,6 +45,27 @@ public class DonHangChiTietDAO extends ShopAoQuanDAO<DonHangChiTiet,String> {
             return null;
         }
         return list.get(0);
+    }
+    
+    public List<DonHangChiTiet> selectByIdDH(String id) {
+          List<DonHangChiTiet> list = new ArrayList<>();
+          String sql="SELECT * FROM DonHangChiTiet where MaDH = ?";
+        try {
+            ResultSet rs = jdbcHelper.query(sql, id);
+            while(rs.next()){
+                DonHangChiTiet entity = new DonHangChiTiet();
+                entity.setMaDHCT(rs.getString("MaDHCT"));
+                entity.setMaDH(rs.getString("MaDH"));
+                entity.setMaSP(rs.getString("MaSP"));              
+                entity.setSoLuong(rs.getInt("SoLuong"));
+                entity.setDonGia(rs.getFloat("GiaBan"));
+                entity.setGhiChu(rs.getString("GhiChu"));
+                list.add(entity);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     @Override

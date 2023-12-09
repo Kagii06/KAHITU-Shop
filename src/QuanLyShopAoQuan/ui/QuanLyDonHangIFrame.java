@@ -10,6 +10,8 @@ import ShopQuanLyAoQuan.entity.SanPham;
 import com.fsm.utils.MsgBox;
 import com.fsm.utils.XDate;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     NhanVienDAO nvDao = new NhanVienDAO();
     SanPhamDAO spDao = new SanPhamDAO();
     DonHangChiTietDAO dhctDAO = new DonHangChiTietDAO();
+    
     int row = 0;
     int index = 0;
     private List<NhanVien> danhSachNhanVien;
@@ -36,6 +39,8 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         fillToTable();
         fillComboboxMaNV();
         fillComboboxMaSP();
+        txtTongTien.setEditable(false);
+        txtNgayLap.setEditable(false);
     }
     void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblDonHang.getModel();
@@ -49,7 +54,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                         };
                 model.addRow(row);
             }
-            fillToTable_DHCT();
+//            fillToTable_DHCT();
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             System.out.println(e);
@@ -74,6 +79,39 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
+    
+    void filltoTableDHCT_DH(){
+        DefaultTableModel model = (DefaultTableModel) tblDHCT.getModel();
+        model.setRowCount(0);
+        double sum1 = 0;
+        int i = tblDonHang.getSelectedRow();
+        String maDH = String.valueOf(tblDonHang.getValueAt(i, 0));
+        try {
+            
+            List<DonHangChiTiet> list = (List<DonHangChiTiet>) dhctDAO.selectByIdDH(maDH);
+            for (DonHangChiTiet dhct : list) {
+                Object[] row
+                        = {
+                            dhct.getMaDHCT(), dhct.getMaDH(), dhct.getMaSP(), dhct.getSoLuong(), dhct.getDonGia(), dhct.getGhiChu()
+                        };
+                model.addRow(row);
+                
+                sum1 += (double) dhct.getDonGia() * dhct.getSoLuong();
+                
+            }
+            DonHang dh = new DonHang();
+            dh.setMaDH(maDH);
+            dh.setTongTien((float) sum1);
+            dao.updateTongTien(dh);
+            txtTongTien.setText(Double.toString(sum1));
+            fillToTable();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            System.out.println(e);
+        }
+    }
+    
+
 
     void fillComboboxMaNV() {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -97,6 +135,10 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
+    }
+
+    private float Double(double sum1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 // Renderer to display additional information in the ComboBox
@@ -143,12 +185,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             txtMaHD.requestFocus();
             return false;
         }
-         if(txtNgayLap.getText().equals("") || !txtNgayLap.getText().matches("\\d{4}-\\d{2}-\\d{2}"))
-        {
-            MsgBox.alert(this, "Nhập ngày lập (với định dạng yyyy-MM-dd)!");
-            txtNgayLap.requestFocus();
-            return false;
-        }
+        
         if(txtMaKH.getText().equals(""))
         {
             MsgBox.alert(this, "Không được để trống mã khách hàng!");
@@ -156,8 +193,8 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             return false;
         }
        
-        if(txtTongTien.getText().isEmpty() || !txtTongTien.getText().matches("\\d+") || Integer.parseInt(txtTongTien.getText()) <= 0) {
-            MsgBox.alert(this, "Nhập tổng tiền là số nguyên lớn hơn 0!");
+        if(txtTongTien.getText().isEmpty() || !txtTongTien.getText().matches("\\d+") || Integer.parseInt(txtTongTien.getText()) < 0) {
+            MsgBox.alert(this, "Nhập tổng tiền là số nguyên dương!");
             txtTongTien.requestFocus();
             return false;
          }
@@ -230,7 +267,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         dh.setMaKH(txtMaKH.getText());
 
         dh.setTongTien(Float.parseFloat(txtTongTien.getText()));
-        dh.setNgayLap(XDate.toDate(txtNgayLap.getText(), "yyyy-MM-dd"));
+        dh.setNgayLap(new Date());
         dh.setGhiChu(txtGhiChu.getText());
         return dh;
     }
@@ -251,7 +288,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         dhct.setGhiChu(txtGhiChu.getText());
         return dhct;
     }
-
+    
 // Hàm tham chiếu qua danh sách nhân viên để lấy thông tin nhân viên bằng mã nhân viên
     private NhanVien getNhanVienByMaNV(String MaNV) {
         for (NhanVien nhanVien : danhSachNhanVien) {
@@ -425,7 +462,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         txtMaKH.setText("");
         cboNV.setSelectedIndex(0);
         txtNgayLap.setText("");
-        txtTongTien.setText("");
+        txtTongTien.setText("0");
         txtGhiChu.setText("");
         this.updateStatus();
         this.row = -1;
@@ -473,10 +510,8 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                 try {
 
                 dhctDAO.insert(model);
-
                 this.fillToTable_DHCT();
                 index++;
-                this.clear();
                 MsgBox.alert(this, "Thêm mới thành công!");
                 } catch (Exception e) {
                 e.printStackTrace();
@@ -506,7 +541,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
          }   
         }
     }
-
+    
     void updateDHCT() throws Exception {
 //       DonHangChiTiet model = getFormDonHangChiTiet();
         if(tblDHCT.getSelectedRow()== -1)
@@ -583,12 +618,15 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     void first() {
         row = 0;
+        tblDonHang.setRowSelectionInterval(row, row);
         edit();
     }
 
     void prev() {
         if (row > 0) {
+            
             row--;
+            tblDonHang.setRowSelectionInterval(row, row);
             edit();
         }
     }
@@ -596,23 +634,27 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     void next() {
         if (row < tblDonHang.getRowCount() - 1) {
             row++;
+            tblDonHang.setRowSelectionInterval(row, row);
             edit();
         }
     }
 
     void last() {
         row = tblDonHang.getRowCount() - 1;
+        tblDonHang.setRowSelectionInterval(row, row);
         edit();
     }
 
     void first2() {
         index = 0;
+        tblDHCT.setRowSelectionInterval(index, index);
         edit_DHCT();
     }
 
     void prev2() {
         if (index > 0) {
             index--;
+            tblDHCT.setRowSelectionInterval(index, index);
             edit_DHCT();
         }
     }
@@ -620,12 +662,14 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     void next2() {
         if (index < tblDHCT.getRowCount() - 1) {
             index++;
+            tblDHCT.setRowSelectionInterval(index, index);
             edit_DHCT();
         }
     }
 
     void last2() {
         index = tblDHCT.getRowCount() - 1;
+        tblDHCT.setRowSelectionInterval(index, index);
         edit_DHCT();
     }
 
@@ -688,6 +732,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDHCT = new javax.swing.JTable();
+        btnXemAll = new javax.swing.JButton();
 
         setMaximizable(true);
 
@@ -706,6 +751,8 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         jLabel5.setText("Ngày lập:");
 
         jLabel6.setText("Tổng tiền:");
+
+        txtTongTien.setText("0");
 
         jLabel7.setText("Khách hàng:");
 
@@ -753,6 +800,11 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
         btnFirst.setBackground(new java.awt.Color(255, 204, 255));
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/First.png"))); // NOI18N
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         btnLast.setBackground(new java.awt.Color(255, 204, 255));
         btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Last.png"))); // NOI18N
@@ -764,6 +816,11 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
         btnPrev.setBackground(new java.awt.Color(255, 204, 255));
         btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Previous.png"))); // NOI18N
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
 
         btnNext.setBackground(new java.awt.Color(255, 204, 255));
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QuanLyShopAoQuan/icon/Next.png"))); // NOI18N
@@ -970,19 +1027,6 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(btnPrev2)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnFirst2)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnLast2)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnNext2))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1006,7 +1050,20 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                             .addComponent(btnReSet)
                             .addComponent(btnSuaDHCT)
                             .addComponent(btnXoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnPrev2)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnFirst2)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnLast2)
+                                .addGap(36, 36, 36)
+                                .addComponent(btnNext2)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1040,7 +1097,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnThem)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1088,7 +1145,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -1112,20 +1169,33 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblDHCT);
 
+        btnXemAll.setText("Xem tất cả");
+        btnXemAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnXemAll)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnXemAll)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1159,7 +1229,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -1194,21 +1264,58 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        String maDH = txtMaHoaDon.getText();
         insert_DHCT();
+        fillToTable();
+         DefaultTableModel model = (DefaultTableModel) tblDHCT.getModel();
+        model.setRowCount(0);
+        double sum1 = 0;
+        try {
+            
+            List<DonHangChiTiet> list = (List<DonHangChiTiet>) dhctDAO.selectByIdDH(maDH);
+            for (DonHangChiTiet dhct : list) {
+                Object[] row
+                        = {
+                            dhct.getMaDHCT(), dhct.getMaDH(), dhct.getMaSP(), dhct.getSoLuong(), dhct.getDonGia(), dhct.getGhiChu()
+                        };
+                model.addRow(row);
+                
+                sum1 += (double) dhct.getDonGia() * dhct.getSoLuong();
+                
+            }
+            DonHang dh = new DonHang();
+            dh.setMaDH(maDH);
+            dh.setTongTien((float) sum1);
+            dao.updateTongTien(dh);
+            txtTongTien.setText(Double.toString(sum1));
+            fillToTable();
+            txtSoLuong.setText("");
+            txtDonGia.setText("");
+            txtGhiChu.setText("");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            System.out.println(e);
+        }
+ 
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnNext2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext2ActionPerformed
         // TODO add your handling code here:
-         next2();
+         
+         last2();
     }//GEN-LAST:event_btnNext2ActionPerformed
 
     private void tblDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonHangMousePressed
         // TODO add your handling code here:
          if(evt.getClickCount() == 2)
         {
+            row = tblDonHang.getSelectedRow();
             this.row = tblDonHang.rowAtPoint(evt.getPoint());
+//            int i = tblDonHang.getSelectedRow();
+            String maDH = String.valueOf(tblDonHang.getValueAt(row, 0));
+            txtMaHoaDon.setText(maDH);
             edit();
-            edit_DHCT();
+            filltoTableDHCT_DH();
         
         }
     }//GEN-LAST:event_tblDonHangMousePressed
@@ -1235,6 +1342,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
         insert();
+        fillToTable();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnXoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa2ActionPerformed
@@ -1245,13 +1353,14 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnFirst2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst2ActionPerformed
         // TODO add your handling code here:
-        first2();
+        prev2();
     }//GEN-LAST:event_btnFirst2ActionPerformed
 
     private void tblDHCTMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDHCTMousePressed
         // TODO add your handling code here:
         if(evt.getClickCount() == 2)
         {
+            index = tblDHCT.getSelectedRow();
             this.index = tblDHCT.rowAtPoint(evt.getPoint());          
             edit_DHCT();
         }
@@ -1259,12 +1368,13 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnLast2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast2ActionPerformed
         // TODO add your handling code here:
-        last2();
+        next2();
     }//GEN-LAST:event_btnLast2ActionPerformed
 
     private void btnPrev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev2ActionPerformed
         // TODO add your handling code here:
-        prev2();
+        
+        first2();
     }//GEN-LAST:event_btnPrev2ActionPerformed
 
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
@@ -1288,6 +1398,21 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSuaDHCTActionPerformed
 
+    private void btnXemAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemAllActionPerformed
+        // TODO add your handling code here:
+        fillToTable_DHCT();
+    }//GEN-LAST:event_btnXemAllActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -1304,6 +1429,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSuaDHCT;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXemAll;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa2;
     private javax.swing.JComboBox<String> cboNV;

@@ -74,5 +74,7 @@ public class DonHangChiTiet {
         this.GhiChu = GhiChu;
     }
     
-    
+    public double getTotalPrice() {
+        return getDonGia() * getSoLuong();
+    }
 }

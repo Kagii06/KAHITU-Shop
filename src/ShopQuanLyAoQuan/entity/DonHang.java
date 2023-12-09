@@ -78,5 +78,4 @@ public class DonHang {
         this.GhiChu = GhiChu;
     }
     
-    
 }
