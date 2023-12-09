@@ -20,6 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
@@ -103,7 +104,9 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             dh.setMaDH(maDH);
             dh.setTongTien((float) sum1);
             dao.updateTongTien(dh);
-            txtTongTien.setText(Double.toString(sum1));
+            int roundedNumber;
+            roundedNumber = (int) Math.round(sum1);
+            txtTongTien.setText(String.valueOf(roundedNumber));
             fillToTable();
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
@@ -323,7 +326,9 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             txtMaKH.setText(model.getMaKH());
 
             txtNgayLap.setText(XDate.toString(model.getNgayLap(), "yyyy-MM-dd"));
-            txtTongTien.setText(String.valueOf(model.getTongTien()));
+            int roundedNumber;
+            roundedNumber = Math.round(model.getTongTien());
+            txtTongTien.setText(String.valueOf(roundedNumber));
             txtGhiChu.setText(model.getGhiChu());
 
             // Lấy mã nhân viên từ DonHang
@@ -380,7 +385,9 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         try {
             txtMaHoaDon.setText(model.getMaDH());
             txtSoLuong.setText(String.valueOf(model.getSoLuong()));
-            txtDonGia.setText(String.valueOf(model.getDonGia()));
+            int roundedNumber;
+            roundedNumber = (int) Math.ceil(model.getDonGia());
+            txtDonGia.setText(String.valueOf(roundedNumber));
             txtGhiChu.setText(model.getGhiChu());
 
             // Lấy mã sản phẩm từ DonHangChiTiet 
@@ -523,6 +530,23 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi insert đơn hàng chi tiết!");
         }
     }
+    
+     public boolean existsInTable(JTable table, String maDH) {
+        DefaultTableModel model = (DefaultTableModel) tblDonHang.getModel();
+        int rowCount = model.getRowCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            String currentMaDH = (String) model.getValueAt(i, 0); // Giả sử cột đầu tiên là cột chứa mã đơn hàng
+
+            // Kiểm tra xem maDH có trùng với mã đơn hàng trong bảng không
+            if (maDH.equals(currentMaDH)) {
+                return true; // Mã đơn hàng đã tồn tại trong bảng
+            }
+        }
+
+        return false; // Mã đơn hàng không tồn tại trong bảng
+    }
+     
 
     void update() throws Exception {
         if(tblDonHang.getSelectedRow()== -1)
@@ -531,16 +555,23 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             }else if(check_HoaDon())
         {
          DonHang model = getFormDonHang();
+         String maDH = txtMaHD.getText();
          try {
+             if(existsInTable(tblDonHang, maDH)){
             dao.update(model);
             this.fillToTable();
             MsgBox.alert(this, "Cập nhật thành công!");
+             }else{
+                 MsgBox.alert(this, "MaDH không tồn tại!");
+             }
          } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại!");
             System.out.println(e);
          }   
         }
     }
+    
+
     
     void updateDHCT() throws Exception {
 //       DonHangChiTiet model = getFormDonHangChiTiet();
@@ -567,10 +598,15 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
                 dhct.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
                 dhct.setGhiChu(txtGhiChu.getText());
+                String maDH = txtMaHoaDon.getText();
+                if(existsInTable(tblDonHang,maDH )){
                 dhctDAO.update(dhct);
 
                 this.fillToTable_DHCT();
                 MsgBox.alert(this, "Cập nhật thành công!");
+                }else{
+                    MsgBox.alert(this, "MaDH không tồn tại");
+                }
             } catch (Exception e) {
                 MsgBox.alert(this, "Cập nhật thất bại!");
                 System.out.println(e);
@@ -1287,7 +1323,9 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             dh.setMaDH(maDH);
             dh.setTongTien((float) sum1);
             dao.updateTongTien(dh);
-            txtTongTien.setText(Double.toString(sum1));
+            int roundedNumber;
+            roundedNumber = (int) Math.ceil(dh.getTongTien());
+            txtTongTien.setText(String.valueOf(roundedNumber));
             fillToTable();
             txtSoLuong.setText("");
             txtDonGia.setText("");
@@ -1307,7 +1345,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void tblDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonHangMousePressed
         // TODO add your handling code here:
-         if(evt.getClickCount() == 2)
+         if(evt.getClickCount() == 1)
         {
             row = tblDonHang.getSelectedRow();
             this.row = tblDonHang.rowAtPoint(evt.getPoint());
@@ -1358,7 +1396,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void tblDHCTMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDHCTMousePressed
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2)
+        if(evt.getClickCount() == 1)
         {
             index = tblDHCT.getSelectedRow();
             this.index = tblDHCT.rowAtPoint(evt.getPoint());          
