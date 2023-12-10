@@ -45,13 +45,13 @@ public class TrangChu extends javax.swing.JFrame {
         add(pnlThanhDuoi, BorderLayout.SOUTH);
         getContentPane().add(jDesktopPane);
         getContentPane().add(pnlMain);
-//        new Timer(1000, new ActionListener() {
-//        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//           lblDongHo.setText(format.format(new Date()));
-//        }
-//    }).start();
+        new Timer(1000, new ActionListener() {
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           lblDongHo.setText(format.format(new Date()));
+        }
+    }).start();
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
 
@@ -748,7 +748,7 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
@@ -767,8 +767,8 @@ public class TrangChu extends javax.swing.JFrame {
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlThanhDuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jDesktopPane))
@@ -932,7 +932,7 @@ public class TrangChu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

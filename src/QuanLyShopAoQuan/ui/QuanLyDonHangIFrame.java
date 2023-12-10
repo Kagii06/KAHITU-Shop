@@ -522,7 +522,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                 MsgBox.alert(this, "Thêm mới thành công!");
                 } catch (Exception e) {
                 e.printStackTrace();
-                MsgBox.alert(this, "Thêm mới thất bại!" + e);
+                MsgBox.alert(this, "Thêm mới thất bại!");
                 } 
             }
             
@@ -1060,7 +1060,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1099,8 +1099,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(btnLast2)
                                 .addGap(36, 36, 36)
-                                .addComponent(btnNext2)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnNext2))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1181,7 +1180,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -1254,7 +1253,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1275,7 +1274,7 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1301,8 +1300,10 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         String maDH = txtMaHoaDon.getText();
-        insert_DHCT();
-        fillToTable();
+            insert_DHCT();
+
+        
+//        fillToTable();
          DefaultTableModel model = (DefaultTableModel) tblDHCT.getModel();
         model.setRowCount(0);
         double sum1 = 0;
@@ -1352,6 +1353,9 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 //            int i = tblDonHang.getSelectedRow();
             String maDH = String.valueOf(tblDonHang.getValueAt(row, 0));
             txtMaHoaDon.setText(maDH);
+            txtDonGia.setText("");
+            txtSoLuong.setText("");
+            txtGhiChuHDCT.setText("");
             edit();
             filltoTableDHCT_DH();
         
@@ -1385,8 +1389,40 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
 
     private void btnXoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa2ActionPerformed
         // TODO add your handling code here:
-        delete_DHCT();
-        fillToTable_DHCT();
+        delete_DHCT();      
+         String maDH = txtMaHoaDon.getText();
+
+//        fillToTable();
+         DefaultTableModel model = (DefaultTableModel) tblDHCT.getModel();
+        model.setRowCount(0);
+        double sum1 = 0;
+        try {
+            List<DonHangChiTiet> list = (List<DonHangChiTiet>) dhctDAO.selectByIdDH(maDH);
+            for (DonHangChiTiet dhct : list) {
+                Object[] row
+                        = {
+                            dhct.getMaDHCT(), dhct.getMaDH(), dhct.getMaSP(), dhct.getSoLuong(), dhct.getDonGia(), dhct.getGhiChu()
+                        };
+                model.addRow(row);
+                
+                sum1 += (double) dhct.getDonGia() * dhct.getSoLuong();
+                
+            }
+            DonHang dh = new DonHang();
+            dh.setMaDH(maDH);
+            dh.setTongTien((float) sum1);
+            dao.updateTongTien(dh);
+            int roundedNumber;
+            roundedNumber = (int) Math.ceil(dh.getTongTien());
+            txtTongTien.setText(String.valueOf(roundedNumber));
+            fillToTable();
+        txtDonGia.setText("");
+        txtGhiChuHDCT.setText("");
+        txtSoLuong.setText("");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnXoa2ActionPerformed
 
     private void btnFirst2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst2ActionPerformed
@@ -1430,9 +1466,42 @@ public class QuanLyDonHangIFrame extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             updateDHCT();
-           this.fillToTable_DHCT();
+//           this.fillToTable_DHCT();
         } catch (Exception ex) {
        
+        }
+        String maDH = txtMaHoaDon.getText();
+
+//        fillToTable();
+         DefaultTableModel model = (DefaultTableModel) tblDHCT.getModel();
+        model.setRowCount(0);
+        double sum1 = 0;
+        try {
+            List<DonHangChiTiet> list = (List<DonHangChiTiet>) dhctDAO.selectByIdDH(maDH);
+            for (DonHangChiTiet dhct : list) {
+                Object[] row
+                        = {
+                            dhct.getMaDHCT(), dhct.getMaDH(), dhct.getMaSP(), dhct.getSoLuong(), dhct.getDonGia(), dhct.getGhiChu()
+                        };
+                model.addRow(row);
+                
+                sum1 += (double) dhct.getDonGia() * dhct.getSoLuong();
+                
+            }
+            DonHang dh = new DonHang();
+            dh.setMaDH(maDH);
+            dh.setTongTien((float) sum1);
+            dao.updateTongTien(dh);
+            int roundedNumber;
+            roundedNumber = (int) Math.ceil(dh.getTongTien());
+            txtTongTien.setText(String.valueOf(roundedNumber));
+            fillToTable();
+        txtDonGia.setText("");
+        txtGhiChuHDCT.setText("");
+        txtSoLuong.setText("");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnSuaDHCTActionPerformed
 
