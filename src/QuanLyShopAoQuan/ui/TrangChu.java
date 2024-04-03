@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -37,6 +39,14 @@ public class TrangChu extends javax.swing.JFrame {
         init();
     }
     void init() {
+    	java.net.URL location = getClass().getResource("D:\\FPoly\\Kiem thu nang cao SOF304\\Project\\DuAn1_Nhom5");
+
+    	if (location != null) {
+    	    String urlString = location.toExternalForm();
+    	    // Continue using the URL string
+    	} else {
+    	    System.err.println("Error: location is null");
+    	}
         setIconImage(XImage.getAppIcon());
         setTitle("FSM - TRANG CHỦ");
         jDesktopPane.setBackground(Color.decode("#FFEDED"));
