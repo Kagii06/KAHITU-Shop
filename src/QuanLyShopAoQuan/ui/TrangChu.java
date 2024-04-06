@@ -39,7 +39,7 @@ public class TrangChu extends javax.swing.JFrame {
         init();
     }
     void init() {
-    	java.net.URL location = getClass().getResource("D:\\FPoly\\Kiem thu nang cao SOF304\\Project\\DuAn1_Nhom5");
+    	java.net.URL location = getClass().getResource("C:\\Users\\Huy Nguyen\\eclipse-workspace\\DuAn1_Nhom54");
 
     	if (location != null) {
     	    String urlString = location.toExternalForm();

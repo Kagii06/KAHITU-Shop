@@ -17,5 +17,14 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/slf4j-api-2.0.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/byte-buddy-1.10.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/byte-buddy-agent-1.10.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/javassist-3.27.0-GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/objenesis-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/powermock-core-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/Downloads/powermock-reflect-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Huy Nguyen/.m2/repository/org/powermock/powermock-module-testng-common/2.0.9/powermock-module-testng-common-2.0.9.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
