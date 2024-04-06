@@ -4,26 +4,25 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ShopQuanLyAoQuan.dao.KhachHangDAO;
+import ShopQuanLyAoQuan.entity.KhachHang;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-import ShopQuanLyAoQuan.dao.DonHangDAO;
-import ShopQuanLyAoQuan.entity.DonHang;
-
 import java.util.List;
 
-public class TestDonHangDAO {
+public class TestKhachHangDAO {
 
-    DonHangDAO donHangDAO;
+    KhachHangDAO khachHangDAO;
 
     @BeforeMethod
     public void setUp() {
-        donHangDAO = new DonHangDAO();
+        khachHangDAO = new KhachHangDAO();
     }
 
     @AfterMethod
     public void tearDown() {
-        donHangDAO = null;
+        khachHangDAO = null;
     }
 
     @Rule
@@ -31,31 +30,31 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH(null);
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH(null);
         exceptionRule.expect(Exception.class);
-        donHangDAO.insert(donHang);
+        khachHangDAO.insert(khachHang);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH(" ");
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH(" ");
         exceptionRule.expect(Exception.class);
-        donHangDAO.insert(donHang);
+        khachHangDAO.insert(khachHang);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH("DH00003");
-        donHang.setMaKH("KH01");
-        donHang.setMaNV("NV01");
-        //donHang.setNgayLap("2024-04-06");
-        donHang.setTongTien(100000.0f);
-        donHang.setGhiChu(null);
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH("KH00008");
+        khachHang.setHoTen("Nguyễn Thị F");
+        khachHang.setDiaChi("Hà Nội");
+        khachHang.setSDT("0987654321");
+        khachHang.setEmail("nguyenthif@gmail.com");
+        khachHang.setGhiChu(null);
         try {
-            donHangDAO.insert(donHang);
+            khachHangDAO.insert(khachHang);
         } catch (Exception e) {
             Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
         }
@@ -63,28 +62,27 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử cập nhật với mô hình null")
     public void testUpdateWithNullModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH(null);
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH(null);
         exceptionRule.expect(Exception.class);
-        donHangDAO.update(donHang);
+        khachHangDAO.update(khachHang);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH(" ");
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH(" ");
         exceptionRule.expect(Exception.class);
-        donHangDAO.update(donHang);
+        khachHangDAO.update(khachHang);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
-        DonHang donHang = new DonHang();
-        donHang.setMaDH("DH03");
-        donHang.setMaKH("KH02");
-        donHang.setMaNV("NV02");
+        KhachHang khachHang = new KhachHang();
+        khachHang.setMaKH("KH03");
+        khachHang.setHoTen("Nguyễn Văn C");
         try {
-            donHangDAO.update(donHang);
+            khachHangDAO.update(khachHang);
         } catch (Exception e) {
             Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
         }
@@ -93,19 +91,19 @@ public class TestDonHangDAO {
     @Test(description = "Kiểm thử xóa với ID null")
     public void testDeleteWithNullModel() {
         exceptionRule.expect(Exception.class);
-        donHangDAO.delete(null);
+        khachHangDAO.delete(null);
     }
 
     @Test(description = "Kiểm thử xóa với ID trống")
     public void testDeleteWithEmptyModel() {
         exceptionRule.expect(Exception.class);
-        donHangDAO.delete(" ");
+        khachHangDAO.delete(" ");
     }
 
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         try {
-            donHangDAO.delete("DH03");
+            khachHangDAO.delete("KH03");
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
@@ -113,14 +111,31 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử lấy tất cả")
     public void testSelectAll() {
-        List<DonHang> donHangs = donHangDAO.selectALl();
-        Assert.assertNotNull(donHangs);
+        List<KhachHang> khachHangs = khachHangDAO.selectALl();
+        Assert.assertNotNull(khachHangs);
     }
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        DonHang donHang = donHangDAO.selectById("1");
-        Assert.assertNotNull(donHang);
+        KhachHang khachHang = khachHangDAO.selectById("1");
+        Assert.assertNotNull(khachHang);
     }
 
+    @Test(description = "Kiểm thử tìm kiếm theo Mã KH hoặc Tên KH")
+    public void testTimKiemByMaKHOrHoTen() {
+        List<KhachHang> khachHangs = khachHangDAO.timKiem("KH01", true);
+        Assert.assertNotNull(khachHangs);
+    }
+
+    @Test(description = "Kiểm thử lấy theo SDT")
+    public void testSelectBySDT() {
+        KhachHang khachHang = khachHangDAO.selectBySDT("0987654321");
+        Assert.assertNotNull(khachHang);
+    }
+
+    @Test(description = "Kiểm thử lấy theo Email")
+    public void testSelectByEmail() {
+        KhachHang khachHang = khachHangDAO.selectByEmail("nguyenthib@gmail.com");
+        Assert.assertNotNull(khachHang);
+    }
 }

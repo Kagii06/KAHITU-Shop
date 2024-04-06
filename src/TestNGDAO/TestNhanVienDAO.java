@@ -1,23 +1,22 @@
 package TestNGDAO;
 
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.fsm.utils.jdbcHelper;
+import org.testng.internal.junit.ArrayAsserts;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.NhanVienDAO;
 import ShopQuanLyAoQuan.entity.NhanVien;
 
 import java.util.List;
 
-//@PrepareForTest({jdbcHelper.class, NhanVienDAO.class})
-public class TestNhanVienDAOTest{
+
+public class TestNhanVienDAO {
 
     NhanVienDAO nhanVienDAO;
-    NhanVienDAO nhanVienDAOspy;
     @BeforeMethod
     public void setUp() {
         nhanVienDAO = new NhanVienDAO();
@@ -27,27 +26,24 @@ public class TestNhanVienDAOTest{
     public void tearDown() {
         nhanVienDAO = null;
     }
- 
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
+
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(null);
-        try {
-            nhanVienDAO.insert(nhanVien);
-        } catch (Exception e) {
-            Assert.fail("Chèn với mô hình null không nên ném ra ngoại lệ");
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.insert(nhanVien);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(" ");
-        try {
-            nhanVienDAO.insert(nhanVien);
-            Assert.fail("Chèn với mô hình trống nên ném ra ngoại lệ");
-        } catch (Exception ignored) {
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.insert(nhanVien);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
@@ -71,22 +67,16 @@ public class TestNhanVienDAOTest{
     public void testUpdateWithNullModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(null);
-        try {
-            nhanVienDAO.update(nhanVien);
-        } catch (Exception e) {
-            Assert.fail("Cập nhật với mô hình null không nên ném ra ngoại lệ");
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.update(nhanVien);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(" ");
-        try {
-            nhanVienDAO.update(nhanVien);
-            Assert.fail("Cập nhật với mô hình trống nên ném ra ngoại lệ");
-        } catch (Exception ignored) {
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.update(nhanVien);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
@@ -103,20 +93,14 @@ public class TestNhanVienDAOTest{
 
     @Test(description = "Kiểm thử xóa với ID null")
     public void testDeleteWithNullModel() {
-        try {
-            nhanVienDAO.delete(null);
-            Assert.fail("Xóa với ID null nên ném ra ngoại lệ");
-        } catch (Exception ignored) {
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.delete(null);
     }
 
     @Test(description = "Kiểm thử xóa với ID trống")
     public void testDeleteWithEmptyModel() {
-        try {
-            nhanVienDAO.delete(" ");
-            Assert.fail("Xóa với ID trống nên ném ra ngoại lệ");
-        } catch (Exception ignored) {
-        }
+        exceptionRule.expect(Exception.class);
+        nhanVienDAO.delete(" ");
     }
 
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
@@ -163,7 +147,4 @@ public class TestNhanVienDAOTest{
         NhanVien nhanVien = nhanVienDAO.selectByEmail("Nguyenvana@gmail.com");
         Assert.assertNotNull(nhanVien);
     }
-
 }
-
-

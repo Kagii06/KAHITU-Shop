@@ -4,27 +4,25 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.internal.junit.ArrayAsserts;
+import ShopQuanLyAoQuan.dao.SanPhamDAO;
+import ShopQuanLyAoQuan.entity.SanPham;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-import ShopQuanLyAoQuan.dao.DonHangChiTietDAO;
-import ShopQuanLyAoQuan.entity.DonHangChiTiet;
-
 import java.util.List;
 
-public class TestDonHangChiTietDAO {
+public class TestSanPhamDAO {
 
-    DonHangChiTietDAO donHangChiTietDAO;
+    SanPhamDAO sanPhamDAO;
 
     @BeforeMethod
     public void setUp() {
-        donHangChiTietDAO = new DonHangChiTietDAO();
+        sanPhamDAO = new SanPhamDAO();
     }
 
     @AfterMethod
     public void tearDown() {
-        donHangChiTietDAO = null;
+        sanPhamDAO = null;
     }
 
     @Rule
@@ -32,30 +30,32 @@ public class TestDonHangChiTietDAO {
 
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(null);
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP(null);
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.insert(donHangChiTiet);
+        sanPhamDAO.insert(sanPham);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(" ");
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP(" ");
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.insert(donHangChiTiet);
+        sanPhamDAO.insert(sanPham);
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaSP("SP01");
-        donHangChiTiet.setMaDH("DH01");
-        donHangChiTiet.setSoLuong(2);
-        donHangChiTiet.setDonGia(150000);
-        donHangChiTiet.setGhiChu("sp");
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP("SP00003");
+        sanPham.setMaLoai("LOAI01");
+        sanPham.setTenSP("Áo thun nam");
+        sanPham.setGiaNhap(250000);
+        sanPham.setSoLuongNhap(100);
+        sanPham.setGhiChu(null);
+        sanPham.setHinhAnh("image.jpg");
         try {
-            donHangChiTietDAO.insert(donHangChiTiet);
+            sanPhamDAO.insert(sanPham);
         } catch (Exception e) {
             Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
         }
@@ -63,30 +63,28 @@ public class TestDonHangChiTietDAO {
 
     @Test(description = "Kiểm thử cập nhật với mô hình null")
     public void testUpdateWithNullModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(null);
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP(null);
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.update(donHangChiTiet);
+        sanPhamDAO.update(sanPham);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(" ");
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP(" ");
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.update(donHangChiTiet);
+        sanPhamDAO.update(sanPham);
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaSP("SP01");
-        donHangChiTiet.setMaDH("DH01");
-        donHangChiTiet.setSoLuong(3); // Cập nhật số lượng
-        donHangChiTiet.setDonGia(150000); // Cập nhật đơn giá
-        donHangChiTiet.setGhiChu("sp");
+        SanPham sanPham = new SanPham();
+        sanPham.setMaSP("SP03");
+        sanPham.setMaLoai("LOAI02");
+        sanPham.setTenSP("Áo khoác nữ");
         try {
-            donHangChiTietDAO.update(donHangChiTiet);
+            sanPhamDAO.update(sanPham);
         } catch (Exception e) {
             Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
         }
@@ -95,23 +93,45 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử xóa với ID null")
     public void testDeleteWithNullModel() {
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.delete(null);
+        sanPhamDAO.delete(null);
     }
 
     @Test(description = "Kiểm thử xóa với ID trống")
     public void testDeleteWithEmptyModel() {
         exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.delete(" ");
+        sanPhamDAO.delete(" ");
     }
 
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
-        // Tạo một mã đơn hàng hợp lệ để xoá
-        String maDH = "DH01";
         try {
-            donHangChiTietDAO.delete(maDH);
+            sanPhamDAO.delete("SP03");
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
+    }
+
+    @Test(description = "Kiểm thử lấy tất cả")
+    public void testSelectAll() {
+        List<SanPham> sanPhams = sanPhamDAO.selectALl();
+        Assert.assertNotNull(sanPhams);
+    }
+
+    @Test(description = "Kiểm thử lấy theo ID")
+    public void testSelectById() {
+        SanPham sanPham = sanPhamDAO.selectById("1");
+        Assert.assertNotNull(sanPham);
+    }
+
+    @Test(description = "Kiểm thử tìm kiếm theo Mã SP hoặc Tên SP")
+    public void testTimKiemByMaSPOrTenSP() {
+        List<SanPham> sanPhams = sanPhamDAO.timKiem("SP01", true);
+        Assert.assertNotNull(sanPhams);
+    }
+
+    @Test(description = "Kiểm thử lấy theo Tên SP")
+    public void testSelectByTenSP() {
+        SanPham sanPham = sanPhamDAO.selectByTenSP("Áo thun nam");
+        Assert.assertNotNull(sanPham);
     }
 }
