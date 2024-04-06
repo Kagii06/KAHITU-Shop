@@ -27,7 +27,6 @@ public class TestKhachHangDAO {
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
         KhachHang khachHang = new KhachHang();
@@ -35,11 +34,12 @@ public class TestKhachHangDAO {
         exceptionRule.expect(Exception.class);
         khachHangDAO.insert(khachHang);
     }
-
+    @Rule
+    public ExpectedException testInsertWithEmptyModel = ExpectedException.none();
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
         KhachHang khachHang = new KhachHang();
-        khachHang.setMaKH(" ");
+        khachHang.setMaKH("");
         exceptionRule.expect(Exception.class);
         khachHangDAO.insert(khachHang);
     }
@@ -47,11 +47,11 @@ public class TestKhachHangDAO {
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         KhachHang khachHang = new KhachHang();
-        khachHang.setMaKH("KH00008");
-        khachHang.setHoTen("Nguyễn Thị F");
-        khachHang.setDiaChi("Hà Nội");
-        khachHang.setSDT("0987654321");
-        khachHang.setEmail("nguyenthif@gmail.com");
+        khachHang.setMaKH("KH00012");
+        khachHang.setHoTen("Nguyễn Anna");
+        khachHang.setDiaChi("Quãng Nam");
+        khachHang.setSDT("0987344001");
+        khachHang.setEmail("nguyenanna@gmail.com");
         khachHang.setGhiChu(null);
         try {
             khachHangDAO.insert(khachHang);
@@ -117,7 +117,7 @@ public class TestKhachHangDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        KhachHang khachHang = khachHangDAO.selectById("1");
+        KhachHang khachHang = khachHangDAO.selectById("KH00001");
         Assert.assertNotNull(khachHang);
     }
 
@@ -135,7 +135,7 @@ public class TestKhachHangDAO {
 
     @Test(description = "Kiểm thử lấy theo Email")
     public void testSelectByEmail() {
-        KhachHang khachHang = khachHangDAO.selectByEmail("nguyenthib@gmail.com");
+        KhachHang khachHang = khachHangDAO.selectByEmail("nguyenthif@gmail.com");
         Assert.assertNotNull(khachHang);
     }
 }

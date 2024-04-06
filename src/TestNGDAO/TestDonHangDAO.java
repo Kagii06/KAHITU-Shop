@@ -8,8 +8,9 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.DonHangDAO;
-import ShopQuanLyAoQuan.entity.DonHang;
-
+import ShopQuanLyAoQuan.entity.DonHang;import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TestDonHangDAO {
@@ -44,14 +45,16 @@ public class TestDonHangDAO {
         exceptionRule.expect(Exception.class);
         donHangDAO.insert(donHang);
     }
-
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         DonHang donHang = new DonHang();
-        donHang.setMaDH("DH00003");
-        donHang.setMaKH("KH01");
-        donHang.setMaNV("NV01");
-        //donHang.setNgayLap("2024-04-06");
+        donHang.setMaDH("DH00007");
+        donHang.setMaKH("KH00001");
+        donHang.setMaNV("NV00001");
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2024, 04, 06);
+	    Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
         donHang.setTongTien(100000.0f);
         donHang.setGhiChu(null);
         try {
@@ -80,9 +83,13 @@ public class TestDonHangDAO {
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         DonHang donHang = new DonHang();
-        donHang.setMaDH("DH03");
-        donHang.setMaKH("KH02");
-        donHang.setMaNV("NV02");
+        donHang.setMaDH("DH00003");
+        donHang.setMaKH("KH00002");
+        donHang.setMaNV("NV00002");
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2024, 04, 07);
+	    Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
         try {
             donHangDAO.update(donHang);
         } catch (Exception e) {
@@ -119,7 +126,7 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        DonHang donHang = donHangDAO.selectById("1");
+        DonHang donHang = donHangDAO.selectById("DH00001");
         Assert.assertNotNull(donHang);
     }
 

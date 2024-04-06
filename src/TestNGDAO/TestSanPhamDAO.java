@@ -47,8 +47,8 @@ public class TestSanPhamDAO {
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         SanPham sanPham = new SanPham();
-        sanPham.setMaSP("SP00003");
-        sanPham.setMaLoai("LOAI01");
+        sanPham.setMaSP("SP00007");
+        sanPham.setMaLoai("MSP0001");
         sanPham.setTenSP("Áo thun nam");
         sanPham.setGiaNhap(250000);
         sanPham.setSoLuongNhap(100);
@@ -119,19 +119,19 @@ public class TestSanPhamDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        SanPham sanPham = sanPhamDAO.selectById("1");
+        SanPham sanPham = sanPhamDAO.selectById("SP00001");
         Assert.assertNotNull(sanPham);
     }
 
     @Test(description = "Kiểm thử tìm kiếm theo Mã SP hoặc Tên SP")
     public void testTimKiemByMaSPOrTenSP() {
-        List<SanPham> sanPhams = sanPhamDAO.timKiem("SP01", true);
+        List<SanPham> sanPhams = sanPhamDAO.timKiem("SP00001", true);
         Assert.assertNotNull(sanPhams);
     }
 
     @Test(description = "Kiểm thử lấy theo Tên SP")
     public void testSelectByTenSP() {
-        SanPham sanPham = sanPhamDAO.selectByTenSP("Áo thun nam");
+        SanPham sanPham = sanPhamDAO.selectByTenSP("Áo thun Puma");
         Assert.assertNotNull(sanPham);
     }
 }

@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestNGDAO.TestDonHangChiTietDAO">
+      <class name="TestNGDAO.TestPhanLoaiSanPhamDAO">
         <methods>
-          <include name="testInsertWithValidModel"/>
-          <include name="setUp"/>
           <include name="testInsertWithNullModel"/>
-          <include name="testInsertWithEmptyModel"/>
-          <include name="testDeleteWithValidModel"/>
+          <include name="setUp"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- TestNGDAO.TestDonHangChiTietDAO -->
+      </class> <!-- TestNGDAO.TestPhanLoaiSanPhamDAO -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

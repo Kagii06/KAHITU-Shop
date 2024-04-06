@@ -11,6 +11,8 @@ import org.junit.rules.ExpectedException;
 import ShopQuanLyAoQuan.dao.NhanVienDAO;
 import ShopQuanLyAoQuan.entity.NhanVien;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,12 +51,16 @@ public class TestNhanVienDAO {
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         NhanVien nhanVien = new NhanVien();
-        nhanVien.setMaNV("NV00003");
-        nhanVien.setHoTen("Nguyễn Văn A");
-        nhanVien.setDiaChi("Quảng Ngãi");
-        nhanVien.setSDT("0534534343");
-        nhanVien.setEmail("Nguyenvana@gmail.com");
+        nhanVien.setMaNV("NV00007");
+        nhanVien.setHoTen("Nguyễn Văn F");
+        nhanVien.setDiaChi("Huế");
+        nhanVien.setSDT("0534534113");
+        nhanVien.setEmail("Nguyenf@gmail.com");
         nhanVien.setLuong(6000000);
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2001, 04, 06);
+	    Date validDate = calendar.getTime();
+        nhanVien.setNgaySinh(validDate); // convert string to Date
         nhanVien.setGhiChu(null);
         try {
             nhanVienDAO.insert(nhanVien);
@@ -120,7 +126,7 @@ public class TestNhanVienDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        NhanVien nhanVien = nhanVienDAO.selectById("1");
+        NhanVien nhanVien = nhanVienDAO.selectById("NV00001");
         Assert.assertNotNull(nhanVien);
     }
 
@@ -132,19 +138,19 @@ public class TestNhanVienDAO {
 
     @Test(description = "Kiểm thử lấy theo SDT")
     public void testSelectBySDT() {
-        NhanVien nhanVien = nhanVienDAO.selectBySDT("0534534343");
+        NhanVien nhanVien = nhanVienDAO.selectBySDT("0886314559");
         Assert.assertNotNull(nhanVien);
     }
 
     @Test(description = "Kiểm tra sự tồn tại của Mã NV")
     public void testMaNVExists() {
-        boolean exists = nhanVienDAO.maNVExists("NV01");
+        boolean exists = nhanVienDAO.maNVExists("NV00001");
         Assert.assertTrue(exists);
     }
 
     @Test(description = "Kiểm thử lấy theo Email")
     public void testSelectByEmail() {
-        NhanVien nhanVien = nhanVienDAO.selectByEmail("Nguyenvana@gmail.com");
+        NhanVien nhanVien = nhanVienDAO.selectByEmail("tranb@gmail.com");
         Assert.assertNotNull(nhanVien);
     }
 }

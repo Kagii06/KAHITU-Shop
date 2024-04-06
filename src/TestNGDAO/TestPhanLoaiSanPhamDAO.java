@@ -78,8 +78,8 @@ public class TestPhanLoaiSanPhamDAO {
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
-        phanLoaiSanPham.setMaLoai("LOAI03");
-        phanLoaiSanPham.setTenLoai("Áo thun nữ");
+        phanLoaiSanPham.setMaLoai("LOAI04");
+        phanLoaiSanPham.setTenLoai("Áo dài nữ");
         try {
             phanLoaiSanPhamDAO.update(phanLoaiSanPham);
         } catch (Exception e) {
@@ -116,19 +116,19 @@ public class TestPhanLoaiSanPhamDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        PhanLoaiSanPham phanLoaiSanPham = phanLoaiSanPhamDAO.selectById("1");
+        PhanLoaiSanPham phanLoaiSanPham = phanLoaiSanPhamDAO.selectById("MSP0001");
         Assert.assertNotNull(phanLoaiSanPham);
     }
 
     @Test(description = "Kiểm thử kiểm tra sự tồn tại của Mã Loại")
     public void testMaLoaiExists() {
-        boolean exists = phanLoaiSanPhamDAO.isMaLoaiExists("LOAI01");
+        boolean exists = phanLoaiSanPhamDAO.isMaLoaiExists("MSP0001");
         Assert.assertTrue(exists);
     }
 
     @Test(description = "Kiểm thử kiểm tra sự tồn tại của Tên Loại")
     public void testTenLoaiExists() {
-        boolean exists = phanLoaiSanPhamDAO.isTenLoaiExists("Áo thun nam");
+        boolean exists = phanLoaiSanPhamDAO.isTenLoaiExists("Áo thun");
         Assert.assertTrue(exists);
     }
 }

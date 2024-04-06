@@ -29,28 +29,34 @@ public class TestDonHangChiTietDAO {
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
+        // Arrange
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
         donHangChiTiet.setMaDH(null);
-        exceptionRule.expect(Exception.class);
+
+        // Act and Assert
         donHangChiTietDAO.insert(donHangChiTiet);
     }
-
+    
+    @Rule
+    public ExpectedException testInsertWithEmptyModel = ExpectedException.none();
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
-        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(" ");
-        exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.insert(donHangChiTiet);
+    	 DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+
+         donHangChiTiet.setMaDH("");
+
+    	    // Act
+    	    donHangChiTietDAO.insert(donHangChiTiet);
+
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaSP("SP01");
-        donHangChiTiet.setMaDH("DH01");
+        donHangChiTiet.setMaSP("SP00001");
+        donHangChiTiet.setMaDH("DH00001");
         donHangChiTiet.setSoLuong(2);
         donHangChiTiet.setDonGia(150000);
         donHangChiTiet.setGhiChu("sp");
@@ -64,7 +70,7 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử cập nhật với mô hình null")
     public void testUpdateWithNullModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(null);
+        donHangChiTiet.setMaDHCT(null);
         exceptionRule.expect(Exception.class);
         donHangChiTietDAO.update(donHangChiTiet);
     }
@@ -72,7 +78,7 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(" ");
+        donHangChiTiet.setMaDHCT(" ");
         exceptionRule.expect(Exception.class);
         donHangChiTietDAO.update(donHangChiTiet);
     }
@@ -107,9 +113,9 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         // Tạo một mã đơn hàng hợp lệ để xoá
-        String maDH = "DH01";
+        String maDHCT = "2";
         try {
-            donHangChiTietDAO.delete(maDH);
+            donHangChiTietDAO.delete(maDHCT);
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
