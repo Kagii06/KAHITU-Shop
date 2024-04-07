@@ -1,335 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="105" passed="93" failed="12" skipped="0">
+<testng-results ignored="0" total="12" passed="8" failed="4" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-07T00:13:19 ICT" name="Suite" finished-at="2024-04-07T00:13:24 ICT" duration-ms="4821">
+  <suite started-at="2024-04-07T20:54:22 ICT" name="Default suite" finished-at="2024-04-07T20:54:23 ICT" duration-ms="816">
     <groups>
     </groups>
-    <test started-at="2024-04-07T00:13:19 ICT" name="Test" finished-at="2024-04-07T00:13:24 ICT" duration-ms="4821">
-      <class name="TestNGDAO.TestNhanVienDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="38" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="46" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:24 ICT" duration-ms="32" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:24 ICT" duration-ms="33" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.NhanVienDAO.insert(NhanVienDAO.java:23)
-at TestNGDAO.TestNhanVienDAO.testInsertWithEmptyModel(TestNhanVienDAO.java:48)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:24 ICT" duration-ms="25" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaNV', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaNV', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.NhanVienDAO.insert(NhanVienDAO.java:23)
-at TestNGDAO.TestNhanVienDAO.testInsertWithNullModel(TestNhanVienDAO.java:40)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaNV', table 'QLShop.dbo.NhanVien'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:24 ICT" duration-ms="58" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testMaNVExists()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testMaNVExists" description="Kiểm tra sự tồn tại của Mã NV" finished-at="2024-04-07T00:13:24 ICT" duration-ms="43" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMaNVExists -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testSelectAll" description="Kiểm thử lấy tất cả" finished-at="2024-04-07T00:13:24 ICT" duration-ms="46" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectAll -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectByEmail()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testSelectByEmail" description="Kiểm thử lấy theo Email" finished-at="2024-04-07T00:13:24 ICT" duration-ms="39" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectByEmail -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testSelectById" description="Kiểm thử lấy theo ID" finished-at="2024-04-07T00:13:24 ICT" duration-ms="27" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectById -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testSelectBySDT()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testSelectBySDT" description="Kiểm thử lấy theo SDT" finished-at="2024-04-07T00:13:24 ICT" duration-ms="26" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectBySDT -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testTimkiemByMaNVOrTenNV()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testTimkiemByMaNVOrTenNV" description="Kiểm thử tìm kiếm theo Mã NV hoặc Tên NV" finished-at="2024-04-07T00:13:24 ICT" duration-ms="39" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testTimkiemByMaNVOrTenNV -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:24 ICT" duration-ms="52" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:24 ICT" duration-ms="44" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="setUp" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:24 ICT" duration-ms="38" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestNhanVienDAO@3232a28a]" started-at="2024-04-07T00:13:24 ICT" name="tearDown" finished-at="2024-04-07T00:13:24 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestNhanVienDAO -->
+    <test started-at="2024-04-07T20:54:22 ICT" name="Default test" finished-at="2024-04-07T20:54:23 ICT" duration-ms="816">
       <class name="TestNGDAO.TestDonHangChiTietDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:22 ICT" name="setUp" finished-at="2024-04-07T20:54:22 ICT" duration-ms="7" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="33" status="PASS">
+        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:22 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T20:54:23 ICT" duration-ms="402" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="31" status="PASS">
+        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T20:54:23 ICT" duration-ms="31" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="40" status="PASS">
+        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T20:54:23 ICT" duration-ms="31" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="33" status="FAIL">
+        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T20:54:23 ICT" duration-ms="33" status="FAIL">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaSP', table 'QLShop.dbo.DonHangChiTiet'; column does not allow nulls. INSERT fails.]]>
@@ -341,27 +59,27 @@ at ShopQuanLyAoQuan.dao.DonHangChiTietDAO.insert(DonHangChiTietDAO.java:23)
 at TestNGDAO.TestDonHangChiTietDAO.testInsertWithEmptyModel(TestDonHangChiTietDAO.java:51)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
 at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
@@ -383,15 +101,11 @@ at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="31" status="FAIL">
+        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T20:54:23 ICT" duration-ms="25" status="FAIL">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaSP', table 'QLShop.dbo.DonHangChiTiet'; column does not allow nulls. INSERT fails.]]>
@@ -403,27 +117,27 @@ at ShopQuanLyAoQuan.dao.DonHangChiTietDAO.insert(DonHangChiTietDAO.java:23)
 at TestNGDAO.TestDonHangChiTietDAO.testInsertWithNullModel(TestDonHangChiTietDAO.java:39)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
 at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
@@ -445,1076 +159,76 @@ at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="25" status="PASS">
+        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T20:54:23 ICT" duration-ms="37" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="26" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="35" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="37" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@7133da86]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestDonHangChiTietDAO -->
-      <class name="ShopQuanLyAoQuan.entity.test.DonHangTest">
-        <test-method signature="getGhiChuTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getGhiChuTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="18" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getGhiChuTest -->
-        <test-method signature="getMaDHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getMaDHTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaDHTest -->
-        <test-method signature="getMaKHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getMaKHTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="5" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaKHTest -->
-        <test-method signature="getMaNVTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getMaNVTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaNVTest -->
-        <test-method signature="getNgayLapTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getNgayLapTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getNgayLapTest -->
-        <test-method signature="getTongTienTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="getTongTienTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getTongTienTest -->
-        <test-method signature="setGhiChuTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setGhiChuTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setGhiChuTest -->
-        <test-method signature="setMaDHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setMaDHTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaDHTest -->
-        <test-method signature="setMaKHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setMaKHTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaKHTest -->
-        <test-method signature="setMaNVTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setMaNVTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaNVTest -->
-        <test-method signature="setNgayLapTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setNgayLapTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="65" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setNgayLapTest -->
-        <test-method signature="setNgayLap_withInvalidDate()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setNgayLap_withInvalidDate" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setNgayLap_withInvalidDate -->
-        <test-method signature="setTongTienTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangTest@37654521]" started-at="2024-04-07T00:13:19 ICT" name="setTongTienTest" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setTongTienTest -->
-      </class> <!-- ShopQuanLyAoQuan.entity.test.DonHangTest -->
-      <class name="TestNGDAO.TestDonHangDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:22 ICT" duration-ms="47" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:22 ICT" duration-ms="31" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:22 ICT" duration-ms="37" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:22 ICT" duration-ms="41" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.DonHangDAO.insert(DonHangDAO.java:31)
-at TestNGDAO.TestDonHangDAO.testInsertWithEmptyModel(TestDonHangDAO.java:46)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:22 ICT" duration-ms="47" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaDH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaDH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.DonHangDAO.insert(DonHangDAO.java:31)
-at TestNGDAO.TestDonHangDAO.testInsertWithNullModel(TestDonHangDAO.java:38)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaDH', table 'QLShop.dbo.DonHang'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:22 ICT" duration-ms="49" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testSelectAll" description="Kiểm thử lấy tất cả" finished-at="2024-04-07T00:13:22 ICT" duration-ms="36" status="PASS">
+        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testSelectAll" description="Kiểm tra lấy tất cả các bản ghi từ bảng hóa đơn chi tiết" finished-at="2024-04-07T20:54:23 ICT" duration-ms="54" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSelectAll -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testSelectById" description="Kiểm thử lấy theo ID" finished-at="2024-04-07T00:13:22 ICT" duration-ms="30" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectById -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:22 ICT" duration-ms="36" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:22 ICT" duration-ms="38" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:22 ICT" duration-ms="40" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangDAO@53fdffa1]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestDonHangDAO -->
-      <class name="TestNGDAO.TestSanPhamDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:21 ICT" duration-ms="51" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:21 ICT" duration-ms="40" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:21 ICT" duration-ms="42" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:21 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:22 ICT" duration-ms="44" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.SanPhamDAO.insert(SanPhamDAO.java:26)
-at TestNGDAO.TestSanPhamDAO.testInsertWithEmptyModel(TestSanPhamDAO.java:44)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:22 ICT" duration-ms="43" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaSP', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaSP', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.SanPhamDAO.insert(SanPhamDAO.java:26)
-at TestNGDAO.TestSanPhamDAO.testInsertWithNullModel(TestSanPhamDAO.java:36)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaSP', table 'QLShop.dbo.SanPham'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:22 ICT" duration-ms="72" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testSelectAll" description="Kiểm thử lấy tất cả" finished-at="2024-04-07T00:13:22 ICT" duration-ms="42" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectAll -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testSelectById" description="Kiểm thử lấy theo ID" finished-at="2024-04-07T00:13:22 ICT" duration-ms="49" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectById -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testSelectByTenSP()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testSelectByTenSP" description="Kiểm thử lấy theo Tên SP" finished-at="2024-04-07T00:13:22 ICT" duration-ms="48" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectByTenSP -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testTimKiemByMaSPOrTenSP()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testTimKiemByMaSPOrTenSP" description="Kiểm thử tìm kiếm theo Mã SP hoặc Tên SP" finished-at="2024-04-07T00:13:22 ICT" duration-ms="43" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testTimKiemByMaSPOrTenSP -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:22 ICT" duration-ms="50" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:22 ICT" duration-ms="51" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="setUp" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:22 ICT" duration-ms="52" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestSanPhamDAO@4d465b11]" started-at="2024-04-07T00:13:22 ICT" name="tearDown" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestSanPhamDAO -->
-      <class name="ShopQuanLyAoQuan.entity.test.DonHangChiTietTest">
-        <test-method signature="getDonGiaTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getDonGiaTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getDonGiaTest -->
-        <test-method signature="getGhiChuTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getGhiChuTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getGhiChuTest -->
-        <test-method signature="getMaDHCTTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getMaDHCTTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaDHCTTest -->
-        <test-method signature="getMaDHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getMaDHTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaDHTest -->
-        <test-method signature="getMaSPTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getMaSPTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getMaSPTest -->
-        <test-method signature="getSoLuongTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getSoLuongTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getSoLuongTest -->
-        <test-method signature="getTotalPriceTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="getTotalPriceTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getTotalPriceTest -->
-        <test-method signature="setDonGiaTestWithNegative()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="setDonGiaTestWithNegative" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setDonGiaTestWithNegative -->
-        <test-method signature="setDonGiaTestWithValid()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="setDonGiaTestWithValid" finished-at="2024-04-07T00:13:22 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setDonGiaTestWithValid -->
-        <test-method signature="setDonGiaTestWithZero()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="setDonGiaTestWithZero" finished-at="2024-04-07T00:13:22 ICT" duration-ms="9" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setDonGiaTestWithZero -->
-        <test-method signature="setGhiChuTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="setGhiChuTest" finished-at="2024-04-07T00:13:22 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setGhiChuTest -->
-        <test-method signature="setMaDHCTTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:22 ICT" name="setMaDHCTTest" finished-at="2024-04-07T00:13:23 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaDHCTTest -->
-        <test-method signature="setMaDHTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:23 ICT" name="setMaDHTest" finished-at="2024-04-07T00:13:23 ICT" duration-ms="3" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaDHTest -->
-        <test-method signature="setMaSPTest()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:23 ICT" name="setMaSPTest" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setMaSPTest -->
-        <test-method signature="setSoLuongTestWithNegative()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:23 ICT" name="setSoLuongTestWithNegative" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setSoLuongTestWithNegative -->
-        <test-method signature="setSoLuongTestWithValid()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:23 ICT" name="setSoLuongTestWithValid" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setSoLuongTestWithValid -->
-        <test-method signature="setSoLuongTestWithZero()[pri:0, instance:ShopQuanLyAoQuan.entity.test.DonHangChiTietTest@32ee6fee]" started-at="2024-04-07T00:13:23 ICT" name="setSoLuongTestWithZero" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setSoLuongTestWithZero -->
-      </class> <!-- ShopQuanLyAoQuan.entity.test.DonHangChiTietTest -->
-      <class name="TestNGDAO.TestPhanLoaiSanPhamDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:19 ICT" name="setUp" finished-at="2024-04-07T00:13:19 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:19 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1096" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:21 ICT" duration-ms="77" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:21 ICT" duration-ms="73" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:21 ICT" duration-ms="58" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:21 ICT" duration-ms="51" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.PhanLoaiSanPham'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.PhanLoaiSanPham'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.PhanLoaiSanPhamDAO.insert(PhanLoaiSanPhamDAO.java:27)
-at TestNGDAO.TestPhanLoaiSanPhamDAO.testInsertWithNullModel(TestPhanLoaiSanPhamDAO.java:39)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaLoai', table 'QLShop.dbo.PhanLoaiSanPham'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:21 ICT" duration-ms="50" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testMaLoaiExists()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testMaLoaiExists" description="Kiểm thử kiểm tra sự tồn tại của Mã Loại" finished-at="2024-04-07T00:13:21 ICT" duration-ms="107" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMaLoaiExists -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testSelectAll" description="Kiểm thử lấy tất cả" finished-at="2024-04-07T00:13:21 ICT" duration-ms="54" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectAll -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testSelectById" description="Kiểm thử lấy theo ID" finished-at="2024-04-07T00:13:21 ICT" duration-ms="98" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectById -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testTenLoaiExists()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testTenLoaiExists" description="Kiểm thử kiểm tra sự tồn tại của Tên Loại" finished-at="2024-04-07T00:13:21 ICT" duration-ms="63" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testTenLoaiExists -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:21 ICT" duration-ms="39" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:21 ICT" duration-ms="28" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="setUp" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:21 ICT" duration-ms="26" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestPhanLoaiSanPhamDAO@2b48a640]" started-at="2024-04-07T00:13:21 ICT" name="tearDown" finished-at="2024-04-07T00:13:21 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestPhanLoaiSanPhamDAO -->
-      <class name="TestNGDAO.TestKhachHangDAO">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithEmptyModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithEmptyModel" description="Kiểm thử xóa với ID trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="35" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithEmptyModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDeleteWithNullModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithNullModel" description="Kiểm thử xóa với ID null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="23" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testDeleteWithValidModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testDeleteWithValidModel" description="Kiểm thử xóa với ID hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="35" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testDeleteWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithEmptyModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithEmptyModel" description="Kiểm thử chèn với mô hình trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="35" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.KhachHangDAO.insert(KhachHangDAO.java:26)
-at TestNGDAO.TestKhachHangDAO.testInsertWithEmptyModel(TestKhachHangDAO.java:44)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'HoTen', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertWithNullModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithNullModel" description="Kiểm thử chèn với mô hình null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="40" status="FAIL">
-          <exception class="java.lang.RuntimeException">
-            <message>
-              <![CDATA[com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:51)
-at ShopQuanLyAoQuan.dao.KhachHangDAO.insert(KhachHangDAO.java:26)
-at TestNGDAO.TestKhachHangDAO.testInsertWithNullModel(TestKhachHangDAO.java:35)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'MaKH', table 'QLShop.dbo.KhachHang'; column does not allow nulls. INSERT fails.
-at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1752)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:675)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:594)
-at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7739)
-at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4384)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:293)
-at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:263)
-at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeUpdate(SQLServerPreparedStatement.java:537)
-at com.fsm.utils.jdbcHelper.Update(jdbcHelper.java:46)
-... 28 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testInsertWithValidModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testInsertWithValidModel" description="Kiểm thử chèn với mô hình hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="62" status="FAIL">
+        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testSelectById" description="Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng chi tiết" finished-at="2024-04-07T20:54:23 ICT" duration-ms="23" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Chèn với mô hình hợp lệ không nên ném ra ngoại lệ]]>
+              <![CDATA[expected object to not be null]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Chèn với mô hình hợp lệ không nên ném ra ngoại lệ
-at org.testng.Assert.fail(Assert.java:99)
-at TestNGDAO.TestKhachHangDAO.testInsertWithValidModel(TestKhachHangDAO.java:59)
+              <![CDATA[java.lang.AssertionError: expected object to not be null
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.assertNotNull(Assert.java:1484)
+at org.testng.Assert.assertNotNull(Assert.java:1468)
+at TestNGDAO.TestDonHangChiTietDAO.testSelectById(TestDonHangChiTietDAO.java:136)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
 at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
@@ -1523,112 +237,100 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testInsertWithValidModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectAll()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testSelectAll" description="Kiểm thử lấy tất cả" finished-at="2024-04-07T00:13:23 ICT" duration-ms="39" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectAll -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectByEmail()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testSelectByEmail" description="Kiểm thử lấy theo Email" finished-at="2024-04-07T00:13:23 ICT" duration-ms="48" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectByEmail -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testSelectById()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testSelectById" description="Kiểm thử lấy theo ID" finished-at="2024-04-07T00:13:23 ICT" duration-ms="39" status="PASS">
-          <reporter-output>
-          </reporter-output>
         </test-method> <!-- testSelectById -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method signature="testSelectByIdDH()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testSelectByIdDH" description="Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng" finished-at="2024-04-07T20:54:23 ICT" duration-ms="27" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at org.testng.Assert.assertTrue(Assert.java:67)
+at TestNGDAO.TestDonHangChiTietDAO.testSelectByIdDH(TestDonHangChiTietDAO.java:146)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSelectByIdDH -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testSelectBySDT()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testSelectBySDT" description="Kiểm thử lấy theo SDT" finished-at="2024-04-07T00:13:23 ICT" duration-ms="29" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSelectBySDT -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testTimKiemByMaKHOrHoTen()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testTimKiemByMaKHOrHoTen" description="Kiểm thử tìm kiếm theo Mã KH hoặc Tên KH" finished-at="2024-04-07T00:13:23 ICT" duration-ms="42" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testTimKiemByMaKHOrHoTen -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T00:13:23 ICT" duration-ms="36" status="PASS">
+        <test-method signature="testUpdateWithEmptyModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testUpdateWithEmptyModel" description="Kiểm thử cập nhật với mô hình trống" finished-at="2024-04-07T20:54:23 ICT" duration-ms="23" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUpdateWithEmptyModel -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T00:13:23 ICT" duration-ms="24" status="PASS">
+        <test-method signature="testUpdateWithNullModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testUpdateWithNullModel" description="Kiểm thử cập nhật với mô hình null" finished-at="2024-04-07T20:54:23 ICT" duration-ms="22" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUpdateWithNullModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="setUp" finished-at="2024-04-07T00:13:23 ICT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T00:13:23 ICT" duration-ms="27" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdateWithValidModel -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestKhachHangDAO@4d0f2471]" started-at="2024-04-07T00:13:23 ICT" name="tearDown" finished-at="2024-04-07T00:13:23 ICT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- TestNGDAO.TestKhachHangDAO -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="setUp" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testUpdateWithValidModel()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="testUpdateWithValidModel" description="Kiểm thử cập nhật với mô hình hợp lệ" finished-at="2024-04-07T20:54:23 ICT" duration-ms="22" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdateWithValidModel -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestNGDAO.TestDonHangChiTietDAO@67d18ed7]" started-at="2024-04-07T20:54:23 ICT" name="tearDown" finished-at="2024-04-07T20:54:23 ICT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- TestNGDAO.TestDonHangChiTietDAO -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

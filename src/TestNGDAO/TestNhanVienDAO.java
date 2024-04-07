@@ -153,4 +153,5 @@ public class TestNhanVienDAO {
         NhanVien nhanVien = nhanVienDAO.selectByEmail("tranb@gmail.com");
         Assert.assertNotNull(nhanVien);
     }
+    
 }

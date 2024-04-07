@@ -56,7 +56,7 @@ public class TestDonHangChiTietDAO {
     public void testInsertWithValidModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
         donHangChiTiet.setMaSP("SP00001");
-        donHangChiTiet.setMaDH("DH00001");
+        donHangChiTiet.setMaDH("DH00007");
         donHangChiTiet.setSoLuong(2);
         donHangChiTiet.setDonGia(150000);
         donHangChiTiet.setGhiChu("sp");
@@ -86,8 +86,8 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaSP("SP01");
-        donHangChiTiet.setMaDH("DH01");
+        donHangChiTiet.setMaSP("SP00001");
+        donHangChiTiet.setMaDH("DH00001");
         donHangChiTiet.setSoLuong(3); // Cập nhật số lượng
         donHangChiTiet.setDonGia(150000); // Cập nhật đơn giá
         donHangChiTiet.setGhiChu("sp");
@@ -113,11 +113,36 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         // Tạo một mã đơn hàng hợp lệ để xoá
-        String maDHCT = "2";
+        String maDHCT = "1029";
         try {
             donHangChiTietDAO.delete(maDHCT);
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
     }
-}
+
+    @Test(description = "Kiểm tra lấy tất cả các bản ghi từ bảng hóa đơn chi tiết")
+    public void testSelectAll() {
+        List<DonHangChiTiet> donHangChiTiets = donHangChiTietDAO.selectALl();
+        Assert.assertNotNull(donHangChiTiets);
+        Assert.assertTrue(donHangChiTiets.size() > 0);
+    }
+
+    @Test(description = "Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng chi tiết")
+    public void testSelectById() {
+        String maDHCT = "1029";
+        DonHangChiTiet donHangChiTiet = donHangChiTietDAO.selectById(maDHCT);
+
+        Assert.assertNotNull(donHangChiTiet);
+        Assert.assertEquals(donHangChiTiet.getMaDHCT(), maDHCT);
+    }
+
+    @Test(description = "Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng")
+    public void testSelectByIdDH() {
+        String maDH = "DH00001";
+        List<DonHangChiTiet> donHangChiTiets = donHangChiTietDAO.selectByIdDH(maDH);
+
+        Assert.assertNotNull(donHangChiTiets);
+        Assert.assertTrue(donHangChiTiets.size() > 0);
+    }
+    }

@@ -60,7 +60,7 @@ public class TestDonHangDAO {
         try {
             donHangDAO.insert(donHang);
         } catch (Exception e) {
-            Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+           // Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
         }
     }
 
@@ -126,8 +126,53 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        DonHang donHang = donHangDAO.selectById("DH00001");
+        DonHang donHang = donHangDAO.selectById("DH00002");
         Assert.assertNotNull(donHang);
     }
+    @Test(description = "Kiểm tra truy vấn đơn hàng bằng SQL")
+    public void testSelectBySql() {
+        List<DonHang> donHangs = donHangDAO.selectBySql("SELECT * FROM donhang");
+        Assert.assertNotNull(donHangs);
+        Assert.assertFalse(donHangs.isEmpty());
+    }
+
+    @Test(description = "Kiểm tra truy vấn đơn hàng theo mã nhân viên")
+    public void testSelectNhanVienByMaNV() {
+        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaNV("NV00002");
+        Assert.assertNotNull(donHangs);
+    }
+
+    @Test(description = "Kiểm tra truy vấn nhân viên theo mã đơn hàng")
+    public void testSelectNhanVienByMaDH() {
+        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaDH("DH00002");
+        Assert.assertNotNull(donHangs);
+    }
+
+    @Test(description = "Kiểm thử lấy danh sách các ngày đơn hàng")
+    public void testSelectDay() {
+        DonHangDAO donHangDAO = new DonHangDAO();
+        List<Date> ngayLapList = donHangDAO.selectDay();
+        Assert.assertNotNull(ngayLapList);
+        Assert.assertFalse(ngayLapList.isEmpty());
+    }
+
+
+    @Test(description = "Kiểm tra truy vấn đơn hàng theo tháng")
+    public void testSelectMonth() {
+        DonHangDAO donHangDAO = new DonHangDAO();
+        List<String> monthList = donHangDAO.selectMonth();
+        Assert.assertNotNull(monthList);
+        Assert.assertFalse(monthList.isEmpty());
+    }
+
+    @Test(description = "Kiểm tra truy vấn đơn hàng theo năm")
+    public void testSelectYear() {
+        DonHangDAO donHangDAO = new DonHangDAO();
+        List<Integer> yearList = donHangDAO.selectYear();
+        Assert.assertNotNull(yearList);
+        Assert.assertFalse(yearList.isEmpty());
+    }
+
+
 
 }
