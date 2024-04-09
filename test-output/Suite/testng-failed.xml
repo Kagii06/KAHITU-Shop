@@ -3,54 +3,13 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="TestNGDAO.TestPhanLoaiSanPhamDAO">
-        <methods>
-          <include name="testInsertWithNullModel"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- TestNGDAO.TestPhanLoaiSanPhamDAO -->
       <class name="TestNGDAO.TestDonHangDAO">
         <methods>
           <include name="tearDown"/>
-          <include name="testInsertWithNullModel"/>
+          <include name="testSelectNhanVienByMaNV"/>
           <include name="setUp"/>
-          <include name="testInsertWithEmptyModel"/>
         </methods>
       </class> <!-- TestNGDAO.TestDonHangDAO -->
-      <class name="TestNGDAO.TestDonHangChiTietDAO">
-        <methods>
-          <include name="testInsertWithNullModel"/>
-          <include name="setUp"/>
-          <include name="testInsertWithEmptyModel"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- TestNGDAO.TestDonHangChiTietDAO -->
-      <class name="TestNGDAO.TestSanPhamDAO">
-        <methods>
-          <include name="tearDown"/>
-          <include name="testInsertWithNullModel"/>
-          <include name="setUp"/>
-          <include name="testInsertWithEmptyModel"/>
-        </methods>
-      </class> <!-- TestNGDAO.TestSanPhamDAO -->
-      <class name="TestNGDAO.TestKhachHangDAO">
-        <methods>
-          <include name="testInsertWithEmptyModel"/>
-          <include name="testInsertWithValidModel"/>
-          <include name="tearDown"/>
-          <include name="testInsertWithNullModel"/>
-          <include name="setUp"/>
-        </methods>
-      </class> <!-- TestNGDAO.TestKhachHangDAO -->
-      <class name="TestNGDAO.TestNhanVienDAO">
-        <methods>
-          <include name="testInsertWithNullModel"/>
-          <include name="setUp"/>
-          <include name="testInsertWithEmptyModel"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- TestNGDAO.TestNhanVienDAO -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

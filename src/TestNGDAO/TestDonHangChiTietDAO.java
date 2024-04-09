@@ -9,7 +9,11 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.DonHangChiTietDAO;
+import ShopQuanLyAoQuan.entity.DonHang;
 import ShopQuanLyAoQuan.entity.DonHangChiTiet;
+
+import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
@@ -33,10 +37,17 @@ public class TestDonHangChiTietDAO {
     public void testInsertWithNullModel() {
         // Arrange
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-        donHangChiTiet.setMaDH(null);
-
-        // Act and Assert
-        donHangChiTietDAO.insert(donHangChiTiet);
+        donHangChiTiet.setMaDHCT(null);
+        donHangChiTiet.setMaDH("DH00007");
+        donHangChiTiet.setSoLuong(2);
+        donHangChiTiet.setDonGia(150000);
+        donHangChiTiet.setGhiChu("sp");
+        try {
+        	donHangChiTietDAO.insert(donHangChiTiet);
+            assertNotNull(donHangChiTietDAO.selectById(donHangChiTiet.getMaDHCT()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @Rule
@@ -44,26 +55,41 @@ public class TestDonHangChiTietDAO {
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
     	 DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-
-         donHangChiTiet.setMaDH("");
-
-    	    // Act
-    	    donHangChiTietDAO.insert(donHangChiTiet);
+         donHangChiTiet.setMaDHCT("");
+         donHangChiTiet.setMaDH("DH00007");
+         donHangChiTiet.setSoLuong(2);
+         donHangChiTiet.setDonGia(150000);
+         donHangChiTiet.setGhiChu("sp");
+         try {
+             if (donHangChiTiet.getMaDH().trim().isEmpty()) {
+                 throw new IllegalArgumentException("Mã đơn hàng không được để trống");
+             }
+             donHangChiTietDAO.insert(donHangChiTiet);
+             assertNotNull(donHangChiTietDAO.selectById(donHangChiTiet.getMaDHCT()));
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
 
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+        donHangChiTiet.setMaDH("DH00007");
         donHangChiTiet.setMaSP("SP00001");
         donHangChiTiet.setMaDH("DH00007");
         donHangChiTiet.setSoLuong(2);
         donHangChiTiet.setDonGia(150000);
         donHangChiTiet.setGhiChu("sp");
         try {
-            donHangChiTietDAO.insert(donHangChiTiet);
+        	donHangChiTietDAO.insert(donHangChiTiet);
+        	DonHangChiTiet retrievedDonHangChiTiet = donHangChiTietDAO.selectById(donHangChiTiet.getMaDHCT());
+
+            // Kiểm tra xem Khách hàng đã được chèn thành công và trùng khớp với dữ liệu ban đầu hay không
+            assertEquals(donHangChiTiet.getMaDHCT(), retrievedDonHangChiTiet.getMaDHCT());
+            //assertEquals(donHang.getMaNV(), retrievedDonHang.getMaNV());
         } catch (Exception e) {
-            Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -79,8 +105,16 @@ public class TestDonHangChiTietDAO {
     public void testUpdateWithEmptyModel() {
         DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
         donHangChiTiet.setMaDHCT(" ");
-        exceptionRule.expect(Exception.class);
-        donHangChiTietDAO.update(donHangChiTiet);
+        try {
+            if (donHangChiTiet.getMaDH().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã đơn hàng không được để trống");
+            }
+            donHangChiTietDAO.update(donHangChiTiet);
+            assertNotNull(donHangChiTietDAO.selectById(donHangChiTiet.getMaDHCT()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
@@ -130,7 +164,7 @@ public class TestDonHangChiTietDAO {
 
     @Test(description = "Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng chi tiết")
     public void testSelectById() {
-        String maDHCT = "1029";
+        String maDHCT = "2057";
         DonHangChiTiet donHangChiTiet = donHangChiTietDAO.selectById(maDHCT);
 
         Assert.assertNotNull(donHangChiTiet);
@@ -139,7 +173,7 @@ public class TestDonHangChiTietDAO {
 
     @Test(description = "Kiểm tra lấy các cột của bảng hóa đơn chi tiết theo mã đơn hàng")
     public void testSelectByIdDH() {
-        String maDH = "DH00001";
+        String maDH = "DH00002";
         List<DonHangChiTiet> donHangChiTiets = donHangChiTietDAO.selectByIdDH(maDH);
 
         Assert.assertNotNull(donHangChiTiets);

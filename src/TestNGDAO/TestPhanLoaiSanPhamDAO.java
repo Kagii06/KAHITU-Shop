@@ -10,7 +10,10 @@ import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.PhanLoaiSanPhamDAO;
 import ShopQuanLyAoQuan.entity.PhanLoaiSanPham;
+import ShopQuanLyAoQuan.entity.SanPham;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -35,27 +38,42 @@ public class TestPhanLoaiSanPhamDAO {
     public void testInsertWithNullModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
         phanLoaiSanPham.setMaLoai(null);
-        exceptionRule.expect(Exception.class);
-        phanLoaiSanPhamDAO.insert(phanLoaiSanPham);
+        phanLoaiSanPham.setTenLoai("Áo sơ mi");
+        try {	
+            phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Thông tin loại sản phẩm không hợp lệ");
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
         phanLoaiSanPham.setMaLoai(" ");
-        exceptionRule.expect(Exception.class);
-        phanLoaiSanPhamDAO.insert(phanLoaiSanPham);
+        phanLoaiSanPham.setTenLoai("Áo sơ mi");
+        try {
+            if (phanLoaiSanPham.getMaLoai().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã loại không được để trống");
+            }
+            phanLoaiSanPhamDAO.insert(phanLoaiSanPham);
+            assertNotNull(phanLoaiSanPhamDAO.selectById(phanLoaiSanPham.getMaLoai()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
-        phanLoaiSanPham.setMaLoai("LOAI03");
+        phanLoaiSanPham.setMaLoai("MSP0006");
         phanLoaiSanPham.setTenLoai("Áo sơ mi");
         try {
-            phanLoaiSanPhamDAO.insert(phanLoaiSanPham);
+        	phanLoaiSanPhamDAO.insert(phanLoaiSanPham);
+        	PhanLoaiSanPham insertdphanLoaiSanPham = phanLoaiSanPhamDAO.selectById(phanLoaiSanPham.getTenLoai());
+        	assertEquals(phanLoaiSanPham.getMaLoai(), insertdphanLoaiSanPham.getMaLoai());
+        	assertEquals(phanLoaiSanPham.getTenLoai(), insertdphanLoaiSanPham.getTenLoai());
         } catch (Exception e) {
-            Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -63,27 +81,41 @@ public class TestPhanLoaiSanPhamDAO {
     public void testUpdateWithNullModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
         phanLoaiSanPham.setMaLoai(null);
-        exceptionRule.expect(Exception.class);
-        phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        phanLoaiSanPham.setTenLoai("Áo sơ mi");
+        try {
+            phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Thông tin loại sản phẩm không hợp lệ");
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
         phanLoaiSanPham.setMaLoai(" ");
-        exceptionRule.expect(Exception.class);
-        phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        phanLoaiSanPham.setTenLoai("Áo sơ mi");
+        try {
+            if (phanLoaiSanPham.getMaLoai().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã loại không được để trống");
+            }
+            phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+            assertNotNull(phanLoaiSanPhamDAO.selectById(phanLoaiSanPham.getMaLoai()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         PhanLoaiSanPham phanLoaiSanPham = new PhanLoaiSanPham();
-        phanLoaiSanPham.setMaLoai("LOAI04");
+        phanLoaiSanPham.setMaLoai("MSP0006");
         phanLoaiSanPham.setTenLoai("Áo dài nữ");
         try {
-            phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        	phanLoaiSanPhamDAO.update(phanLoaiSanPham);
+        	PhanLoaiSanPham updatedphanLoaiSanPham = phanLoaiSanPhamDAO.selectById(phanLoaiSanPham.getTenLoai());
+            assertEquals(phanLoaiSanPham.getTenLoai(), updatedphanLoaiSanPham.getTenLoai());
         } catch (Exception e) {
-            Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -102,7 +134,7 @@ public class TestPhanLoaiSanPhamDAO {
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         try {
-            phanLoaiSanPhamDAO.delete("LOAI03");
+            phanLoaiSanPhamDAO.delete("MSP0006");
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }

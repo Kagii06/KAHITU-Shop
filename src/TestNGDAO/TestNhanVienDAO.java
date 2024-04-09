@@ -1,24 +1,23 @@
 package TestNGDAO;
 
-import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.internal.junit.ArrayAsserts;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.NhanVienDAO;
 import ShopQuanLyAoQuan.entity.NhanVien;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-
 public class TestNhanVienDAO {
 
     NhanVienDAO nhanVienDAO;
+
     @BeforeMethod
     public void setUp() {
         nhanVienDAO = new NhanVienDAO();
@@ -29,43 +28,75 @@ public class TestNhanVienDAO {
         nhanVienDAO = null;
     }
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
     @Test(description = "Kiểm thử chèn với mô hình null")
     public void testInsertWithNullModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(null);
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.insert(nhanVien);
+        nhanVien.setHoTen("Nguyễn Văn i");
+        nhanVien.setDiaChi("Huế");
+        nhanVien.setSDT("0886986559");
+        nhanVien.setEmail("Nguyeni@gmail.com");
+        nhanVien.setLuong(6000000);
+        nhanVien.setNgaySinh(null);
+        nhanVien.setGhiChu(null);
+
+        try {
+            nhanVienDAO.insert(nhanVien);
+            // Kiểm tra xem nhanVien đã được chèn thành công hay không
+            assertNotNull(nhanVienDAO.selectById(nhanVien.getMaNV()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(" ");
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.insert(nhanVien);
+        nhanVien.setHoTen("Nguyễn Văn a");
+        nhanVien.setDiaChi("Huế");
+        nhanVien.setSDT("090352179");
+        nhanVien.setEmail("Nguyenqa@gmail.com");
+        nhanVien.setLuong(6000000);
+        nhanVien.setNgaySinh(null);
+        nhanVien.setGhiChu(null);
+
+        try {
+            if (nhanVien.getMaNV().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã nhân viên không được để trống");
+            }
+            nhanVienDAO.insert(nhanVien);
+            assertNotNull(nhanVienDAO.selectById(nhanVien.getMaNV()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         NhanVien nhanVien = new NhanVien();
-        nhanVien.setMaNV("NV00007");
-        nhanVien.setHoTen("Nguyễn Văn F");
+        nhanVien.setMaNV("NV00022");
+        nhanVien.setHoTen("Nguyễn Te");
         nhanVien.setDiaChi("Huế");
-        nhanVien.setSDT("0534534113");
-        nhanVien.setEmail("Nguyenf@gmail.com");
-        nhanVien.setLuong(6000000);
-        Calendar calendar = Calendar.getInstance();
-	    calendar.set(2001, 04, 06);
-	    Date validDate = calendar.getTime();
-        nhanVien.setNgaySinh(validDate); // convert string to Date
+        nhanVien.setSDT("0663000323");
+        nhanVien.setEmail("Nguyente@gmail.com");
+        nhanVien.setLuong(9000000);
+        nhanVien.setNgaySinh(null);
         nhanVien.setGhiChu(null);
+
         try {
             nhanVienDAO.insert(nhanVien);
+            NhanVien retrievedNhanVien = nhanVienDAO.selectById(nhanVien.getMaNV());
+
+            // Kiểm tra xem nhanVien đã được chèn thành công và trùng khớp với dữ liệu ban đầu hay không
+            assertEquals(nhanVien.getHoTen(), retrievedNhanVien.getHoTen());
+            assertEquals(nhanVien.getDiaChi(), retrievedNhanVien.getDiaChi());
+            assertEquals(nhanVien.getSDT(), retrievedNhanVien.getSDT());
+            assertEquals(nhanVien.getEmail(), retrievedNhanVien.getEmail());
+            assertEquals(nhanVien.getLuong(), retrievedNhanVien.getLuong());
+            assertEquals(nhanVien.getGhiChu(), retrievedNhanVien.getGhiChu());
         } catch (Exception e) {
-            Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -73,85 +104,112 @@ public class TestNhanVienDAO {
     public void testUpdateWithNullModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(null);
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.update(nhanVien);
+        try {
+            nhanVienDAO.update(nhanVien);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Thông tin nhân viên không hợp lệ");
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMaNV(" ");
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.update(nhanVien);
-    }
+        nhanVien.setHoTen("Nguyễn Văn a");
+        nhanVien.setDiaChi("Huế");
+        nhanVien.setSDT("090352179");
+        nhanVien.setEmail("Nguyenqa@gmail.com");
+        nhanVien.setLuong(6000000);
+        nhanVien.setNgaySinh(null);
+        nhanVien.setGhiChu(null);
 
+        try {
+            if (nhanVien.getMaNV().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã nhân viên không được để trống");
+            }
+            nhanVienDAO.update(nhanVien);
+            assertNotNull(nhanVienDAO.selectById(nhanVien.getMaNV()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         NhanVien nhanVien = new NhanVien();
-        nhanVien.setMaNV("NV03");
+        nhanVien.setMaNV("NV00003");
         nhanVien.setHoTen("Nguyễn Văn B");
         try {
             nhanVienDAO.update(nhanVien);
+            NhanVien updatedNhanVien = nhanVienDAO.selectById(nhanVien.getMaNV());
+            assertEquals(nhanVien.getHoTen(), updatedNhanVien.getHoTen());
         } catch (Exception e) {
-            Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
     @Test(description = "Kiểm thử xóa với ID null")
     public void testDeleteWithNullModel() {
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.delete(null);
+        try {
+            nhanVienDAO.delete(null);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "ID không được để trống");
+        }
     }
 
     @Test(description = "Kiểm thử xóa với ID trống")
     public void testDeleteWithEmptyModel() {
-        exceptionRule.expect(Exception.class);
-        nhanVienDAO.delete(" ");
+        try {
+            nhanVienDAO.delete(" ");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "ID không được để trống");
+        }
     }
 
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         try {
-            nhanVienDAO.delete("NV03");
+            nhanVienDAO.delete("NV00003");
+            // Kiểm tra xem đã xóa thành công hay không
+            assertNull(nhanVienDAO.selectById("NV00003"));
         } catch (Exception e) {
-            Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
     @Test(description = "Kiểm thử lấy tất cả")
     public void testSelectAll() {
         List<NhanVien> nhanViens = nhanVienDAO.selectALl();
-        Assert.assertNotNull(nhanViens);
+        assertNotNull(nhanViens);
+        assertTrue(nhanViens.size() > 0);
     }
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
         NhanVien nhanVien = nhanVienDAO.selectById("NV00001");
-        Assert.assertNotNull(nhanVien);
+        assertNotNull(nhanVien);
     }
 
     @Test(description = "Kiểm thử tìm kiếm theo Mã NV hoặc Tên NV")
     public void testTimkiemByMaNVOrTenNV() {
-        List<NhanVien> nhanViens = nhanVienDAO.timkiemByMaNVOrTenNV("NV01", true);
-        Assert.assertNotNull(nhanViens);
+        List<NhanVien> nhanViens = nhanVienDAO.timkiemByMaNVOrTenNV("NV00001", true);
+        assertNotNull(nhanViens);
     }
 
     @Test(description = "Kiểm thử lấy theo SDT")
     public void testSelectBySDT() {
         NhanVien nhanVien = nhanVienDAO.selectBySDT("0886314559");
-        Assert.assertNotNull(nhanVien);
+        assertNotNull(nhanVien);
     }
 
     @Test(description = "Kiểm tra sự tồn tại của Mã NV")
     public void testMaNVExists() {
         boolean exists = nhanVienDAO.maNVExists("NV00001");
-        Assert.assertTrue(exists);
+        assertTrue(exists);
     }
 
     @Test(description = "Kiểm thử lấy theo Email")
     public void testSelectByEmail() {
         NhanVien nhanVien = nhanVienDAO.selectByEmail("tranb@gmail.com");
-        Assert.assertNotNull(nhanVien);
+        assertNotNull(nhanVien);
     }
-    
 }

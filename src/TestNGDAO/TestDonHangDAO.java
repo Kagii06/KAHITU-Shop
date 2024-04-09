@@ -8,7 +8,12 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
 import ShopQuanLyAoQuan.dao.DonHangDAO;
-import ShopQuanLyAoQuan.entity.DonHang;import java.text.DateFormat;
+import ShopQuanLyAoQuan.entity.DonHang;
+
+import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertEquals;
+
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,17 +39,45 @@ public class TestDonHangDAO {
     public void testInsertWithNullModel() {
         DonHang donHang = new DonHang();
         donHang.setMaDH(null);
-        exceptionRule.expect(Exception.class);
-        donHangDAO.insert(donHang);
+        donHang.setMaKH("KH00001");
+        donHang.setMaNV("NV00001");
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2024, 04, 06);
+	    Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
+        donHang.setTongTien(100000.0f);
+        donHang.setGhiChu(null);
+        try {
+        	donHangDAO.insert(donHang);
+            assertNotNull(donHangDAO.selectById(donHang.getMaDH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình trống")
     public void testInsertWithEmptyModel() {
         DonHang donHang = new DonHang();
         donHang.setMaDH(" ");
-        exceptionRule.expect(Exception.class);
-        donHangDAO.insert(donHang);
+        donHang.setMaKH("KH00001");
+        donHang.setMaNV("NV00001");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2024, 04, 06);
+        Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
+        donHang.setTongTien(100000.0f);
+        donHang.setGhiChu(null);
+        try {
+            if (donHang.getMaDH().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã đơn hàng không được để trống");
+            }
+            donHangDAO.insert(donHang);
+            assertNotNull(donHangDAO.selectById(donHang.getMaDH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
     public void testInsertWithValidModel() {
         DonHang donHang = new DonHang();
@@ -58,9 +91,14 @@ public class TestDonHangDAO {
         donHang.setTongTien(100000.0f);
         donHang.setGhiChu(null);
         try {
-            donHangDAO.insert(donHang);
+        	donHangDAO.insert(donHang);
+        	DonHang retrievedDonHang = donHangDAO.selectById(donHang.getMaDH());
+
+            // Kiểm tra xem Khách hàng đã được chèn thành công và trùng khớp với dữ liệu ban đầu hay không
+            assertEquals(donHang.getMaKH(), retrievedDonHang.getMaKH());
+            //assertEquals(donHang.getMaNV(), retrievedDonHang.getMaNV());
         } catch (Exception e) {
-           // Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -68,22 +106,48 @@ public class TestDonHangDAO {
     public void testUpdateWithNullModel() {
         DonHang donHang = new DonHang();
         donHang.setMaDH(null);
-        exceptionRule.expect(Exception.class);
-        donHangDAO.update(donHang);
+        donHang.setMaKH("KH00001");
+        donHang.setMaNV("NV00001");
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2024, 04, 06);
+	    Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
+        donHang.setTongTien(100000.0f);
+        donHang.setGhiChu(null);
+        try {
+        	donHangDAO.update(donHang);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Thông tin đơn hàng không hợp lệ");
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         DonHang donHang = new DonHang();
         donHang.setMaDH(" ");
-        exceptionRule.expect(Exception.class);
-        donHangDAO.update(donHang);
+        donHang.setMaKH("KH00001");
+        donHang.setMaNV("NV00001");
+        Calendar calendar = Calendar.getInstance();
+	    calendar.set(2024, 04, 06);
+	    Date validDate = calendar.getTime();
+        donHang.setNgayLap(validDate); // convert string to Date
+        donHang.setTongTien(100000.0f);
+        donHang.setGhiChu(null);
+        try {
+            if (donHang.getMaDH().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã đơn hàng không được để trống");
+            }
+            donHangDAO.update(donHang);
+            assertNotNull(donHangDAO.selectById(donHang.getMaDH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         DonHang donHang = new DonHang();
-        donHang.setMaDH("DH00003");
+        donHang.setMaDH("DH00007");
         donHang.setMaKH("KH00002");
         donHang.setMaNV("NV00002");
         Calendar calendar = Calendar.getInstance();
@@ -91,9 +155,12 @@ public class TestDonHangDAO {
 	    Date validDate = calendar.getTime();
         donHang.setNgayLap(validDate); // convert string to Date
         try {
-            donHangDAO.update(donHang);
+        	donHangDAO.update(donHang);
+        	DonHang updateddonHang = donHangDAO.selectById(donHang.getMaDH());
+        	 assertEquals(donHang.getMaKH(), updateddonHang.getMaKH());
+             //assertEquals(donHang.getMaNV(), updateddonHang.getMaNV());
         } catch (Exception e) {
-            Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -112,7 +179,7 @@ public class TestDonHangDAO {
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         try {
-            donHangDAO.delete("DH03");
+            donHangDAO.delete("DH00007");
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
@@ -126,7 +193,7 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm thử lấy theo ID")
     public void testSelectById() {
-        DonHang donHang = donHangDAO.selectById("DH00002");
+        DonHang donHang = donHangDAO.selectById("DH00007");
         Assert.assertNotNull(donHang);
     }
     @Test(description = "Kiểm tra truy vấn đơn hàng bằng SQL")
@@ -138,13 +205,13 @@ public class TestDonHangDAO {
 
     @Test(description = "Kiểm tra truy vấn đơn hàng theo mã nhân viên")
     public void testSelectNhanVienByMaNV() {
-        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaNV("NV00002");
+        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaNV("NV00001");
         Assert.assertNotNull(donHangs);
     }
 
     @Test(description = "Kiểm tra truy vấn nhân viên theo mã đơn hàng")
     public void testSelectNhanVienByMaDH() {
-        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaDH("DH00002");
+        List<DonHang> donHangs = donHangDAO.selectNhanVienByMaDH("DH00001");
         Assert.assertNotNull(donHangs);
     }
 

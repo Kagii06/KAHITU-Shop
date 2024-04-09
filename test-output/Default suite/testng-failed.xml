@@ -5,12 +5,9 @@
     <classes>
       <class name="TestNGDAO.TestDonHangChiTietDAO">
         <methods>
-          <include name="testSelectById"/>
+          <include name="testUpdateWithNullModel"/>
           <include name="setUp"/>
-          <include name="testInsertWithNullModel"/>
-          <include name="testInsertWithEmptyModel"/>
           <include name="tearDown"/>
-          <include name="testSelectByIdDH"/>
         </methods>
       </class> <!-- TestNGDAO.TestDonHangChiTietDAO -->
     </classes>

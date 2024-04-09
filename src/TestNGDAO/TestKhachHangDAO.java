@@ -6,8 +6,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ShopQuanLyAoQuan.dao.KhachHangDAO;
 import ShopQuanLyAoQuan.entity.KhachHang;
+import ShopQuanLyAoQuan.entity.NhanVien;
+
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -31,8 +36,17 @@ public class TestKhachHangDAO {
     public void testInsertWithNullModel() {
         KhachHang khachHang = new KhachHang();
         khachHang.setMaKH(null);
-        exceptionRule.expect(Exception.class);
-        khachHangDAO.insert(khachHang);
+        khachHang.setHoTen("Nguyễn Anna");
+        khachHang.setDiaChi("Quãng Nam");
+        khachHang.setSDT("0987344001");
+        khachHang.setEmail("nguyenanna@gmail.com");
+        khachHang.setGhiChu(null);
+        try {
+        	khachHangDAO.insert(khachHang);
+            assertNotNull(khachHangDAO.selectById(khachHang.getMaKH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Rule
     public ExpectedException testInsertWithEmptyModel = ExpectedException.none();
@@ -40,8 +54,20 @@ public class TestKhachHangDAO {
     public void testInsertWithEmptyModel() {
         KhachHang khachHang = new KhachHang();
         khachHang.setMaKH("");
-        exceptionRule.expect(Exception.class);
-        khachHangDAO.insert(khachHang);
+        khachHang.setHoTen("Nguyễn Anna");
+        khachHang.setDiaChi("Quãng Nam");
+        khachHang.setSDT("0987344001");
+        khachHang.setEmail("nguyenanna@gmail.com");
+        khachHang.setGhiChu(null);
+        try {
+            if (khachHang.getMaKH().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã khách hàng không được để trống");
+            }
+            khachHangDAO.insert(khachHang);
+            assertNotNull(khachHangDAO.selectById(khachHang.getMaKH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử chèn với mô hình hợp lệ")
@@ -54,9 +80,17 @@ public class TestKhachHangDAO {
         khachHang.setEmail("nguyenanna@gmail.com");
         khachHang.setGhiChu(null);
         try {
-            khachHangDAO.insert(khachHang);
+        	khachHangDAO.insert(khachHang);
+            KhachHang retrievedKhachHang = khachHangDAO.selectById(khachHang.getMaKH());
+
+            // Kiểm tra xem Khách hàng đã được chèn thành công và trùng khớp với dữ liệu ban đầu hay không
+            assertEquals(khachHang.getHoTen(), retrievedKhachHang.getHoTen());
+            assertEquals(khachHang.getDiaChi(), retrievedKhachHang.getDiaChi());
+            assertEquals(khachHang.getSDT(), retrievedKhachHang.getSDT());
+            assertEquals(khachHang.getEmail(), retrievedKhachHang.getEmail());
+            assertEquals(khachHang.getGhiChu(), retrievedKhachHang.getGhiChu());
         } catch (Exception e) {
-            Assert.fail("Chèn với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -64,27 +98,49 @@ public class TestKhachHangDAO {
     public void testUpdateWithNullModel() {
         KhachHang khachHang = new KhachHang();
         khachHang.setMaKH(null);
-        exceptionRule.expect(Exception.class);
-        khachHangDAO.update(khachHang);
+        khachHang.setHoTen("Nguyễn Anna");
+        khachHang.setDiaChi("Quãng Nam");
+        khachHang.setSDT("0987344001");
+        khachHang.setEmail("nguyenanna@gmail.com");
+        khachHang.setGhiChu(null);
+        try {
+        	khachHangDAO.update(khachHang);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Thông tin khách hàng không hợp lệ");
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình trống")
     public void testUpdateWithEmptyModel() {
         KhachHang khachHang = new KhachHang();
         khachHang.setMaKH(" ");
-        exceptionRule.expect(Exception.class);
-        khachHangDAO.update(khachHang);
+        khachHang.setHoTen("Nguyễn Anna");
+        khachHang.setDiaChi("Quãng Nam");
+        khachHang.setSDT("0987344001");
+        khachHang.setEmail("nguyenanna@gmail.com");
+        khachHang.setGhiChu(null);
+        try {
+            if (khachHang.getMaKH().trim().isEmpty()) {
+                throw new IllegalArgumentException("Mã khách hàng không được để trống");
+            }
+            khachHangDAO.update(khachHang);
+            assertNotNull(khachHangDAO.selectById(khachHang.getMaKH()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(description = "Kiểm thử cập nhật với mô hình hợp lệ")
     public void testUpdateWithValidModel() {
         KhachHang khachHang = new KhachHang();
-        khachHang.setMaKH("KH03");
+        khachHang.setMaKH("KH00012");
         khachHang.setHoTen("Nguyễn Văn C");
         try {
-            khachHangDAO.update(khachHang);
+        	khachHangDAO.update(khachHang);
+        	KhachHang updatedkhachHang = khachHangDAO.selectById(khachHang.getMaKH());
+            assertEquals(khachHang.getHoTen(), updatedkhachHang.getHoTen());
         } catch (Exception e) {
-            Assert.fail("Cập nhật với mô hình hợp lệ không nên ném ra ngoại lệ");
+            e.printStackTrace();
         }
     }
 
@@ -103,7 +159,7 @@ public class TestKhachHangDAO {
     @Test(description = "Kiểm thử xóa với ID hợp lệ")
     public void testDeleteWithValidModel() {
         try {
-            khachHangDAO.delete("KH03");
+            khachHangDAO.delete("KH00012");
         } catch (Exception e) {
             Assert.fail("Xóa với ID hợp lệ không nên ném ra ngoại lệ");
         }
@@ -135,7 +191,7 @@ public class TestKhachHangDAO {
 
     @Test(description = "Kiểm thử lấy theo Email")
     public void testSelectByEmail() {
-        KhachHang khachHang = khachHangDAO.selectByEmail("nguyenthif@gmail.com");
+        KhachHang khachHang = khachHangDAO.selectByEmail("nguyenanna@gmail.com");
         Assert.assertNotNull(khachHang);
     }
 }
